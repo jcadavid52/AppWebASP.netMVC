@@ -1,0 +1,104 @@
+﻿@model List<WebAppAjaxSpiritualArt.Models.TIPO_PLAN>
+
+@{
+    ViewBag.Title = "RegistrarArtista";
+
+}
+
+
+<body class="registro-body">
+
+    <div class="cont">
+
+        <form action="@Url.Action("RegistrarArtistaAccion","Principal")" method="post" class="form-registro">
+
+            <input type="hidden" name="IMAGEN" value="~/ArchivosLectura/images.jpg" />
+
+            <div>
+                <h2 class="animate__animated animate__backInLeft">Registro</h2>
+            </div>
+
+            <div class="in ">
+                <label>Nombre</label>
+                <input class="form-control" type="text" name="NOMBRE_ARTISTA" placeholder="ingrese su nombre" required />
+            </div>
+
+            <div class="in ">
+
+                <label>Primer Apellido</label>
+                <input class="form-control" type="text" name="PRIMER_APELLIDO_ARTISTA" required placeholder="ingrese su apellido" />
+
+            </div>
+
+            <div class="in ">
+
+                <label>Segundo Apellido</label>
+                <input class="form-control" type="text" name="SEGUNDO_APELLIDO_ARTISTA" required placeholder="ingrese su segundo apellido" />
+
+            </div>
+
+            <div class="in ">
+
+                <label>Teléfono</label>
+                <input class="form-control" type="text" name="TELEFONO" required placeholder="ingrese su teléfono" />
+
+            </div>
+
+            <div class="in ">
+
+                <label>Correo</label>
+                <input class="form-control" type="email" name="CORREO" required placeholder="ingrese su email" />
+
+            </div>
+
+            <div class="in ">
+
+                <label>País</label>
+                <input class="form-control" type="text" name="PAIS" required placeholder="ingrese su país" />
+
+            </div>
+
+            <div class="in ">
+                <label>Ciudad</label>
+                <input class="form-control" type="text" name="CIUDAD" required placeholder="ingrese su ciudad" />
+            </div>
+
+            <div class="in ">
+                <label>Localidad</label>
+                <input class="form-control" type="text" name="LOCALIDAD" required placeholder="ingrese su localidad" />
+
+            </div>
+
+            <div class="in ">
+
+                <label>Dirección</label>
+                <input class="form-control" type="text" name="DIRECCION" required placeholder="ingrese su dirección" />
+
+            </div>
+            <div class="in ">
+
+                <label>Tipo de plan</label>
+                <select class="form-control" name="FK_TIPO_PLAN">
+                    @foreach (var planes in Model)
+                    {
+                        <option value="@planes.PK_ID_TIPO_PLAN">@planes.NOMBRE_PLAN</option>
+                    }
+
+                </select>
+            </div>
+
+            <div>
+                <input class="btn btn-primary mt-4" type="submit" value="Registrarse" />
+
+            </div>
+
+        </form>
+
+
+    </div>
+
+
+</body>
+
+
+

@@ -1,0 +1,211 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="BD_SPIRITUAL_ARTModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="CATEGORIA">
+    <Key>
+      <PropertyRef Name="PK_ID_CATEGORIA" />
+    </Key>
+    <Property Name="PK_ID_CATEGORIA" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NOMBRE_CATEGORIA" Type="varchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="CLIENTE">
+    <Key>
+      <PropertyRef Name="PK_ID_CLIENTE" />
+    </Key>
+    <Property Name="PK_ID_CLIENTE" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NOMBRE_CLIENTE" Type="varchar" MaxLength="50" />
+    <Property Name="APELLIDO_CLIENTE" Type="varchar" MaxLength="50" />
+    <Property Name="TELEFONO_CLIENTE" Type="varchar" MaxLength="30" />
+    <Property Name="EMAIL_CLIENTE" Type="varchar" MaxLength="40" />
+    <Property Name="ASUNTO" Type="varchar" MaxLength="100" />
+    <Property Name="MENSAJE" Type="varchar" MaxLength="500" />
+  </EntityType>
+  <EntityType Name="NOTIFICACION">
+    <Key>
+      <PropertyRef Name="PK_ID_NOTIFICACION" />
+    </Key>
+    <Property Name="PK_ID_NOTIFICACION" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FECHA" Type="date" />
+    <Property Name="FK_CLIENTE" Type="int" />
+    <Property Name="FK_ARTISTA" Type="int" />
+    <Property Name="FK_PRODUCTO" Type="int" />
+  </EntityType>
+  <EntityType Name="PRODUCTO">
+    <Key>
+      <PropertyRef Name="PK_ID_PRODUCTO" />
+    </Key>
+    <Property Name="PK_ID_PRODUCTO" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NOMBRE_PRODUCTO" Type="varchar" MaxLength="50" />
+    <Property Name="PRECIO" Type="float" />
+    <Property Name="DESCRIPCION" Type="varchar" MaxLength="200" />
+    <Property Name="CANTIDAD" Type="int" />
+    <Property Name="ESTADO" Type="bit" />
+    <Property Name="IMAGEN_PRODUCTO" Type="varchar(max)" />
+    <Property Name="FK_CATEGORIA" Type="int" />
+    <Property Name="FK_ARTISTA" Type="int" />
+  </EntityType>
+  <EntityType Name="REGISTRO_ARTISTA">
+    <Key>
+      <PropertyRef Name="PK_ID_ARTISTA" />
+    </Key>
+    <Property Name="PK_ID_ARTISTA" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NOMBRE_ARTISTA" Type="varchar" MaxLength="50" />
+    <Property Name="PRIMER_APELLIDO_ARTISTA" Type="varchar" MaxLength="50" />
+    <Property Name="SEGUNDO_APELLIDO_ARTISTA" Type="varchar" MaxLength="50" />
+    <Property Name="TELEFONO" Type="varchar" MaxLength="30" />
+    <Property Name="CORREO" Type="varchar" MaxLength="40" />
+    <Property Name="PAIS" Type="varchar" MaxLength="30" />
+    <Property Name="CIUDAD" Type="varchar" MaxLength="30" />
+    <Property Name="LOCALIDAD" Type="varchar" MaxLength="50" />
+    <Property Name="DIRECCION" Type="varchar" MaxLength="50" />
+    <Property Name="CLAVE" Type="int" />
+    <Property Name="FK_TIPO_PLAN" Type="int" />
+    <Property Name="ESTADO" Type="bit" />
+    <Property Name="IMAGEN" Type="varchar(max)" />
+  </EntityType>
+  <EntityType Name="TIPO_PLAN">
+    <Key>
+      <PropertyRef Name="PK_ID_TIPO_PLAN" />
+    </Key>
+    <Property Name="PK_ID_TIPO_PLAN" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NOMBRE_PLAN" Type="varchar" MaxLength="20" />
+    <Property Name="PRECIO" Type="float" />
+    <Property Name="DESCRIPCION_CANTIDAD_OBRAS" Type="varchar(max)" />
+    <Property Name="DESCRIPCION_VISIBILIDAD" Type="varchar(max)" />
+    <Property Name="DESCRIPCION_BUSQUEDA" Type="varchar(max)" />
+    <Property Name="DESCRIPCION_TIEMPO_PLAN" Type="varchar(max)" />
+  </EntityType>
+  <Association Name="FK__NOTIFICAC__FK_AR__6A30C649">
+    <End Role="REGISTRO_ARTISTA" Type="Self.REGISTRO_ARTISTA" Multiplicity="0..1" />
+    <End Role="NOTIFICACION" Type="Self.NOTIFICACION" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="REGISTRO_ARTISTA">
+        <PropertyRef Name="PK_ID_ARTISTA" />
+      </Principal>
+      <Dependent Role="NOTIFICACION">
+        <PropertyRef Name="FK_ARTISTA" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__NOTIFICAC__FK_CL__693CA210">
+    <End Role="CLIENTE" Type="Self.CLIENTE" Multiplicity="0..1" />
+    <End Role="NOTIFICACION" Type="Self.NOTIFICACION" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CLIENTE">
+        <PropertyRef Name="PK_ID_CLIENTE" />
+      </Principal>
+      <Dependent Role="NOTIFICACION">
+        <PropertyRef Name="FK_CLIENTE" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__NOTIFICAC__FK_PR__6B24EA82">
+    <End Role="PRODUCTO" Type="Self.PRODUCTO" Multiplicity="0..1" />
+    <End Role="NOTIFICACION" Type="Self.NOTIFICACION" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PRODUCTO">
+        <PropertyRef Name="PK_ID_PRODUCTO" />
+      </Principal>
+      <Dependent Role="NOTIFICACION">
+        <PropertyRef Name="FK_PRODUCTO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__PRODUCTO__FK_ART__5629CD9C">
+    <End Role="REGISTRO_ARTISTA" Type="Self.REGISTRO_ARTISTA" Multiplicity="0..1" />
+    <End Role="PRODUCTO" Type="Self.PRODUCTO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="REGISTRO_ARTISTA">
+        <PropertyRef Name="PK_ID_ARTISTA" />
+      </Principal>
+      <Dependent Role="PRODUCTO">
+        <PropertyRef Name="FK_ARTISTA" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__PRODUCTO__FK_CAT__5535A963">
+    <End Role="CATEGORIA" Type="Self.CATEGORIA" Multiplicity="0..1" />
+    <End Role="PRODUCTO" Type="Self.PRODUCTO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CATEGORIA">
+        <PropertyRef Name="PK_ID_CATEGORIA" />
+      </Principal>
+      <Dependent Role="PRODUCTO">
+        <PropertyRef Name="FK_CATEGORIA" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__REGISTRO___FK_TI__3D5E1FD2">
+    <End Role="TIPO_PLAN" Type="Self.TIPO_PLAN" Multiplicity="0..1" />
+    <End Role="REGISTRO_ARTISTA" Type="Self.REGISTRO_ARTISTA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TIPO_PLAN">
+        <PropertyRef Name="PK_ID_TIPO_PLAN" />
+      </Principal>
+      <Dependent Role="REGISTRO_ARTISTA">
+        <PropertyRef Name="FK_TIPO_PLAN" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="SP_REGISTRAR_ARTISTA" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="NOMBRE_ARTISTA" Type="varchar" Mode="In" />
+    <Parameter Name="PRIMER_APELLIDO_ARTISTA" Type="varchar" Mode="In" />
+    <Parameter Name="SEGUNDO_APELLIDO_ARTISTA" Type="varchar" Mode="In" />
+    <Parameter Name="TELEFONO" Type="varchar" Mode="In" />
+    <Parameter Name="CORREO" Type="varchar" Mode="In" />
+    <Parameter Name="PAIS" Type="varchar" Mode="In" />
+    <Parameter Name="CIUDAD" Type="varchar" Mode="In" />
+    <Parameter Name="LOCALIDAD" Type="varchar" Mode="In" />
+    <Parameter Name="DIRECCION" Type="varchar" Mode="In" />
+    <Parameter Name="FK_TIPO_PLAN" Type="int" Mode="In" />
+    <Parameter Name="CLAVE" Type="int" Mode="In" />
+    <Parameter Name="ESTADO" Type="bit" Mode="In" />
+    <Parameter Name="IMAGEN" Type="varchar(max)" Mode="In" />
+  </Function>
+  <Function Name="SP_REGISTRAR_NOTIFICACION" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="FK_CLIENTE" Type="int" Mode="In" />
+    <Parameter Name="FK_ARTISTA" Type="int" Mode="In" />
+    <Parameter Name="FK_PRODUCTO" Type="int" Mode="In" />
+  </Function>
+  <Function Name="SP_REGISTRO_CLIENTE" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="NOMBRE_CLIENTE" Type="varchar" Mode="In" />
+    <Parameter Name="APELLIDO_CLIENTE" Type="varchar" Mode="In" />
+    <Parameter Name="TELEFONO_CLIENTE" Type="varchar" Mode="In" />
+    <Parameter Name="EMAIL_CLIENTE" Type="varchar" Mode="In" />
+    <Parameter Name="ASUNTO" Type="varchar" Mode="In" />
+    <Parameter Name="MENSAJE" Type="varchar" Mode="In" />
+    <Parameter Name="FK_ARTISTA" Type="int" Mode="In" />
+    <Parameter Name="FK_PRODUCTO" Type="int" Mode="In" />
+  </Function>
+  <EntityContainer Name="BD_SPIRITUAL_ARTModelStoreContainer">
+    <EntitySet Name="CATEGORIA" EntityType="Self.CATEGORIA" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CLIENTE" EntityType="Self.CLIENTE" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="NOTIFICACION" EntityType="Self.NOTIFICACION" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PRODUCTO" EntityType="Self.PRODUCTO" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="REGISTRO_ARTISTA" EntityType="Self.REGISTRO_ARTISTA" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TIPO_PLAN" EntityType="Self.TIPO_PLAN" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__NOTIFICAC__FK_AR__6A30C649" Association="Self.FK__NOTIFICAC__FK_AR__6A30C649">
+      <End Role="REGISTRO_ARTISTA" EntitySet="REGISTRO_ARTISTA" />
+      <End Role="NOTIFICACION" EntitySet="NOTIFICACION" />
+    </AssociationSet>
+    <AssociationSet Name="FK__NOTIFICAC__FK_CL__693CA210" Association="Self.FK__NOTIFICAC__FK_CL__693CA210">
+      <End Role="CLIENTE" EntitySet="CLIENTE" />
+      <End Role="NOTIFICACION" EntitySet="NOTIFICACION" />
+    </AssociationSet>
+    <AssociationSet Name="FK__NOTIFICAC__FK_PR__6B24EA82" Association="Self.FK__NOTIFICAC__FK_PR__6B24EA82">
+      <End Role="PRODUCTO" EntitySet="PRODUCTO" />
+      <End Role="NOTIFICACION" EntitySet="NOTIFICACION" />
+    </AssociationSet>
+    <AssociationSet Name="FK__PRODUCTO__FK_ART__5629CD9C" Association="Self.FK__PRODUCTO__FK_ART__5629CD9C">
+      <End Role="REGISTRO_ARTISTA" EntitySet="REGISTRO_ARTISTA" />
+      <End Role="PRODUCTO" EntitySet="PRODUCTO" />
+    </AssociationSet>
+    <AssociationSet Name="FK__PRODUCTO__FK_CAT__5535A963" Association="Self.FK__PRODUCTO__FK_CAT__5535A963">
+      <End Role="CATEGORIA" EntitySet="CATEGORIA" />
+      <End Role="PRODUCTO" EntitySet="PRODUCTO" />
+    </AssociationSet>
+    <AssociationSet Name="FK__REGISTRO___FK_TI__3D5E1FD2" Association="Self.FK__REGISTRO___FK_TI__3D5E1FD2">
+      <End Role="TIPO_PLAN" EntitySet="TIPO_PLAN" />
+      <End Role="REGISTRO_ARTISTA" EntitySet="REGISTRO_ARTISTA" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

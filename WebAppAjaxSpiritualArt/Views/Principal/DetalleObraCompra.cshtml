@@ -1,0 +1,169 @@
+﻿@model List<WebAppAjaxSpiritualArt.Models.PRODUCTO>
+@using WebAppAjaxSpiritualArt.Models;
+@{
+    ViewBag.Title = "DetalleObra";
+
+    PRODUCTO detalleObra = ViewBag.DetalleObra;
+    string imagen = detalleObra.IMAGEN_PRODUCTO.Replace("..", "~");
+
+}
+
+<h2>DetalleObra</h2>
+
+<div>
+    <h1>@detalleObra.NOMBRE_PRODUCTO</h1>
+    <label>Precio</label>
+    <h3>@detalleObra.PRECIO</h3>
+    <img src="@Url.Content(imagen)" class="card-img-top" alt="..." width="250" height="250">
+
+    <h1>Detalles</h1>
+
+    <label>Autor: @detalleObra.REGISTRO_ARTISTA.NOMBRE_ARTISTA</label><br />
+    <label>País: @detalleObra.REGISTRO_ARTISTA.PAIS</label><br />
+    <label>Ciudad:@detalleObra.REGISTRO_ARTISTA.CIUDAD</label><br />
+    <label>Categoria: @detalleObra.CATEGORIA.NOMBRE_CATEGORIA</label><br />
+    <p>Descripción: @detalleObra.DESCRIPCION</p><br />
+
+    <input type="hidden" id="fk_artista" value="@detalleObra.REGISTRO_ARTISTA.PK_ID_ARTISTA" />
+    <input type="hidden" id="fk_producto" value="@detalleObra.PK_ID_PRODUCTO" />
+
+</div>
+
+<div>
+    <h1>¿Tienes interés en comprar esta obra?</h1>
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#FormularioCliente">
+        Hazle saber al artista
+    </button>
+</div>
+<br />
+<br />
+<hr />
+<h1>Otros trabajos del artista</h1>
+
+<div class="container">
+    <div class="rowProducts">
+
+        <div class="row2">
+            @foreach (var obras in Model)
+            {
+                if (detalleObra.NOMBRE_PRODUCTO != obras.NOMBRE_PRODUCTO)
+                {
+
+                    string imagenes = obras.IMAGEN_PRODUCTO.Replace("..", "~");
+
+
+                    <div class="card2" style="width: 18rem;">
+                        <img src="@Url.Content(imagenes)" class="card-img-top" alt="..." width="250" height="250">
+                        <div class="card-body">
+                            <h5 class="card-title">@obras.NOMBRE_PRODUCTO</h5>
+                            <p>@obras.DESCRIPCION</p>
+                            <p class="card-text">@obras.PRECIO</p>
+                            <a href="@Url.Content("~/Principal/DetalleObraCompra/" + obras.PK_ID_PRODUCTO)" class="btn btn-primary">Ver obra</a>
+                        </div>
+                    </div>
+                }
+
+            }
+
+        </div>
+    </div>
+</div>
+<!-- Modal cliente -->
+<div class="modal fade" id="FormularioCliente" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Contacta al artista</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <div class="modal-body">
+
+                <label>Nombre</label><br />
+                <input type="text" id="nombre_cliente" /><br /><br />
+
+                <label>Apellido</label><br />
+                <input type="text" id="apellido_cliente" /><br /><br />
+
+                <label>Teléfono</label><br />
+                <input type="text" id="telefono_cliente" /><br /><br />
+
+                <label>Correo</label><br />
+                <input type="text" id="correo_cliente" /><br /><br />
+
+                
+
+                <label>Asunto</label><br />
+                <input type="text" id="asunto" /><br /><br />
+
+                <label>Mensaje</label><br />
+                <textarea id="mensaje_cliente"></textarea>
+
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-primary" id="btn-enviar">Enviar</button>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    <script>
+
+        $(function () {
+
+            $("#btn-enviar").click(function () {
+
+                var form_data = new FormData();
+
+                form_data.append("NOMBRE_CLIENTE", $("#nombre_cliente").val());
+                form_data.append("APELLIDO_CLIENTE", $("#apellido_cliente").val());
+                form_data.append("TELEFONO_CLIENTE", $("#telefono_cliente").val());
+                form_data.append("EMAIL_CLIENTE", $("#correo_cliente").val());     
+                form_data.append("ASUNTO", $("#asunto").val());
+                form_data.append("MENSAJE", $("#mensaje_cliente").val());
+                form_data.append("FK_ARTISTA", $("#fk_artista").val());
+                form_data.append("FK_PRODUCTO", $("#fk_producto").val());
+
+                for (var value of form_data.values()) {
+                    console.log(value);
+                }
+
+                var url = "@Url.Content("~/JsonProductos/RegistroCliente")";
+
+                $.ajax({
+
+                    cache: false,
+                    contentType: false,
+                    data: form_data,
+                    dataType: 'JSON',
+                   // enctype: 'multipart/form-data',
+                    processData: false,
+                    method: "POST",
+                    url: url,
+                    success: function (data) {
+                        if (data == 1) {
+                            swal("Registrado exitosamente!", "El artista se estArá comunicando lo más pronto contigo", "success");
+                            
+
+                            
+                        } else {
+
+                        }
+
+                    }
+
+                })
+
+            });
+
+        });
+
+    </script>
+    
+
+}

@@ -1,0 +1,332 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Mi aplicación ASP.NET</title>
+    <link href="~/Content/slider.css" rel="stylesheet" />
+
+    @Scripts.Render("~/bundles/modernizr")
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+    <link rel="stylesheet" href="~/Content/RegistroArtista.css" />
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css" />
+    <link rel="stylesheet"
+          href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css" />
+    <link rel="stylesheet"
+          href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css" />
+    <link rel="stylesheet" href="~/Content/IniciarSesion.css" />
+
+    <link href="~/Content/slider2.css" rel="stylesheet" />
+    <link href="~/Content/slider3.css" rel="stylesheet" />
+    <link href="~/Content/style.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+</head>
+<body>
+
+
+
+
+
+    <div class="menu2">
+        <div style="text-align: left;" class="m2">
+            <a href=""><img src="" width="60" alt=""></a>
+
+        </div>
+        @if (Session["correo"] != null && Session["clave"] != null)
+        {
+
+
+            <div style="text-align: center;" class="m2">
+                <a style="text-decoration:none" href="@Url.Action("Index", "Principal")">Inicio |</a>
+
+                <a style="text-decoration:none" href="@Url.Action("ListarArtistas", "Principal")">Artistas |</a>
+
+                <a style="text-decoration:none" href="@Url.Action("Exposicion", "Principal")">Exposiciones |</a>
+
+                <a style="text-decoration:none" href="@Url.Action("IndexSesion", "Principal")">Mi espacio virtual |</a>
+
+            </div>
+
+            <div style="text-align: right;" class="m2">
+                <a style="text-decoration:none" href="#"><img src="~/ArchivosLectura/imagenes-index/love.png" width="30" alt="">  |</a>
+
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    <img src="@Url.Content(Session["imagen"].ToString())" width="45" height="45" id="perfil"/>
+                </button>
+
+                <a style="text-decoration:none" href="#"> |<img src="~/ArchivosLectura/imagenes-index/bolso.png" width="30" alt=""> |</a>
+
+                <a style="text-decoration:none"  onclick="cerrarSesion()"><img src="~/ArchivosLectura/imagenes-index/cerrar.png" width="30" alt=""></a>
+
+            </div>
+
+
+        }
+        else
+        {
+            <div style="text-align: center;" class="m2">
+                <a style="text-decoration:none" href="@Url.Action("Index", "Principal")">Inicio |</a>
+
+                <a style="text-decoration:none" href="@Url.Action("ListarArtistas", "Principal")">Artistas |</a>
+
+                <a style="text-decoration:none" href="@Url.Action("Exposicion", "Principal")">Exposiciones |</a>
+
+                <a style="text-decoration:none" href="@Url.Action("RegistrarArtista", "Principal")">Registro |</a>
+
+            </div>
+
+            <div style="text-align: right;" class="m2">
+                <a style="text-decoration:none" href="#"><img src="~/ArchivosLectura/imagenes-index/love.png" width="30" alt=""> |</a>
+                <a style="text-decoration:none" href="@Url.Action("IniciarSesion", "Principal")"><img src="~/ArchivosLectura/imagenes-index/user2.png" width="30" alt=""> |</a>
+                <a><img src="~/ArchivosLectura/imagenes-index/bolso.png" width="30" alt=""></a>
+
+
+
+
+            </div>
+
+
+        }
+
+    </div>
+
+
+
+    <div style="min-height:calc(100vh - 100px - 200px)">
+        @RenderBody()
+
+
+    </div><br />
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Cambiar imagen</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+              
+                    <div class="modal-body">
+
+                        <input type="hidden" id="IMAGEN" value="@Session["imagen"]" />
+                        <input type="hidden" id="CORREO" value="@Session["correo"]" />
+                        <input type="hidden" id="CLAVE" value="@Session["clave"]" />
+                        <input type="hidden" id="CIUDAD" value="@Session["ciudad"]" />
+                        <input type="hidden" id="PK_ID_ARTISTA" value="@Session["id_registro"]" />
+                        <input type="hidden" id="PAIS" value="@Session["pais"]" />
+                        <input type="hidden" id="LOCALIDAD" value="@Session["localidad"]" />
+                        <input type="hidden" id="DIRECCION" value="@Session["direccion"]" />
+                        <input type="hidden" id="FK_TIPO_PLAN" value="@Session["fk_plan"]" />
+                        <input type="hidden" id="NOMBRE_ARTISTA" value="@Session["nombre_artista"]" />
+                        <input type="hidden" id="PRIMER_APELLIDO_ARTISTA" value="@Session["primer_apellido"]" />
+                        <input type="hidden" id="SEGUNDO_APELLIDO_ARTISTA" value="@Session["segundo_apellido"]" />
+                        <input type="hidden" id="TELEFONO" value="@Session["telefono"]" />
+                        <input type="file" id="archivo" value="" /><br /><br />
+
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                        <button id="btn-imagen-perfil" class="btn-primary">Cambiar imagen</button>
+                    </div>
+                
+            </div>
+        </div>
+    </div>
+
+    <footer class="foot">
+
+
+
+
+
+
+
+        <div class="descfoot">
+
+            <div class="descf">
+
+                <div class="sobre">
+
+                    <br>
+                    <div class="tittle"><a href="">Nuestra Empresa</a></div><br>
+                    <div class="sobren"><a href="">Quienes somos</a></div>
+                    <div class="sobren"><a href="">Empleo</a></div>
+                    <div class="sobren"><a href="">Movil</a></div>
+                    <div class="sobren"><a href="">Blog</a></div>
+
+
+                </div>
+
+
+                <div class="sobre">
+                    <br>
+
+                    <div class="tittle"><a href="">Contacto</a></div><br>
+                    <div class="sobren"><a href="">Ayuda</a></div>
+                    <div class="sobren"><a href="">Preguntas Frecuentes</a></div>
+                    <div class="sobren"><a href="">Movil</a></div>
+                    <div class="sobren"><a href="">Blog</a></div>
+
+
+                </div>
+
+                <div class="sobre">
+                    <br>
+
+                    <div class="tittle"><a href="">Servicio</a></div><br>
+                    <div class="sobren"><a href="">Domicilio</a></div>
+                    <div class="sobren"><a href="">Envios</a></div>
+                    <div class="sobren"><a href="">Nuestras Tiendas</a></div>
+                    <div class="sobren"><a href="">Mapa</a></div>
+
+
+                </div>
+
+
+                <div class="sobre">
+                    <br>
+
+                    <div class="tittle"><a href="">Categorias</a></div><br>
+                    <div class="sobren"><a href="">Arte</a></div>
+                    <div class="sobren"><a href="">Musica</a></div>
+                    <div class="sobren"><a href="">Artesanos</a></div>
+                    <div class="sobren"><a href="">Moda</a></div>
+
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+
+
+
+    </footer>
+
+    @Scripts.Render("~/bundles/jquery")
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    @RenderSection("scripts", required: false)
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/js/all.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-loading-overlay/2.1.7/loadingoverlay.min.js"></script>
+    <script src="~/Scripts/slider.js"></script>
+    <script src="~/Scripts/slider2.js"></script>
+    <script src="~/Scripts/slider3.js"></script>
+
+    <script>
+
+        //cerrar sesion
+        function cerrarSesion() {
+            swal({
+                title: "¿Deseas cerrar sesión?",
+
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+            })
+                .then((willDelete) => {
+                    if (willDelete) {
+
+                        url = "@Url.Content("~/Principal/CerrarSesion")"
+
+                        $.post(url).done(function (data) {
+                            if (data == 1) {
+                                window.location.href = "@Url.Content("~/Principal/Index")"
+                            }
+
+                        })
+                    }
+                });
+        }
+
+         //subir obra
+        $(function () {
+
+            $("#btn-imagen-perfil").click(function () {
+
+                var form_data = new FormData();
+                var file_data = $("#archivo").prop("files")[0];
+
+                form_data.append("archivo", file_data);
+
+                form_data.append("archivo", $("#archivo").val());
+                form_data.append("IMAGEN", $("#IMAGEN").val());
+                form_data.append("CORREO", $("#CORREO").val());
+                form_data.append("CLAVE", $("#CLAVE").val());
+                form_data.append("CIUDAD", $("#CIUDAD").val());
+                form_data.append("PK_ID_ARTISTA", $("#PK_ID_ARTISTA").val());
+                form_data.append("PAIS", $("#PAIS").val());
+                form_data.append("LOCALIDAD", $("#LOCALIDAD").val());
+                form_data.append("DIRECCION", $("#DIRECCION").val());
+                form_data.append("FK_TIPO_PLAN", $("#FK_TIPO_PLAN").val());
+                form_data.append("NOMBRE_ARTISTA", $("#NOMBRE_ARTISTA").val());
+                form_data.append("PRIMER_APELLIDO_ARTISTA", $("#PRIMER_APELLIDO_ARTISTA").val());
+                form_data.append("SEGUNDO_APELLIDO_ARTISTA", $("#SEGUNDO_APELLIDO_ARTISTA").val());
+                form_data.append("TELEFONO", $("#TELEFONO").val());
+
+                //for (var value of form_data.values()) {
+                //    console.log(value);
+                //}
+
+                var url = "@Url.Content("~/Principal/CambiarImagen")";
+
+
+                $.ajax({
+
+                    cache: false,
+                    contentType: false,
+                    data: form_data,
+                    dataType: 'JSON',
+                    enctype: 'multipart/form-data',
+                    processData: false,
+                    method: "POST",
+                    url: url,
+                    success: function (data) {
+                        if (data == 1) {
+
+                            swal({
+                                title: "Se cambió la foto correctamente",
+                                
+                                icon: "success",
+                                button: true
+                                
+                            })
+                                .then((willDelete) => {
+                                    if (willDelete) {
+                                        window.location.reload();
+                                    } else {
+                                        window.location.reload();
+                                    }
+                                });
+                            
+
+
+
+
+
+                        } else {
+                            swal("Hubo un error :(", "warning");
+                        }
+
+
+
+                    }
+
+                })
+               
+
+            });
+        });
+
+
+    </script>
+
+</body>
+</html>

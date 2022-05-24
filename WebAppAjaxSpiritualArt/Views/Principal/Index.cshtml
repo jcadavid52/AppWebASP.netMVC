@@ -1,0 +1,170 @@
+﻿
+<head>
+    <style>
+        import url('https://fonts.googleapis.com/css2?family=Archivo:wght@500&family=Belgrano&family=Carter+One&family=Cinzel:wght@400;500&family=Cookie&family=Licorice&family=Martel:wght@600&family=Merriweather:wght@900&family=Michroma&family=Pacifico&family=Playball&family=Playfair+Display+SC&family=Prompt:ital,wght@0,300;1,300&family=Ramaraja&family=Sacramento&family=Secular+One&family=Slabo+27px&family=Varela+Round&family=Zilla+Slab:wght@300&display=swap');
+    </style>
+</head>
+
+<!-- carousel-->
+
+
+<div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-indicators">
+        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+    </div>
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            <img src="~/ArchivosLectura/imagenes-index/rain.jpg" class="d-block w-100" alt="..." width="500" height="450">
+            <div class="carousel-caption d-none d-md-block">
+                <h5 style="color:brown">Conoce SpiritualArt</h5>
+                <p style="color:brown">Una gran oportunidad para emancipar tu creaitividad.</p>
+            </div>
+        </div>
+        <div class="carousel-item">
+            <img src="https://bit.ly/3iMHuI1" class="d-block w-100" alt="..." width="500" height="450">
+            <div class="carousel-caption d-none d-md-block">
+                <h5 style="color:brown">¿Quieres hacer parte de la comunidad SpiritualArt?</h5>
+                <p style="color:brown;"><a style="text-decoration: none; background-color:aliceblue" href="#">Solicita información aquí</a></p>
+            </div>
+        </div>
+        <div class="carousel-item">
+            <img src="~/ArchivosLectura/imagenes-index/salpica4.png" class="d-block w-100" alt="..." width="500" height="450">
+            <div class="carousel-caption d-none d-md-block">
+                <h5 style="color:brown">¿Quieres comprar arte?</h5>
+                <p style="color:brown"><a style="text-decoration: none; background-color:aliceblue" href="#">Visita nuestra exposición virtual</a></p>
+            </div>
+        </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </button>
+</div>
+
+<div class="body2">
+    <h2 class="titulocate">Categorías</h2>
+    <div id="wrapper">
+        <div id="carousel">
+            <div id="content">
+                <figure class="item1">
+                    <figcaption class="spn">
+                        <a href="">Artes plásticas</a>
+                    </figcaption>
+                </figure>
+                <figure class="item2">
+                    <figcaption class="spn"><a href="">Pintura</a></figcaption>
+                </figure>
+                <figure class="item3">
+                    <figcaption class="spn"><a href="">Arte Moderno</a></figcaption>
+                </figure>
+
+                <figure class="item4">
+                    <figcaption class="spn"><a href="">Fotografía</a></figcaption>
+                </figure>
+            </div>
+        </div>
+        <button id="prev">
+            <svg xmlns="http://www.w3.org/2000/svg"
+                 width="24"
+                 height="24"
+                 viewBox="0 0 24 24">
+                <path fill="none" d="M0 0h24v24H0V0z" />
+                <path d="M15.61 7.41L14.2 6l-6 6 6 6 1.41-1.41L11.03 12l4.58-4.59z" />
+            </svg>
+        </button>
+        <button id="next">
+            <svg xmlns="http://www.w3.org/2000/svg"
+                 width="24"
+                 height="24"
+                 viewBox="0 0 24 24">
+                <path fill="none" d="M0 0h24v24H0V0z" />
+                <path d="M10.02 6L8.61 7.41 13.19 12l-4.58 4.59L10.02 18l6-6-6-6z" />
+            </svg>
+        </button>
+    </div>
+</div>
+
+
+
+
+<!--CAROUSEL 3-->
+<h2 class="titulocate">Obras Destacadas</h2>
+<div class="car3">
+
+    <div class="center">
+        <div class="wrapper">
+            <div class="inner" id="card-json">
+
+
+                <div class="card" >
+                 
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="map">
+            <button class="active first"></button>
+            <button class="second"></button>
+            <button class="third"></button>
+        </div>
+    </div>
+
+
+</div>
+
+
+@section scripts{
+
+    <script>
+
+        //listar obras premium
+        function listarPremium() {
+            fetch("@Url.Content("~/JsonProductos/ObrasPremium")")
+                .then(function (res) {
+
+                    return res.json();
+                })
+
+                .then(function (miJson) {
+
+                    console.log(miJson);
+                   document.getElementById("card-json").innerHTML = "";
+                    //let ruta = "~/ ArchivosLectura/imagenes-index/fig1.jpg"
+
+
+                    for (let i = 0; i < miJson.length; i++){
+
+                        document.getElementById("card-json").innerHTML = document.getElementById("card-json").innerHTML +
+                            '<div class="card" >' +
+                            '<img src="' + miJson[i].IMAGEN_PRODUCTO+'" >' +
+                            '<div class="content">' +
+
+                            '<h1>'+miJson[i].NOMBRE_PRODUCTO+'</h1>' +
+
+                            '<h3>'+miJson[i].nombreArtista+'</h3>' +
+
+                            '</div >' +
+                            '</div >'
+
+
+
+                    }
+
+
+                })
+        }
+
+        (listarPremium)();
+
+    </script>
+
+
+}

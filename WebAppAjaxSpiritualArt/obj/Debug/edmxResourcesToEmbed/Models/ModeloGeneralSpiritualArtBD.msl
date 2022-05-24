@@ -1,0 +1,88 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="BD_SPIRITUAL_ARTModelStoreContainer" CdmEntityContainer="BD_SPIRITUAL_ARTEntities">
+    <FunctionImportMapping FunctionImportName="SP_REGISTRAR_ARTISTA" FunctionName="BD_SPIRITUAL_ARTModel.Store.SP_REGISTRAR_ARTISTA" />
+    <EntitySetMapping Name="CATEGORIA">
+      <EntityTypeMapping TypeName="BD_SPIRITUAL_ARTModel.CATEGORIA">
+        <MappingFragment StoreEntitySet="CATEGORIA">
+          <ScalarProperty Name="NOMBRE_CATEGORIA" ColumnName="NOMBRE_CATEGORIA" />
+          <ScalarProperty Name="PK_ID_CATEGORIA" ColumnName="PK_ID_CATEGORIA" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CLIENTE">
+      <EntityTypeMapping TypeName="BD_SPIRITUAL_ARTModel.CLIENTE">
+        <MappingFragment StoreEntitySet="CLIENTE">
+          <ScalarProperty Name="MENSAJE" ColumnName="MENSAJE" />
+          <ScalarProperty Name="ASUNTO" ColumnName="ASUNTO" />
+          <ScalarProperty Name="EMAIL_CLIENTE" ColumnName="EMAIL_CLIENTE" />
+          <ScalarProperty Name="TELEFONO_CLIENTE" ColumnName="TELEFONO_CLIENTE" />
+          <ScalarProperty Name="APELLIDO_CLIENTE" ColumnName="APELLIDO_CLIENTE" />
+          <ScalarProperty Name="NOMBRE_CLIENTE" ColumnName="NOMBRE_CLIENTE" />
+          <ScalarProperty Name="PK_ID_CLIENTE" ColumnName="PK_ID_CLIENTE" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="NOTIFICACION">
+      <EntityTypeMapping TypeName="BD_SPIRITUAL_ARTModel.NOTIFICACION">
+        <MappingFragment StoreEntitySet="NOTIFICACION">
+          <ScalarProperty Name="FK_PRODUCTO" ColumnName="FK_PRODUCTO" />
+          <ScalarProperty Name="FK_ARTISTA" ColumnName="FK_ARTISTA" />
+          <ScalarProperty Name="FK_CLIENTE" ColumnName="FK_CLIENTE" />
+          <ScalarProperty Name="FECHA" ColumnName="FECHA" />
+          <ScalarProperty Name="PK_ID_NOTIFICACION" ColumnName="PK_ID_NOTIFICACION" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PRODUCTO">
+      <EntityTypeMapping TypeName="BD_SPIRITUAL_ARTModel.PRODUCTO">
+        <MappingFragment StoreEntitySet="PRODUCTO">
+          <ScalarProperty Name="FK_ARTISTA" ColumnName="FK_ARTISTA" />
+          <ScalarProperty Name="FK_CATEGORIA" ColumnName="FK_CATEGORIA" />
+          <ScalarProperty Name="IMAGEN_PRODUCTO" ColumnName="IMAGEN_PRODUCTO" />
+          <ScalarProperty Name="ESTADO" ColumnName="ESTADO" />
+          <ScalarProperty Name="CANTIDAD" ColumnName="CANTIDAD" />
+          <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
+          <ScalarProperty Name="PRECIO" ColumnName="PRECIO" />
+          <ScalarProperty Name="NOMBRE_PRODUCTO" ColumnName="NOMBRE_PRODUCTO" />
+          <ScalarProperty Name="PK_ID_PRODUCTO" ColumnName="PK_ID_PRODUCTO" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="REGISTRO_ARTISTA">
+      <EntityTypeMapping TypeName="BD_SPIRITUAL_ARTModel.REGISTRO_ARTISTA">
+        <MappingFragment StoreEntitySet="REGISTRO_ARTISTA">
+          <ScalarProperty Name="IMAGEN" ColumnName="IMAGEN" />
+          <ScalarProperty Name="ESTADO" ColumnName="ESTADO" />
+          <ScalarProperty Name="FK_TIPO_PLAN" ColumnName="FK_TIPO_PLAN" />
+          <ScalarProperty Name="CLAVE" ColumnName="CLAVE" />
+          <ScalarProperty Name="DIRECCION" ColumnName="DIRECCION" />
+          <ScalarProperty Name="LOCALIDAD" ColumnName="LOCALIDAD" />
+          <ScalarProperty Name="CIUDAD" ColumnName="CIUDAD" />
+          <ScalarProperty Name="PAIS" ColumnName="PAIS" />
+          <ScalarProperty Name="CORREO" ColumnName="CORREO" />
+          <ScalarProperty Name="TELEFONO" ColumnName="TELEFONO" />
+          <ScalarProperty Name="SEGUNDO_APELLIDO_ARTISTA" ColumnName="SEGUNDO_APELLIDO_ARTISTA" />
+          <ScalarProperty Name="PRIMER_APELLIDO_ARTISTA" ColumnName="PRIMER_APELLIDO_ARTISTA" />
+          <ScalarProperty Name="NOMBRE_ARTISTA" ColumnName="NOMBRE_ARTISTA" />
+          <ScalarProperty Name="PK_ID_ARTISTA" ColumnName="PK_ID_ARTISTA" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TIPO_PLAN">
+      <EntityTypeMapping TypeName="BD_SPIRITUAL_ARTModel.TIPO_PLAN">
+        <MappingFragment StoreEntitySet="TIPO_PLAN">
+          <ScalarProperty Name="DESCRIPCION_TIEMPO_PLAN" ColumnName="DESCRIPCION_TIEMPO_PLAN" />
+          <ScalarProperty Name="DESCRIPCION_BUSQUEDA" ColumnName="DESCRIPCION_BUSQUEDA" />
+          <ScalarProperty Name="DESCRIPCION_VISIBILIDAD" ColumnName="DESCRIPCION_VISIBILIDAD" />
+          <ScalarProperty Name="DESCRIPCION_CANTIDAD_OBRAS" ColumnName="DESCRIPCION_CANTIDAD_OBRAS" />
+          <ScalarProperty Name="PRECIO" ColumnName="PRECIO" />
+          <ScalarProperty Name="NOMBRE_PLAN" ColumnName="NOMBRE_PLAN" />
+          <ScalarProperty Name="PK_ID_TIPO_PLAN" ColumnName="PK_ID_TIPO_PLAN" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="SP_REGISTRAR_NOTIFICACION" FunctionName="BD_SPIRITUAL_ARTModel.Store.SP_REGISTRAR_NOTIFICACION" />
+    <FunctionImportMapping FunctionImportName="SP_REGISTRO_CLIENTE" FunctionName="BD_SPIRITUAL_ARTModel.Store.SP_REGISTRO_CLIENTE" />
+  </EntityContainerMapping>
+</Mapping>

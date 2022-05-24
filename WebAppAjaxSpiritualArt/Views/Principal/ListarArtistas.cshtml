@@ -1,0 +1,30 @@
+﻿
+@model List<WebAppAjaxSpiritualArt.Models.REGISTRO_ARTISTA>
+@{
+    ViewBag.Title = "ListarArtistas";
+}
+
+
+
+<div class="container">
+    <div class="rowProducts">
+        <h2 class="titulocate">Artistas de SpiritualArt</h2>
+
+        <div class="row">
+            @foreach (var artistas in Model)
+            {
+
+                <article class="">
+                    <figure class="producto">
+                        <img src="@Url.Content(artistas.IMAGEN)" />
+                        <h2 class="subCate">@artistas.NOMBRE_ARTISTA</h2>
+                        <figcaption>@artistas.CIUDAD</figcaption>
+                    </figure>
+                </article>
+            }
+
+
+        </div>
+    </div>
+</div>
+

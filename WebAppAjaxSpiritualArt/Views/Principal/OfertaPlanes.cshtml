@@ -1,0 +1,74 @@
+﻿
+@model List<WebAppAjaxSpiritualArt.Models.TIPO_PLAN>
+@{
+    ViewBag.Title = "OfertaPlanes";
+}
+
+<h2>OfertaPlanes</h2>
+
+@foreach (var planes in Model)
+{
+    if (planes.PRECIO != 0)
+    {
+
+        <div style="border:solid">
+            <h3>@planes.NOMBRE_PLAN</h3><br />
+            <input value="@planes.NOMBRE_PLAN" id="plan" hidden />
+            <h3><label>Con un precio de:</label>@planes.PRECIO</h3><br />
+            <input value="@planes.PRECIO" id="precio" hidden />
+            <h3>@planes.DESCRIPCION_VISIBILIDAD</h3><br />
+            <h3>@planes.DESCRIPCION_CANTIDAD_OBRAS</h3><br />
+            <h3>@planes.DESCRIPCION_BUSQUEDA</h3><br />
+            <h3>@planes.DESCRIPCION_TIEMPO_PLAN</h3><br />
+        </div>
+        <br />
+        <br />
+        <button onclick="pagar()">Contratar</button>
+        <br />
+    }
+}
+
+
+
+@section scripts{
+
+    <script>
+        function pagar() {
+            var body = {
+                precio: $("#precio").val(),
+                plan: $("#plan").val()
+
+
+
+            }
+
+            jQuery.ajax({
+
+                url: '@Url.Action("PagoPlan","Principal")',
+                type: "POST",
+                data: JSON.stringify(body),
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                success: function (data) {
+
+                    if (data.status) {
+
+                        var jsonresult = JSON.parse(data.respuesta);
+
+                        var links = jsonresult.links;
+
+                        var resultado = links.find(item => item.rel === "approve")
+
+                        window.location.href = resultado.href
+                    } else {
+                        alert("Intente más tarde")
+                    }
+                }
+            });
+        }
+
+
+    </script>
+
+}
+

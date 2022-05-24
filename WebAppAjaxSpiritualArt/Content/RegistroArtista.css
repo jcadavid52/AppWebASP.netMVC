@@ -1,0 +1,74 @@
+﻿* {
+    padding: 0;
+    margin: 0;
+    font-family: century gothic;
+}
+.registro-body{
+    background-image: url(../ArchivosLectura/port3.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    margin: 0px;
+    color: rgb(26, 4, 4);
+    font-family: 'Playfair Display SC', serif;
+    
+}
+
+
+.form-registro {
+    backface-visibility: 10%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: right;
+    border-radius: 10px;
+    background-color: #eeebeb52;
+    height: auto;
+    margin: auto;
+    margin-top: 20vh;
+    margin-left: 20vw;
+    margin-right: 20vw;
+    text-align: center;
+    padding-left: 10%;
+    padding-right: 10%;
+    font-family: 'Playfair Display SC', serif;
+}
+
+h2 {
+    text-align: center;
+    padding: 12px;
+    font-size: 3vw;
+    color: rgb(22, 22, 22)
+}
+
+.input label {
+    color: rgb(255, 255, 255);
+    font-size: 2vw;
+}
+
+.input input {
+    color: rgb(126, 9, 9);
+    font-size: 2vw;
+    margin-bottom: 2%;
+    opacity: 90%;
+}
+
+
+.btn-login {
+    background-color: rgb(2, 141, 255);
+    width: 40%;
+    padding: 1.5%;
+    border-style: none;
+    border-radius: 8px;
+    color: rgb(0, 0, 0);
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 2vw;
+    margin-bottom: 5%;
+    margin-top: 1%;
+    transition: all 3s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+    .btn-login:hover {
+        background-color: rgb(0, 30, 54);
+        color: #fff;
+    }

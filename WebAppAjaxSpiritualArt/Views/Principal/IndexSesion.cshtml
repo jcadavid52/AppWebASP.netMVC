@@ -1,0 +1,328 @@
+﻿@model List<WebAppAjaxSpiritualArt.Models.CATEGORIA>
+@using WebAppAjaxSpiritualArt.Models
+@{
+    ViewBag.Title = "IndexSesion";
+    List<PRODUCTO> consultaObras = ViewBag.ConsultaObras;
+}
+
+<h2>IndexSesion</h2>
+
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#AgregarObra">
+    Agregar Obra
+</button>
+<br />
+<br />
+
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#VerNotificaciones">
+    Notificaciones <span id="span-button"></span>
+</button>
+
+
+<!-- Modal -->
+<div class="modal fade" id="AgregarObra" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Publicar Obra</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <div class="modal-body">
+                <form>
+                    <div class="in ">
+                        <label>Nombre del obra</label>
+                        <input class="form-control" type="text" name="NOMBRE_PRODUCTO" id="NOMBRE_PRODUCTO" placeholder="Nombre de la obra" required />
+                    </div>
+
+                    <div class="in ">
+                        <label>Precio</label>
+                        <input class="form-control" type="number" name="PRECIO" placeholder="ingrese el precio" id="precio" required />
+                    </div>
+
+                    <div class="in ">
+                        <label>Descripción de la obra</label>
+                        <input class="form-control" type="text" name="DESCRIPCION" required placeholder="Descripción" id="descripcion" />
+                    </div>
+
+                    <div class="in ">
+                        <label>Cantidad de esta obra</label>
+                        <input class="form-control" type="number" name="CANTIDAD" required placeholder="Cantidad de la obra que quiere publicar" id="cantidad" />
+                    </div>
+
+                    <div class="in ">
+                        <label>Sube la imagen de tu obra</label>
+                        <input class="form-control" type="file" name="archivoProducto" id="archivoProducto" required />
+                    </div>
+
+                    <div class="in">
+                        <label>Selecciona la categoría de tu obra</label>
+                        <select id="select-id-categoria">
+                        </select>
+                    </div>
+
+                    <input class="form-control" type="hidden" name="ESTADO" value="true" id="estado" />
+                    <input class="form-control" type="hidden" name="FK_ARTISTA" value="@Session["id_registro"]" id="fk_artista" />
+
+                </form>
+
+
+
+
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                <input class="btn btn-primary" type="button" name="name" value="Publicar" id="btn-subir-obra" />
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal notificaciones -->
+<div class="modal fade" id="VerNotificaciones" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Clientes que te han solicitado obras</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <div class="modal-body">
+                <h3>Datos de la notificación</h3>
+                <table class="table" id="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Fecha</th>
+                            <th scope="col">Nombre del cliente</th>
+                            <th scope="col">Apellidos del cliente</th>
+                            <th scope="col">Correo del cliente</th>
+                            <th scope="col">Teléfono del cliente</th>
+                            <th scope="col">Asunto</th>
+                            <th scope="col">Mensaje</th>
+                            <th scope="col">Producto solicitado</th>
+
+                        </tr>
+                    </thead>
+                    <tbody id="tbody">
+                    </tbody>
+                </table>
+
+                
+
+                <div id="sin_notificaciones" style="display:none">
+                    <h4>No tienes notificaciones</h4>
+                </div>
+
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                
+            </div>
+
+        </div>
+    </div>
+</div>
+<div class="body2" id="body2">
+    <h2 class="titulocate">Mis Obras</h2>
+    <div id="wrapper">
+        <div id="carousel">
+            <div id="content">
+
+            </div>
+        </div>
+        <button id="prev">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                <path fill="none" d="M0 0h24v24H0V0z" />
+                <path d="M15.61 7.41L14.2 6l-6 6 6 6 1.41-1.41L11.03 12l4.58-4.59z" />
+            </svg>
+        </button>
+        <button id="next">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                <path fill="none" d="M0 0h24v24H0V0z" />
+                <path d="M10.02 6L8.61 7.41 13.19 12l-4.58 4.59L10.02 18l6-6-6-6z" />
+            </svg>
+        </button>
+    </div>
+
+
+</div>
+
+<div id="sin_obras" style="display:none">
+    <h4>No tienes productos publicados</h4>
+</div>
+
+
+
+@section scripts{
+
+    <script>
+        //listar obras para cada sesion
+        function ConsultarObras() {
+            fetch("@Url.Content("~/JsonProductos/ConsultarObra")")
+                .then(function (res) {
+
+                    return res.json();
+                })
+
+                .then(function (miJson) {
+
+                    console.log(miJson);
+                    document.getElementById("content").innerHTML = "";
+
+                    if (miJson[0] != null) {
+
+                      for (let i = 0; i < miJson.length; i++) {
+                        document.getElementById("content").innerHTML = document.getElementById("content").innerHTML +
+                            '<figure style="background-image:url(' + miJson[i].IMAGEN_PRODUCTO+');">' +
+                            '</figure >'
+                        }
+                        //document.getElementById("body2").style.display = "";
+                    } else {
+
+                        document.getElementById("sin_obras").style.display = "";
+                        document.getElementById("body2").style.display = "none";
+                    }
+
+
+
+
+
+                })
+        }
+        //listar categorias
+        function listarCategorias() {
+            fetch("@Url.Content("~/JsonProductos/ListarCategoria")")
+                .then(function (res) {
+
+                    return res.json();
+                })
+
+                .then(function (miJson) {
+
+                    console.log(miJson);
+                    for (let i = 0; i < miJson.length; i++) {
+
+                        document.getElementById("select-id-categoria").innerHTML = document.getElementById("select-id-categoria").innerHTML +
+                            '<option value="' + miJson[i].PK_ID_CATEGORIA + '" id="opcion-id-categoria">' + miJson[i].NOMBRE_CATEGORIA+'</option>'
+
+                    }
+                })
+        }
+
+        //subir obra
+        $(function () {
+            $("#btn-subir-obra").click(function () {
+
+                var form_data = new FormData();
+                var file_data = $("#archivoProducto").prop("files")[0];
+
+                form_data.append("archivoProducto", file_data);
+
+                form_data.append("NOMBRE_PRODUCTO", $("#NOMBRE_PRODUCTO").val());
+                form_data.append("PRECIO", $("#precio").val());
+                form_data.append("DESCRIPCION", $("#descripcion").val());
+                form_data.append("CANTIDAD", $("#cantidad").val());
+                form_data.append("archivoProducto", $("#archivoProducto").val());
+                form_data.append("FK_CATEGORIA", $("#select-id-categoria").val());
+                form_data.append("FK_ARTISTA", $("#fk_artista").val());
+                form_data.append("ESTADO", $("#estado").val());
+
+                for (var value of form_data.values()) {
+                    console.log(value);
+                }
+
+                var url = "@Url.Content("~/JsonProductos/PublicarObraAccion")";
+
+
+                $.ajax({
+
+                    cache: false,
+                    contentType: false,
+                    data: form_data,
+                    dataType: 'JSON',
+                    enctype: 'multipart/form-data',
+                    processData: false,
+                    method: "POST",
+                    url: url,
+                    success: function (data) {
+                        if (data == 1) {
+                            swal("Registrado exitosamente!", "You clicked the button!", "success");
+                            document.getElementById("body2").style.display = "";
+                           document.getElementById("sin_obras").style.display = "none";
+
+                            ConsultarObras();
+                        } else {
+
+                        }
+
+                    }
+
+                })
+
+            });
+        });
+
+        //listar notificaciones
+        function listarNotificaciones() {
+
+            var fk_artista = document.getElementById("fk_artista").value;
+
+            
+            fetch("@Url.Content("~/JsonProductos/EnviarNotificaciones/")" + fk_artista)
+
+                .then(function (res) {
+
+                    return res.json();
+                })
+
+                .then(function (miJson) {
+                    document.getElementById("tbody").innerHTML = "";
+                    console.log(miJson);
+                    let cont = 0;
+                    let botonEliminar = 'Descartar';
+
+                    if (miJson[0] != null) {
+                        for (let i = 0; i < miJson.length; i++) {
+
+                            cont++
+
+
+                            document.getElementById("tbody").innerHTML = document.getElementById("tbody").innerHTML +
+                                '<tr>' +
+
+
+                                '<td>' + miJson[i].fecha + '</td>' +
+                                '<td>' + miJson[i].nombreCliente + '</td>' +
+                                '<td>' + miJson[i].apellidoCliente + '</td>' +
+                                '<td>' + miJson[i].correoCliente + '</td>' +
+                                '<td>' + miJson[i].telefonoCliente + '</td>' +
+                                '<td>' + miJson[i].asunto + '</td>' +
+                                '<td>' + miJson[i].mensaje + '</td>' +
+                                '<td>' + miJson[i].nombreProducto + '</td>' +
+                                '<td><button class="btn-danger">' + botonEliminar + '</button></td>' +
+                                '</tr>';
+
+                        }
+                    } else {
+                        document.getElementById("table").style.display = "none";
+                        document.getElementById("sin_notificaciones").style.display = "";
+                        
+                    }
+                    document.getElementById("span-button").innerHTML = cont;
+                })
+        }
+        (listarCategorias)();
+
+        (ConsultarObras)();
+
+        (listarNotificaciones)();
+    </script>
+
+    
+
+
+}
+

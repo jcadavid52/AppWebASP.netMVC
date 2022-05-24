@@ -1,0 +1,43 @@
+﻿@model List<WebAppAjaxSpiritualArt.Models.PRODUCTO>
+@using WebAppAjaxSpiritualArt.Models
+@{
+    ViewBag.Title = "Exposicion";
+    List<CATEGORIA> categorias = ViewBag.Categorias;
+}
+
+
+<form action="@Url.Action("FiltrarObras","Principal")" method="post">
+    <label>Categoría de obra</label>
+    <select name="id_categoria" class="form-select form-select-sm mb-3">
+        @foreach (var Itemcategorias in categorias)
+        {
+            <option value="@Itemcategorias.PK_ID_CATEGORIA">@Itemcategorias.NOMBRE_CATEGORIA</option>
+        }
+    </select>
+    <input type="submit" value="Buscar" class="btn-info" />
+</form>
+<div class="container">
+    <div class="rowProducts">
+        <h2 class="titulocate">Obras que hacen parte de nuestra comunidad SpiritualArt</h2>
+        <div class="row2">
+            @foreach (var obras in Model)
+            {
+
+
+
+                <div class="card2" style="width: 18rem;">
+                    <img src="@Url.Content(obras.IMAGEN_PRODUCTO)" class="card-img-top" alt="..." width="250" height="250">
+                    <div class="card-body">
+                        <h5 class="card-title">@obras.NOMBRE_PRODUCTO</h5>
+                        <h6 class="card-title" style="color:saddlebrown">@obras.REGISTRO_ARTISTA.NOMBRE_ARTISTA</h6>
+                        <p class="card-text">@obras.PRECIO</p>
+                        <a href="@Url.Content("~/Principal/DetalleObraCompra/" + obras.PK_ID_PRODUCTO)" class="btn btn-primary">Ver obra</a>
+                    </div>
+                </div>
+
+            }
+
+        </div>
+    </div>
+</div>
+
