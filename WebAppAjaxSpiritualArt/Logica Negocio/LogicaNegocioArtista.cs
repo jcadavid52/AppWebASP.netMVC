@@ -90,6 +90,18 @@ namespace WebAppAjaxSpiritualArt.Logica_Negocio
             }
         }
 
+
+
+        //listar informacion de un solo artista(sobrecarga)
+        public List<REGISTRO_ARTISTA> listarArtistas(int id_artista)
+        {
+            using (BD_SPIRITUAL_ARTEntities bd = new BD_SPIRITUAL_ARTEntities())
+            {
+                return bd.REGISTRO_ARTISTA.Where(RA => RA.PK_ID_ARTISTA == id_artista).ToList();
+            }
+        }
+
+
         //mostrar noticiaciones según la fk del artista
 
         public List<NOTIFICACION> notificaciones(int fk_artista)
@@ -99,7 +111,60 @@ namespace WebAppAjaxSpiritualArt.Logica_Negocio
                 return bd.NOTIFICACION.Include("CLIENTE").Include("PRODUCTO").Where(N => N.FK_ARTISTA == fk_artista).ToList();
             }
         }
-        
-        
+
+        //cosulta de un artista
+        public REGISTRO_ARTISTA ConsultaArtista(int id_artista)
+        {
+            using (BD_SPIRITUAL_ARTEntities bd = new BD_SPIRITUAL_ARTEntities())
+            {
+                return bd.REGISTRO_ARTISTA.FirstOrDefault(A => A.PK_ID_ARTISTA == id_artista);
+            }
+        }
+
+        //publicar biografía
+        public bool publicarBiografia(BIOGRAFIA nuevaBiografia)
+        {
+            using (BD_SPIRITUAL_ARTEntities bd = new BD_SPIRITUAL_ARTEntities())
+            {
+                try
+                {
+                    bd.BIOGRAFIA.Add(nuevaBiografia);
+                    bd.SaveChanges();
+                    return true;
+                }catch(Exception e)
+                {
+                    return false;
+                }
+            }
+        }
+
+        //consultar Biografia
+        public BIOGRAFIA consultarBiografia(int fk_artista)
+        {
+            using (BD_SPIRITUAL_ARTEntities bd = new BD_SPIRITUAL_ARTEntities())
+            {
+                return bd.BIOGRAFIA.FirstOrDefault(B => B.FK_REGISTRO_ARTISTA == fk_artista);
+            }
+        }
+
+        //editar biografía
+        public bool editarBiografia(BIOGRAFIA biografia)
+        {
+            using (BD_SPIRITUAL_ARTEntities bd = new BD_SPIRITUAL_ARTEntities())
+            {
+                try
+                {
+                    bd.Entry(biografia).State = System.Data.Entity.EntityState.Modified;
+                    bd.SaveChanges();
+                    return true;
+                }
+                catch (Exception)
+                {
+                    return false;
+                }
+            }
+        }
+
+
     }
 }

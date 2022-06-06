@@ -1,0 +1,202 @@
+﻿@model List<WebAppAjaxSpiritualArt.Models.REGISTRO_ARTISTA>
+@{
+    ViewBag.Title = "MiCuenta";
+}
+
+<h2>Mi Cuenta</h2>
+
+
+@foreach (var item in Model)
+{
+    <input type="hidden" value="@item.PK_ID_ARTISTA" id="fk_artista" />
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Nombre</th>
+                <th scope="col">Primer apellido</th>
+                <th scope="col">Segundo apellido</th>
+                <th scope="col">Correo y usuario</th>
+                <th scope="col">Teléfono</th>
+                <th scope="col">País</th>
+                <th scope="col">Localidad</th>
+                <th scope="col">Ciudad</th>
+                <th scope="col">Dirección</th>
+                <th scope="col">Mi clave</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+
+                <td>@item.NOMBRE_ARTISTA</td>
+                <td>@item.PRIMER_APELLIDO_ARTISTA</td>
+                <td>@item.SEGUNDO_APELLIDO_ARTISTA</td>
+                <td>@item.CORREO</td>
+                <td>@item.TELEFONO</td>
+                <td>@item.PAIS</td>
+                <td>@item.LOCALIDAD</td>
+                <td>@item.CIUDAD</td>
+                <td>@item.DIRECCION</td>
+                <td>@item.CLAVE</td>
+            </tr>
+
+        </tbody>
+    </table>
+    <div class="col text-center">
+        <button class="btn-success regular-button" onclick="ConsultarArtistaEditar(@)">Modificar mis datos</button>
+    </div>
+}
+
+
+
+<hr />
+
+<div class="text-bg-dark mb-3" style="max-width: 25rem;">
+
+    <div class="card-body">
+        <h5 class="card-title">Mi Biografía</h5>
+        <div id="parrafo">
+
+        </div>
+    </div>
+</div>
+
+<!-- Modal editar artista-->
+<div class="modal fade" id="EditarArtista" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Mi Biografía</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form>
+
+                    <div class="col-md-4">
+                        <label for="validationCustom01" class="form-label">First name</label>
+                        <input type="text" class="form-control" id="validationCustom01" value="Mark" required>
+                        <div class="valid-feedback">
+                            Looks good!
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="validationCustom02" class="form-label">Last name</label>
+                        <input type="text" class="form-control" id="validationCustom02" value="Otto" required>
+                        <div class="valid-feedback">
+                            Looks good!
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="validationCustomUsername" class="form-label">Username</label>
+                        <div class="input-group has-validation">
+
+                            <input type="text" class="form-control" id="validationCustomUsername" aria-describedby="inputGroupPrepend" required>
+                            <div class="invalid-feedback">
+                                Please choose a username.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="validationCustom03" class="form-label">City</label>
+                        <input type="text" class="form-control" id="validationCustom03" required>
+                        <div class="invalid-feedback">
+                            Please provide a valid city.
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <label for="validationCustom04" class="form-label">State</label>
+                        <select class="form-select" id="validationCustom04" required>
+                            <option selected disabled value="">Choose...</option>
+                            <option>...</option>
+                        </select>
+                        <div class="invalid-feedback">
+                            Please select a valid state.
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <label for="validationCustom05" class="form-label">Zip</label>
+                        <input type="text" class="form-control" id="validationCustom05" required>
+                        <div class="invalid-feedback">
+                            Please provide a valid zip.
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required>
+                            <label class="form-check-label" for="invalidCheck">
+                                Agree to terms and conditions
+                            </label>
+                            <div class="invalid-feedback">
+                                You must agree before submitting.
+                            </div>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-primary" id="btn-biografia">Publicar</button>
+                <button type="button" class="btn btn-danger" id="btn-editar-biografia" style="display:none">Editar</button>
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts{
+    <script>
+        function ConsultarBiografia() {
+            let fk_artista = document.getElementById("fk_artista").value;
+            fetch("@Url.Content("~/JsonProductos/enviarBiografia/")" + fk_artista)
+               .then(function (res) {
+
+                  return res.json();
+               })
+
+               .then(function (miJson) {
+
+                   document.getElementById("parrafo").innerHTML = "";
+                      if (miJson[0] != null) {
+                          for (let i = 0; i < miJson.length; i++) {
+
+                                  document.getElementById("parrafo").innerHTML = document.getElementById("parrafo").innerHTML +
+                                      '<p class="card-text">' + miJson[i].BIOGRAFIATEXTO + '</p>'
+
+                         }
+                      } else {
+                          document.getElementById("parrafo").innerHTML = document.getElementById("parrafo").innerHTML +
+                              '<p class="card-text">El artista no ha publicado una biografía</p>'
+                      }
+
+
+               })
+        }
+
+         //funtion que consulta un artista para editarlo
+        function ConsultarArtistaEditar(id) {
+             fetch("@Url.Content("~/JsonProductos/ConsultarObraEditar/")" + id)
+                .then(function (res) {
+
+                    return res.json();
+                })
+
+                .then(function (miJson) {
+
+                    for (let i = 0; i < miJson.length; i++) {
+                        document.getElementById("pk_obra").value = miJson[i].PK_ID_PRODUCTO;
+
+
+
+                    }
+
+                    abrirModalEditarArtita();
+                })
+        }
+
+        //abre el modal editar artista
+        function abrirModalEditarArtita() {
+
+        }
+        (ConsultarBiografia)();
+    </script>
+}
+

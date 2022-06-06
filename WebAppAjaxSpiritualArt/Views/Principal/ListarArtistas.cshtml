@@ -16,11 +16,16 @@
 
                 <article class="">
                     <figure class="producto">
+
                         <img src="@Url.Content(artistas.IMAGEN)" />
-                        <h2 class="subCate">@artistas.NOMBRE_ARTISTA</h2>
+
+                        <a href="@Url.Action("DetalleArtista/" + artistas.PK_ID_ARTISTA)" style="text-decoration:none">
+                            <h2 class="subCate">@artistas.NOMBRE_ARTISTA</h2>
+                        </a>
                         <figcaption>@artistas.CIUDAD</figcaption>
                     </figure>
                 </article>
+
             }
 
 

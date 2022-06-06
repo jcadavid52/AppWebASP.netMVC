@@ -33,6 +33,7 @@ namespace WebAppAjaxSpiritualArt.Models
         public virtual DbSet<PRODUCTO> PRODUCTO { get; set; }
         public virtual DbSet<REGISTRO_ARTISTA> REGISTRO_ARTISTA { get; set; }
         public virtual DbSet<TIPO_PLAN> TIPO_PLAN { get; set; }
+        public virtual DbSet<BIOGRAFIA> BIOGRAFIA { get; set; }
     
         public virtual int SP_REGISTRAR_ARTISTA(string nOMBRE_ARTISTA, string pRIMER_APELLIDO_ARTISTA, string sEGUNDO_APELLIDO_ARTISTA, string tELEFONO, string cORREO, string pAIS, string cIUDAD, string lOCALIDAD, string dIRECCION, Nullable<int> fK_TIPO_PLAN, Nullable<int> cLAVE, Nullable<bool> eSTADO, string iMAGEN)
         {

@@ -1,0 +1,203 @@
+﻿@import url("https://fonts.googleapis.com/css?family=Muli");
+
+
+
+
+
+
+
+.body5 {
+    font: 16px;
+    margin: 0;
+    padding: 0;
+   
+}
+
+
+
+
+/*Contenedor*/
+
+.cont5 {
+    margin-top: 40px;
+    padding: 5%;
+    height: auto;
+    grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
+}
+
+
+
+
+/*Card*/
+
+.card5 {
+    max-width: 1000px;
+    display: grid;
+    margin-bottom: 70px;
+    grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
+    grid-gap: 20px;
+}
+
+
+.figure5 {
+    margin: 0;
+    padding: 0;
+}
+
+    .figure5 img {
+        display: grid;
+        
+        height: 450px;
+        width:300px;
+    }
+
+
+
+
+.detalle {
+    display: grid;
+    margin-bottom: 50px;
+    row-gap: 10px;
+}
+
+    .detalle h2 {
+        font-family: 'Slabo 27px', serif;
+    }
+
+
+        .detalle h2 a {
+            text-decoration: none;
+            color: rgb(52, 100, 58);
+        }
+
+.name5 {
+    font-size: 2rem;
+}
+
+
+.precio h2 {
+    color: rgb(85, 81, 81);
+    font-size: 1.5rem;
+}
+
+
+.descripcion {
+    font-size: 0.9rem;
+}
+
+.tecnica, .dimension, .artista {
+    font-size: 1rem;
+}
+
+
+h2.artista {
+    color: rgb(46, 75, 46);
+}
+
+.artista strong {
+    color: black;
+}
+
+
+/*Subititle*/
+
+.subtitle {
+    text-align: center;
+    font-family: 'Slabo 27px', serif;
+    font-size: 3rem
+}
+
+
+
+
+
+
+
+/* LISTAS DE  PRODUCTOS  CARDS  */
+
+
+
+.cont6 {
+    display: grid;
+    align-self: center;
+    padding: 5%;
+    height: auto;
+    grid-template-columns: repeat(auto-fill, minmax(10rem, 1fr));
+    grid-gap: 4px;
+}
+
+
+.cards6 {
+    max-width: 150px;
+    display: grid;
+    justify-self: center;
+    overscroll-behavior-y: contain;
+    grid-gap: 20px;
+}
+
+    .cards6 a {
+        text-decoration: none;
+        color: black;
+    }
+
+
+        .cards6 a:hover {
+            border: 1px solid;
+            background-color: rgba(235, 236, 236, 0.178);
+        }
+
+
+
+
+.fig2 {
+    margin: 0;
+    padding: 0;
+}
+
+    .fig2 img {
+        display: grid;
+        max-width: 100%;
+        width: 100%;
+        height: 150px;
+        object-fit: cover;
+    }
+
+
+
+.detalles {
+    width: 100%;
+    display: grid;
+    row-gap: 10px;
+    padding: 20px;
+}
+
+    .detalles h2 {
+    }
+
+.names {
+    font-size: 1rem;
+}
+
+
+h2 .precios {
+    color: rgb(85, 81, 81);
+    font-size: 1.2rem;
+}
+
+
+.descripciones {
+    font-size: 0.9rem;
+}
+
+.tecnicas, .dimensiones, .artistas {
+    font-size: 0.8rem;
+}
+
+
+h2.artista {
+    color: rgb(46, 75, 46);
+}
+
+.artista strong {
+    color: black;
+}

@@ -68,7 +68,7 @@ figure {
     height: 350px;
     border-radius: 10px;
     background-repeat: no-repeat;
-    background-image: url(img/salpica3.jpg);
+    /*background-image: url(img/salpica3.jpg);*/
     background-size: cover;
 }
 

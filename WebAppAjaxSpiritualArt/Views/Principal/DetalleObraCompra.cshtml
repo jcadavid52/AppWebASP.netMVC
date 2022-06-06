@@ -8,33 +8,43 @@
 
 }
 
-<h2>DetalleObra</h2>
 
-<div>
-    <h1>@detalleObra.NOMBRE_PRODUCTO</h1>
-    <label>Precio</label>
-    <h3>@detalleObra.PRECIO</h3>
-    <img src="@Url.Content(imagen)" class="card-img-top" alt="..." width="250" height="250">
+<body class="body5">
 
-    <h1>Detalles</h1>
+    <div class="cont5">
+        <div class="card5">
+            <div>
+                <figure class="figure5">
+                    <img src="@Url.Content(imagen)" alt="" />
+                </figure>
+            </div>
 
-    <label>Autor: @detalleObra.REGISTRO_ARTISTA.NOMBRE_ARTISTA</label><br />
-    <label>País: @detalleObra.REGISTRO_ARTISTA.PAIS</label><br />
-    <label>Ciudad:@detalleObra.REGISTRO_ARTISTA.CIUDAD</label><br />
-    <label>Categoria: @detalleObra.CATEGORIA.NOMBRE_CATEGORIA</label><br />
-    <p>Descripción: @detalleObra.DESCRIPCION</p><br />
+            <div class="detalle">
+                <input type="hidden" id="fk_artista" value="@detalleObra.FK_ARTISTA" />
+                <input type="hidden" id="fk_producto" value="@detalleObra.PK_ID_PRODUCTO" />
+                <h2 class="name5" style="text-align:left">@detalleObra.NOMBRE_PRODUCTO</h2>
+                <h2 class="precio" style="text-align:left"><strong>COP $</strong>@detalleObra.PRECIO</h2>
+                <h2 class="descripcion" style="text-align:left">
+                    <strong>Descripcion : </strong>@detalleObra.DESCRIPCION
+                </h2>
+                <h2 class="tecnica" style="text-align:left"><strong>Tecnica: </strong>@detalleObra.CATEGORIA.NOMBRE_CATEGORIA</h2>
+                <h2 class="dimension" style="text-align:left"><strong>Ciudad: </strong>@detalleObra.REGISTRO_ARTISTA.CIUDAD</h2>
+                <h2 class="artista" style="text-align:left">
+                    <a href=""><strong>Artista: </strong>@detalleObra.REGISTRO_ARTISTA.NOMBRE_ARTISTA</a>
+                </h2>
+            </div>
+        </div>
+    </div>
 
-    <input type="hidden" id="fk_artista" value="@detalleObra.REGISTRO_ARTISTA.PK_ID_ARTISTA" />
-    <input type="hidden" id="fk_producto" value="@detalleObra.PK_ID_PRODUCTO" />
+    <hr />
 
-</div>
-
-<div>
-    <h1>¿Tienes interés en comprar esta obra?</h1>
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#FormularioCliente">
-        Hazle saber al artista
-    </button>
-</div>
+    <div style="text-align:center">
+        <h1>¿Tienes interés en comprar esta obra?</h1>
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#FormularioCliente">
+            Hazle saber al artista
+        </button>
+    </div>
+</body>
 <br />
 <br />
 <hr />

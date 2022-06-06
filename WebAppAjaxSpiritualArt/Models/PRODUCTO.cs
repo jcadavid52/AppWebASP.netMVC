@@ -30,9 +30,7 @@ namespace WebAppAjaxSpiritualArt.Models
         public string IMAGEN_PRODUCTO { get; set; }
         public Nullable<int> FK_CATEGORIA { get; set; }
         public Nullable<int> FK_ARTISTA { get; set; }
-
         public HttpPostedFileBase archivoProducto { get; set; }
-
         public virtual CATEGORIA CATEGORIA { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<NOTIFICACION> NOTIFICACION { get; set; }

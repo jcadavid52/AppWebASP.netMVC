@@ -61,6 +61,11 @@
       <Parameter Name="FK_ARTISTA" Mode="In" Type="Int32" />
       <Parameter Name="FK_PRODUCTO" Mode="In" Type="Int32" />
     </FunctionImport>
+    <EntitySet Name="BIOGRAFIA" EntityType="BD_SPIRITUAL_ARTModel.BIOGRAFIA" />
+    <AssociationSet Name="FK__BIOGRAFIA__FK_RE__160F4887" Association="BD_SPIRITUAL_ARTModel.FK__BIOGRAFIA__FK_RE__160F4887">
+      <End Role="REGISTRO_ARTISTA" EntitySet="REGISTRO_ARTISTA" />
+      <End Role="BIOGRAFIA" EntitySet="BIOGRAFIA" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="CATEGORIA">
     <Key>
@@ -134,6 +139,7 @@
     <NavigationProperty Name="NOTIFICACION" Relationship="BD_SPIRITUAL_ARTModel.FK__NOTIFICAC__FK_AR__6A30C649" FromRole="REGISTRO_ARTISTA" ToRole="NOTIFICACION" />
     <NavigationProperty Name="PRODUCTO" Relationship="BD_SPIRITUAL_ARTModel.FK__PRODUCTO__FK_ART__5629CD9C" FromRole="REGISTRO_ARTISTA" ToRole="PRODUCTO" />
     <NavigationProperty Name="TIPO_PLAN" Relationship="BD_SPIRITUAL_ARTModel.FK__REGISTRO___FK_TI__3D5E1FD2" FromRole="REGISTRO_ARTISTA" ToRole="TIPO_PLAN" />
+    <NavigationProperty Name="BIOGRAFIA" Relationship="BD_SPIRITUAL_ARTModel.FK__BIOGRAFIA__FK_RE__160F4887" FromRole="REGISTRO_ARTISTA" ToRole="BIOGRAFIA" />
   </EntityType>
   <EntityType Name="TIPO_PLAN">
     <Key>
@@ -217,6 +223,27 @@
       </Principal>
       <Dependent Role="REGISTRO_ARTISTA">
         <PropertyRef Name="FK_TIPO_PLAN" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="BIOGRAFIA">
+    <Key>
+      <PropertyRef Name="PK_ID_BIOGRAFIA" />
+    </Key>
+    <Property Name="PK_ID_BIOGRAFIA" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="BIOGRAFIATEXTO" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="FK_REGISTRO_ARTISTA" Type="Int32" />
+    <NavigationProperty Name="REGISTRO_ARTISTA" Relationship="BD_SPIRITUAL_ARTModel.FK__BIOGRAFIA__FK_RE__160F4887" FromRole="BIOGRAFIA" ToRole="REGISTRO_ARTISTA" />
+  </EntityType>
+  <Association Name="FK__BIOGRAFIA__FK_RE__160F4887">
+    <End Type="BD_SPIRITUAL_ARTModel.REGISTRO_ARTISTA" Role="REGISTRO_ARTISTA" Multiplicity="0..1" />
+    <End Type="BD_SPIRITUAL_ARTModel.BIOGRAFIA" Role="BIOGRAFIA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="REGISTRO_ARTISTA">
+        <PropertyRef Name="PK_ID_ARTISTA" />
+      </Principal>
+      <Dependent Role="BIOGRAFIA">
+        <PropertyRef Name="FK_REGISTRO_ARTISTA" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

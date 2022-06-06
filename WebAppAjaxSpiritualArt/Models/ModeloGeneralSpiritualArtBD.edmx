@@ -5,6 +5,14 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="BD_SPIRITUAL_ARTModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="BIOGRAFIA">
+          <Key>
+            <PropertyRef Name="PK_ID_BIOGRAFIA" />
+          </Key>
+          <Property Name="PK_ID_BIOGRAFIA" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BIOGRAFIATEXTO" Type="varchar(max)" />
+          <Property Name="FK_REGISTRO_ARTISTA" Type="int" />
+        </EntityType>
         <EntityType Name="CATEGORIA">
           <Key>
             <PropertyRef Name="PK_ID_CATEGORIA" />
@@ -79,6 +87,18 @@
           <Property Name="DESCRIPCION_BUSQUEDA" Type="varchar(max)" />
           <Property Name="DESCRIPCION_TIEMPO_PLAN" Type="varchar(max)" />
         </EntityType>
+        <Association Name="FK__BIOGRAFIA__FK_RE__160F4887">
+          <End Role="REGISTRO_ARTISTA" Type="Self.REGISTRO_ARTISTA" Multiplicity="0..1" />
+          <End Role="BIOGRAFIA" Type="Self.BIOGRAFIA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="REGISTRO_ARTISTA">
+              <PropertyRef Name="PK_ID_ARTISTA" />
+            </Principal>
+            <Dependent Role="BIOGRAFIA">
+              <PropertyRef Name="FK_REGISTRO_ARTISTA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__NOTIFICAC__FK_AR__6A30C649">
           <End Role="REGISTRO_ARTISTA" Type="Self.REGISTRO_ARTISTA" Multiplicity="0..1" />
           <End Role="NOTIFICACION" Type="Self.NOTIFICACION" Multiplicity="*" />
@@ -182,12 +202,17 @@
           <Parameter Name="FK_PRODUCTO" Type="int" Mode="In" />
         </Function>
         <EntityContainer Name="BD_SPIRITUAL_ARTModelStoreContainer">
+          <EntitySet Name="BIOGRAFIA" EntityType="Self.BIOGRAFIA" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CATEGORIA" EntityType="Self.CATEGORIA" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CLIENTE" EntityType="Self.CLIENTE" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="NOTIFICACION" EntityType="Self.NOTIFICACION" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PRODUCTO" EntityType="Self.PRODUCTO" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="REGISTRO_ARTISTA" EntityType="Self.REGISTRO_ARTISTA" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TIPO_PLAN" EntityType="Self.TIPO_PLAN" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__BIOGRAFIA__FK_RE__160F4887" Association="Self.FK__BIOGRAFIA__FK_RE__160F4887">
+            <End Role="REGISTRO_ARTISTA" EntitySet="REGISTRO_ARTISTA" />
+            <End Role="BIOGRAFIA" EntitySet="BIOGRAFIA" />
+          </AssociationSet>
           <AssociationSet Name="FK__NOTIFICAC__FK_AR__6A30C649" Association="Self.FK__NOTIFICAC__FK_AR__6A30C649">
             <End Role="REGISTRO_ARTISTA" EntitySet="REGISTRO_ARTISTA" />
             <End Role="NOTIFICACION" EntitySet="NOTIFICACION" />
@@ -278,6 +303,11 @@
             <Parameter Name="FK_ARTISTA" Mode="In" Type="Int32" />
             <Parameter Name="FK_PRODUCTO" Mode="In" Type="Int32" />
           </FunctionImport>
+          <EntitySet Name="BIOGRAFIA" EntityType="BD_SPIRITUAL_ARTModel.BIOGRAFIA" />
+          <AssociationSet Name="FK__BIOGRAFIA__FK_RE__160F4887" Association="BD_SPIRITUAL_ARTModel.FK__BIOGRAFIA__FK_RE__160F4887">
+            <End Role="REGISTRO_ARTISTA" EntitySet="REGISTRO_ARTISTA" />
+            <End Role="BIOGRAFIA" EntitySet="BIOGRAFIA" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="CATEGORIA">
           <Key>
@@ -351,6 +381,7 @@
           <NavigationProperty Name="NOTIFICACION" Relationship="BD_SPIRITUAL_ARTModel.FK__NOTIFICAC__FK_AR__6A30C649" FromRole="REGISTRO_ARTISTA" ToRole="NOTIFICACION" />
           <NavigationProperty Name="PRODUCTO" Relationship="BD_SPIRITUAL_ARTModel.FK__PRODUCTO__FK_ART__5629CD9C" FromRole="REGISTRO_ARTISTA" ToRole="PRODUCTO" />
           <NavigationProperty Name="TIPO_PLAN" Relationship="BD_SPIRITUAL_ARTModel.FK__REGISTRO___FK_TI__3D5E1FD2" FromRole="REGISTRO_ARTISTA" ToRole="TIPO_PLAN" />
+          <NavigationProperty Name="BIOGRAFIA" Relationship="BD_SPIRITUAL_ARTModel.FK__BIOGRAFIA__FK_RE__160F4887" FromRole="REGISTRO_ARTISTA" ToRole="BIOGRAFIA" />
         </EntityType>
         <EntityType Name="TIPO_PLAN">
           <Key>
@@ -434,6 +465,27 @@
             </Principal>
             <Dependent Role="REGISTRO_ARTISTA">
               <PropertyRef Name="FK_TIPO_PLAN" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="BIOGRAFIA">
+          <Key>
+            <PropertyRef Name="PK_ID_BIOGRAFIA" />
+          </Key>
+          <Property Name="PK_ID_BIOGRAFIA" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BIOGRAFIATEXTO" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="FK_REGISTRO_ARTISTA" Type="Int32" />
+          <NavigationProperty Name="REGISTRO_ARTISTA" Relationship="BD_SPIRITUAL_ARTModel.FK__BIOGRAFIA__FK_RE__160F4887" FromRole="BIOGRAFIA" ToRole="REGISTRO_ARTISTA" />
+        </EntityType>
+        <Association Name="FK__BIOGRAFIA__FK_RE__160F4887">
+          <End Type="BD_SPIRITUAL_ARTModel.REGISTRO_ARTISTA" Role="REGISTRO_ARTISTA" Multiplicity="0..1" />
+          <End Type="BD_SPIRITUAL_ARTModel.BIOGRAFIA" Role="BIOGRAFIA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="REGISTRO_ARTISTA">
+              <PropertyRef Name="PK_ID_ARTISTA" />
+            </Principal>
+            <Dependent Role="BIOGRAFIA">
+              <PropertyRef Name="FK_REGISTRO_ARTISTA" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -526,6 +578,15 @@
           </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="SP_REGISTRAR_NOTIFICACION" FunctionName="BD_SPIRITUAL_ARTModel.Store.SP_REGISTRAR_NOTIFICACION" />
           <FunctionImportMapping FunctionImportName="SP_REGISTRO_CLIENTE" FunctionName="BD_SPIRITUAL_ARTModel.Store.SP_REGISTRO_CLIENTE" />
+          <EntitySetMapping Name="BIOGRAFIA">
+            <EntityTypeMapping TypeName="BD_SPIRITUAL_ARTModel.BIOGRAFIA">
+              <MappingFragment StoreEntitySet="BIOGRAFIA">
+                <ScalarProperty Name="FK_REGISTRO_ARTISTA" ColumnName="FK_REGISTRO_ARTISTA" />
+                <ScalarProperty Name="BIOGRAFIATEXTO" ColumnName="BIOGRAFIATEXTO" />
+                <ScalarProperty Name="PK_ID_BIOGRAFIA" ColumnName="PK_ID_BIOGRAFIA" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

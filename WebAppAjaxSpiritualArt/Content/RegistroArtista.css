@@ -1,8 +1,4 @@
-﻿* {
-    padding: 0;
-    margin: 0;
-    font-family: century gothic;
-}
+﻿
 .registro-body{
     background-image: url(../ArchivosLectura/port3.jpg);
     background-repeat: no-repeat;
@@ -11,7 +7,7 @@
     background-attachment: fixed;
     margin: 0px;
     color: rgb(26, 4, 4);
-    font-family: 'Playfair Display SC', serif;
+    
     
 }
 

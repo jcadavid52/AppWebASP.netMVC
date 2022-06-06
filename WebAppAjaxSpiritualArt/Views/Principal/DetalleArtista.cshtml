@@ -1,0 +1,68 @@
+﻿@model WebAppAjaxSpiritualArt.Models.REGISTRO_ARTISTA
+
+@{
+    ViewBag.Title = "DetalleArtista";
+    string imagen = Model.IMAGEN.Replace("..", "~");
+
+
+}
+
+<h2>DetalleArtista</h2>
+
+
+<input type="hidden" id="fk_artista" value="@Model.PK_ID_ARTISTA" />
+<div class="card mb-3" style="max-width: 600px;">
+    <div class="row3 g-0">
+        <div class="col-md-4">
+            <img src="@Url.Content(imagen)" alt="..." height="400" width="300">
+        </div>
+        <div class="col-md-8">
+            <div class="card-body" id="card-body">
+                <h5 class="card-title">@Model.NOMBRE_ARTISTA</h5>
+                <h6 class="card-title">@Model.PRIMER_APELLIDO_ARTISTA</h6>
+                <div id="parrafo">
+                    @*<p class="card-text"></p>*@
+                </div>
+                <h5><strong>Cantidad de obras publicadas: </strong>@ViewBag.CantidadObras</h5>
+                <p class="card-text"><small class="text-muted">@Model.CIUDAD</small></p>
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts{
+    <script>
+        function ConsultarBiografia() {
+            let fk_artista = document.getElementById("fk_artista").value;
+            fetch("@Url.Content("~/JsonProductos/enviarBiografia/")" + fk_artista)
+               .then(function (res) {
+
+                  return res.json();
+               })
+
+               .then(function (miJson) {
+
+                   document.getElementById("parrafo").innerHTML = "";
+                      if (miJson[0] != null) {
+                          for (let i = 0; i < miJson.length; i++) {
+
+                                  document.getElementById("parrafo").innerHTML = document.getElementById("parrafo").innerHTML +
+                                      '<p class="card-text">' + miJson[i].BIOGRAFIATEXTO + '</p>'
+
+                          }
+                          document.getElementById("btn-editar-biografia").style.display = "";
+                          document.getElementById("btn-biografia").style.display = "none";
+                         
+                      } else {
+                          document.getElementById("parrafo").innerHTML = document.getElementById("parrafo").innerHTML +
+                              '<p class="card-text">El artista no ha publicado una biografía</p>'
+                          
+                      }
+
+    
+               })
+        }
+        (ConsultarBiografia)();
+    </script>
+}
+   
+

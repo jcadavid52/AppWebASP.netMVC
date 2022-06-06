@@ -138,6 +138,9 @@
     <Compile Include="Logica Negocio\LogicaNegocioArtista.cs" />
     <Compile Include="Logica Negocio\LogicaPlanes.cs" />
     <Compile Include="Logica Negocio\LogicaProductos.cs" />
+    <Compile Include="Models\BIOGRAFIA.cs">
+      <DependentUpon>ModeloGeneralSpiritualArtBD.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\CATEGORIA.cs">
       <DependentUpon>ModeloGeneralSpiritualArtBD.tt</DependentUpon>
     </Compile>
@@ -179,6 +182,7 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\detalleObra.css" />
     <Content Include="Content\IniciarSesion.css" />
     <Content Include="Content\RegistroArtista.css" />
     <Content Include="Content\slider.css" />
@@ -219,6 +223,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\Previsualizacion.js" />
     <Content Include="Scripts\slider.js" />
     <Content Include="Scripts\slider2.js" />
     <Content Include="Scripts\slider3.js" />
@@ -242,6 +247,8 @@
     <Content Include="Views\Principal\Exposicion.cshtml" />
     <Content Include="Views\Principal\ListarArtistas.cshtml" />
     <Content Include="Views\Principal\DetalleObraCompra.cshtml" />
+    <Content Include="Views\Principal\DetalleArtista.cshtml" />
+    <Content Include="Views\Principal\MiCuenta.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

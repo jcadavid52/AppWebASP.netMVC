@@ -345,5 +345,92 @@ namespace WebAppAjaxSpiritualArt.Controllers
             return View(obrasArtistaEspecifico);
         }
 
+        //edita la obra por cada artista
+
+        public ActionResult EditarObraAccion(PRODUCTO producto)
+        {
+            try
+            {
+                string nombrearchivo = Path.GetFileNameWithoutExtension(producto.archivoProducto.FileName);
+                string extension = Path.GetExtension(producto.archivoProducto.FileName);
+                nombrearchivo = nombrearchivo + DateTime.Now.ToString("yymmssfff") + extension;
+                producto.IMAGEN_PRODUCTO = "../archivosLectura/" + nombrearchivo;
+                nombrearchivo= Path.Combine(Server.MapPath("~/archivosLectura/"), nombrearchivo);
+                producto.archivoProducto.SaveAs(nombrearchivo);
+                producto.ESTADO = true;
+
+                var obraModificada = logicaProductos.modificarObra(producto);
+
+                ModelState.Clear();
+
+                if (!obraModificada)
+                {
+                    return Content("2");
+                }
+                else
+                {
+                    return Content("1");
+                }
+
+                
+
+               
+
+            }
+            catch (Exception e)
+            {
+                return Content("2");
+            }
+        }
+
+        public ActionResult EliminadoLogicoObra(PRODUCTO productoEliminado)
+        {
+            try
+            {
+                productoEliminado.ESTADO = false;
+                var obraEliminada = logicaProductos.eliminadoLogicoObra(productoEliminado);
+                if (!obraEliminada)
+                {
+                    return Content("2");
+                }
+                else
+                {
+                    return Content("1");
+                }
+            }catch(Exception e)
+            {
+                return Content("2");
+            }
+        }
+
+        //detalle del artista
+        public ActionResult DetalleArtista(int id)
+        {
+            int cont = 0;
+            //aqui hace la consulta del prodcuto con la foranea del artista
+            var productos = logicaProductos.consultarObra(id);
+
+           
+
+            //hacer conteo
+            foreach (var item in productos)
+            {
+                cont++;
+            }
+
+            ViewBag.CantidadObras = cont;
+
+            var artista = logicaNegocioArtista.ConsultaArtista(id);
+            return View(artista);
+        }
+
+        //administrar cuenta
+        public ActionResult MiCuenta(int id)
+        {
+            var artista = logicaNegocioArtista.listarArtistas(id);
+
+            return View(artista);
+        }
+
     }
 }

@@ -12,7 +12,6 @@ namespace WebAppAjaxSpiritualArt.Models
     using System;
     using System.Collections.Generic;
     
-    
     public partial class CLIENTE
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -28,10 +27,8 @@ namespace WebAppAjaxSpiritualArt.Models
         public string EMAIL_CLIENTE { get; set; }
         public string ASUNTO { get; set; }
         public string MENSAJE { get; set; }
-
         public int FK_ARTISTA { get; set; }
-
-        public int FK_PRODUCTO{ get; set; }
+        public int FK_PRODUCTO { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<NOTIFICACION> NOTIFICACION { get; set; }

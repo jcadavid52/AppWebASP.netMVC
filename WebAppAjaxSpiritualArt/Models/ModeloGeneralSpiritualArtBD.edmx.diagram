@@ -17,6 +17,8 @@
         <AssociationConnector Association="BD_SPIRITUAL_ARTModel.FK__NOTIFICAC__FK_PR__6B24EA82" />
         <AssociationConnector Association="BD_SPIRITUAL_ARTModel.FK__PRODUCTO__FK_ART__5629CD9C" />
         <AssociationConnector Association="BD_SPIRITUAL_ARTModel.FK__REGISTRO___FK_TI__3D5E1FD2" />
+        <EntityTypeShape EntityType="BD_SPIRITUAL_ARTModel.BIOGRAFIA" Width="1.5" PointX="5.25" PointY="8.375" />
+        <AssociationConnector Association="BD_SPIRITUAL_ARTModel.FK__BIOGRAFIA__FK_RE__160F4887" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

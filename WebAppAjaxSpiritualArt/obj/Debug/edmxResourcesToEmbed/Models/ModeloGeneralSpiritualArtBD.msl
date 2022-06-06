@@ -84,5 +84,14 @@
     </EntitySetMapping>
     <FunctionImportMapping FunctionImportName="SP_REGISTRAR_NOTIFICACION" FunctionName="BD_SPIRITUAL_ARTModel.Store.SP_REGISTRAR_NOTIFICACION" />
     <FunctionImportMapping FunctionImportName="SP_REGISTRO_CLIENTE" FunctionName="BD_SPIRITUAL_ARTModel.Store.SP_REGISTRO_CLIENTE" />
+    <EntitySetMapping Name="BIOGRAFIA">
+      <EntityTypeMapping TypeName="BD_SPIRITUAL_ARTModel.BIOGRAFIA">
+        <MappingFragment StoreEntitySet="BIOGRAFIA">
+          <ScalarProperty Name="FK_REGISTRO_ARTISTA" ColumnName="FK_REGISTRO_ARTISTA" />
+          <ScalarProperty Name="BIOGRAFIATEXTO" ColumnName="BIOGRAFIATEXTO" />
+          <ScalarProperty Name="PK_ID_BIOGRAFIA" ColumnName="PK_ID_BIOGRAFIA" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

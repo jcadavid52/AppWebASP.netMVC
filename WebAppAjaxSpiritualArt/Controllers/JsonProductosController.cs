@@ -62,13 +62,13 @@ namespace WebAppAjaxSpiritualArt.Controllers
 
         public JsonResult ConsultarObra()
         {
-            //consultar obras del artista
+            //consultar obras del artista por cada uno
             int fk_artista = Convert.ToInt32(Session["id_registro"].ToString());
             List<PRODUCTO> consultaObra = logicaProductos.consultarObra(fk_artista);
 
             List<strConsultarObra> structs = new List<strConsultarObra>();
 
-            foreach(var item in consultaObra)
+            foreach (var item in consultaObra)
             {
                 strConsultarObra str = new strConsultarObra();
 
@@ -81,6 +81,7 @@ namespace WebAppAjaxSpiritualArt.Controllers
                 str.IMAGEN_PRODUCTO = item.IMAGEN_PRODUCTO;
                 str.FK_CATEGORIA = item.FK_CATEGORIA;
                 str.FK_ARTISTA = item.FK_ARTISTA;
+
                 structs.Add(str);
             }
 
@@ -99,6 +100,8 @@ namespace WebAppAjaxSpiritualArt.Controllers
             public string IMAGEN_PRODUCTO { get; set; }
             public int? FK_CATEGORIA { get; set; }
             public int? FK_ARTISTA { get; set; }
+
+
 
         }
 
@@ -126,8 +129,7 @@ namespace WebAppAjaxSpiritualArt.Controllers
 
         public ActionResult PublicarObraAccion(PRODUCTO nuevoProducto)
         {
-            //listar categorías
-            List<CATEGORIA> categorias = logicaCategoria.listarCategoria();
+
 
             //guardar imagen y obtener ruta
             string nombreArchivo = Path.GetFileNameWithoutExtension(nuevoProducto.archivoProducto.FileName);
@@ -146,7 +148,7 @@ namespace WebAppAjaxSpiritualArt.Controllers
 
             var agreagrObra = logicaProductos.AgregarObra(nuevoProducto);
 
-            if(agreagrObra == true)
+            if (agreagrObra == true)
             {
                 return Content("1");
             }
@@ -155,10 +157,10 @@ namespace WebAppAjaxSpiritualArt.Controllers
                 return Content("2");
             }
 
-           
 
 
-            
+
+
         }
 
         public ActionResult RegistroCliente(CLIENTE cliente)
@@ -169,7 +171,11 @@ namespace WebAppAjaxSpiritualArt.Controllers
             {
                 return Content("2");
             }
-            return Content("1");
+            else
+            {
+
+                return Content("1");
+            }
         }
 
         [HttpGet]
@@ -183,9 +189,9 @@ namespace WebAppAjaxSpiritualArt.Controllers
                 strListarNotificaciones str = new strListarNotificaciones();
 
                 str.PK_ID_NOTIFICACION = item.PK_ID_NOTIFICACION;
-                DateTime fecha = Convert.ToDateTime( item.FECHA);
-                
-                str.fecha = Convert.ToString( fecha.ToShortDateString());
+                DateTime fecha = Convert.ToDateTime(item.FECHA);
+
+                str.fecha = Convert.ToString(fecha.ToShortDateString());
                 str.nombreCliente = item.CLIENTE.NOMBRE_CLIENTE;
                 str.apellidoCliente = item.CLIENTE.APELLIDO_CLIENTE;
                 str.correoCliente = item.CLIENTE.EMAIL_CLIENTE;
@@ -196,9 +202,9 @@ namespace WebAppAjaxSpiritualArt.Controllers
                 structs.Add(str);
             }
 
-            
 
-   
+
+
 
             return Json(structs, JsonRequestBehavior.AllowGet);
 
@@ -216,15 +222,178 @@ namespace WebAppAjaxSpiritualArt.Controllers
             public string mensaje { get; set; }
             public string nombreProducto { get; set; }
 
-            
+
 
         }
 
+        public JsonResult ConsultarObraEditar(int id)
+        {
+            PRODUCTO consultaObra = logicaProductos.detalleObraCompra(id);
+            List<strConsultarObra> structs = new List<strConsultarObra>();
+            strConsultarObra str = new strConsultarObra();
+
+            str.PK_ID_PRODUCTO = consultaObra.PK_ID_PRODUCTO;
+            str.NOMBRE_PRODUCTO = consultaObra.NOMBRE_PRODUCTO;
+            str.PRECIO = consultaObra.PRECIO;
+            str.DESCRIPCION = consultaObra.DESCRIPCION;
+            str.CANTIDAD = consultaObra.CANTIDAD;
+            str.ESTADO = consultaObra.ESTADO;
+            str.IMAGEN_PRODUCTO = consultaObra.IMAGEN_PRODUCTO;
+            str.FK_CATEGORIA = consultaObra.FK_CATEGORIA;
+            str.FK_ARTISTA = consultaObra.FK_ARTISTA;
+            structs.Add(str);
+
+            return Json(structs, JsonRequestBehavior.AllowGet);
+
+        }
+        //limite de obras por plan
+        public ActionResult ContarObras(int id)
+        {
+            //consulta el artista con el id
+            var artista = logicaNegocioArtista.ConsultaArtista(id);
+
+            int? plan = artista.FK_TIPO_PLAN;
+
+            int cont = 0;
+
+            string respuesta = "1";
+
+            if (plan == 10)
+            {
+                //aqui hace la consulta del prodcuto con la foranea del artista
+                var productos = logicaProductos.consultarObra(id);
+
+                //hacer conteo
+                foreach (var item in productos)
+                {
+                    cont++;
+                }
+
+                if (cont > 2)
+                {
+                    //has superado el limiete de obras
+                    respuesta = "2";
+                }
+
+            }
+
+
+            if (plan == 9)
+            {
+                //aqui hace la consulta del prodcuto con la foranea del artista
+                var productos = logicaProductos.consultarObra(id);
+
+                //hacer conteo
+                foreach (var item in productos)
+                {
+                    cont++;
+                }
+
+                if (cont > 30)
+                {
+                    //has superado el limiete de obras
+                    respuesta = "2";
+                }
+
+            }
+
+            if (plan == 8)
+            {
+                //aqui hace la consulta del prodcuto con la foranea del artista
+                var productos = logicaProductos.consultarObra(id);
+
+                //hacer conteo
+                foreach (var item in productos)
+                {
+                    cont++;
+                }
+
+                if (cont > 15)
+                {
+                    //has superado el limiete de obras
+                    respuesta = "2";
+                }
+
+            }
+
+            return Content(respuesta);
+        }
+
+        //publicar biografia
+        public ActionResult publicarBiografia(BIOGRAFIA nuevaBiografia)
+        {
+            var biografia = logicaNegocioArtista.publicarBiografia(nuevaBiografia);
+
+            if (biografia)
+            {
+                return Content("1");
+            }
+            else
+            {
+                return Content("2");
+            }
+        }
+
+        //enviar biografía
+
+        public JsonResult enviarBiografia(int id = 0)
+        {
+           
+            var biografia = logicaNegocioArtista.consultarBiografia(id);
+
+            if(biografia != null)
+            {
+
+                List<strBiografia> structs = new List<strBiografia>();
+
+                strBiografia str = new strBiografia();
+
+                str.PK_ID_BIOGRAFIA = biografia.PK_ID_BIOGRAFIA;
+                str.BIOGRAFIATEXTO = biografia.BIOGRAFIATEXTO;
+                structs.Add(str);
+
+                return Json(structs, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                List<strBiografia> structs = new List<strBiografia>();
+                return Json(structs, JsonRequestBehavior.AllowGet);
+            }
+          
+            
 
 
 
 
 
+
+        }
+            
+        
+        
+
+        struct strBiografia
+        {
+            public int PK_ID_BIOGRAFIA { get; set; }
+            public string BIOGRAFIATEXTO { get; set; }
+
+
+
+        }
+
+        //editar biografía
+        public ActionResult EditarBiografia(BIOGRAFIA biografia)
+        {
+            var editarBiografia = logicaNegocioArtista.editarBiografia(biografia);
+            if (editarBiografia)
+            {
+                return Content("1");
+            }
+            else
+            {
+                return Content("2");
+            }
+        }
 
     }
 
