@@ -338,10 +338,10 @@ namespace WebAppAjaxSpiritualArt.Controllers
 
         public JsonResult enviarBiografia(int id = 0)
         {
-           
+
             var biografia = logicaNegocioArtista.consultarBiografia(id);
 
-            if(biografia != null)
+            if (biografia != null)
             {
 
                 List<strBiografia> structs = new List<strBiografia>();
@@ -359,8 +359,8 @@ namespace WebAppAjaxSpiritualArt.Controllers
                 List<strBiografia> structs = new List<strBiografia>();
                 return Json(structs, JsonRequestBehavior.AllowGet);
             }
-          
-            
+
+
 
 
 
@@ -368,9 +368,9 @@ namespace WebAppAjaxSpiritualArt.Controllers
 
 
         }
-            
-        
-        
+
+
+
 
         struct strBiografia
         {
@@ -394,6 +394,77 @@ namespace WebAppAjaxSpiritualArt.Controllers
                 return Content("2");
             }
         }
+
+        // consultar artista para editar
+        public JsonResult ConsultarArtistaEditar(int id)
+        {
+            var artista = logicaNegocioArtista.listarArtistas(id);
+            List<strModelArtista> structs = new List<strModelArtista>();
+
+            foreach (var item in artista)
+            {
+                strModelArtista str = new strModelArtista();
+
+                str.PK_ID_ARTISTA = item.PK_ID_ARTISTA;
+                str.NOMBRE_ARTISTA = item.NOMBRE_ARTISTA;
+                str.PRIMER_APELLIDO_ARTISTA = item.PRIMER_APELLIDO_ARTISTA;
+                str.SEGUNDO_APELLIDO_ARTISTA = item.SEGUNDO_APELLIDO_ARTISTA;
+                str.CORREO = item.CORREO;
+                str.TELEFONO = item.TELEFONO;
+                str.PAIS = item.PAIS;
+                str.LOCALIDAD = item.LOCALIDAD;
+                str.CIUDAD = item.CIUDAD;
+                str.DIRECCION = item.DIRECCION;
+                str.CLAVE = item.CLAVE;
+                str.FK_TIPO_PLAN = item.FK_TIPO_PLAN;
+                str.ESTADO = item.ESTADO;
+                str.IMAGEN = item.IMAGEN;
+                structs.Add(str);
+
+            }
+
+            return Json(structs, JsonRequestBehavior.AllowGet);
+        }
+
+        struct strModelArtista
+        {
+            public int PK_ID_ARTISTA { get; set; }
+            public string NOMBRE_ARTISTA { get; set; }
+            public string PRIMER_APELLIDO_ARTISTA { get; set; }
+            public string SEGUNDO_APELLIDO_ARTISTA { get; set; }
+            public string TELEFONO { get; set; }
+            public string CORREO { get; set; }
+            public string PAIS { get; set; }
+            public string CIUDAD { get; set; }
+            public string LOCALIDAD { get; set; }
+            public string DIRECCION { get; set; }
+            public Nullable<int> CLAVE { get; set; }
+            public int? FK_TIPO_PLAN { get; set; }
+            public Nullable<bool> ESTADO { get; set; }
+            public string IMAGEN { get; set; }
+
+        }
+
+        public ActionResult EditarArtista(REGISTRO_ARTISTA artista)
+        {
+            try
+            {
+
+                artista.ESTADO = true;
+
+                
+                //modifica los datos del artista pero usa el mismo metodo con el que se modifica la imagen de perfil
+                logicaNegocioArtista.modificarImagen(artista);
+                return Content("1");
+            }
+            catch (Exception)
+            {
+
+                return Content("2");
+            }
+
+        }
+
 
     }
 
