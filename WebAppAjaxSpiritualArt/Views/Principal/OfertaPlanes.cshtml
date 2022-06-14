@@ -3,31 +3,82 @@
 @{
     ViewBag.Title = "OfertaPlanes";
 }
+<body class="body3">
+    <h2>OfertaPlanes</h2>
 
-<h2>OfertaPlanes</h2>
-
-@foreach (var planes in Model)
-{
-    if (planes.PRECIO != 0)
+    @foreach (var planes in Model)
     {
-
-        <div style="border:solid">
-            <h3>@planes.NOMBRE_PLAN</h3><br />
+        if (planes.PRECIO != 0)
+        {
             <input value="@planes.NOMBRE_PLAN" id="plan" hidden />
-            <h3><label>Con un precio de:</label>@planes.PRECIO</h3><br />
             <input value="@planes.PRECIO" id="precio" hidden />
-            <h3>@planes.DESCRIPCION_VISIBILIDAD</h3><br />
-            <h3>@planes.DESCRIPCION_CANTIDAD_OBRAS</h3><br />
-            <h3>@planes.DESCRIPCION_BUSQUEDA</h3><br />
-            <h3>@planes.DESCRIPCION_TIEMPO_PLAN</h3><br />
-        </div>
-        <br />
-        <br />
-        <button onclick="pagar()">Contratar</button>
-        <br />
-    }
-}
+            if (planes.PK_ID_TIPO_PLAN == 9)
+            {
 
+                <div class="container3">
+
+
+
+                    <div class="card3">
+                        <div class="left-column background2-left-column">
+                            <h6>Plan</h6>
+                            <h2>@planes.NOMBRE_PLAN</h2>
+                            <i><img src="~/ArchivosLectura/imagenes-index/logo.jpeg" alt="Alternate Text" width="120" height="120" /></i>
+                        </div>
+
+                        <div class="right-column">
+                            <div>
+                                <h4>Con un precio de:</h4>
+                                <h6>$@planes.PRECIO</h6>
+                            </div>
+                            <h2>Por @planes.DESCRIPCION_TIEMPO_PLAN</h2>
+                            <p>@planes.DESCRIPCION_CANTIDAD_OBRAS</p>
+                            <p style="color:darkorchid">@planes.DESCRIPCION_VISIBILIDAD</p>
+
+                            <button class="button2 background2-left-column" onclick="pagar()">Contratar</button>
+                        </div>
+
+                    </div>
+                </div>
+            }
+            else
+            {
+
+                <div class="container3">
+                    <div class="card3">
+                        <div class="left-column background1-left-column">
+                            <h6>Plan</h6>
+                            <h2>@planes.NOMBRE_PLAN</h2>
+                            <i><img src="~/ArchivosLectura/imagenes-index/logo.jpeg" alt="Alternate Text" width="120" height="120" /></i>
+                        </div>
+
+                        <div class="right-column">
+                            <div>
+                                <h4>Con un precio de:</h4>
+                                <h6>$@planes.PRECIO</h6>
+
+                            </div>
+                            <h2>Por @planes.DESCRIPCION_TIEMPO_PLAN</h2>
+                            <p>
+                                @planes.DESCRIPCION_CANTIDAD_OBRAS
+                            </p>
+
+                            <p style="color:darkorchid">@planes.DESCRIPCION_VISIBILIDAD</p>
+                            <button class="button2 background1-left-column" onclick="pagar()">Contratar</button>
+                        </div>
+
+                    </div>
+                </div>
+            }
+
+
+
+
+        }
+    }
+
+
+</body>
 
 
 @section scripts{

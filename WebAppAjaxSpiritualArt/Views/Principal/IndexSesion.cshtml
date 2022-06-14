@@ -34,26 +34,31 @@
                     <div class="in ">
                         <label>Nombre del obra</label>
                         <input class="form-control" type="text" name="NOMBRE_PRODUCTO" id="NOMBRE_PRODUCTO" placeholder="Nombre de la obra" />
+                        <h6 id="valNombre" style="color:red"></h6>
                     </div>
 
                     <div class="in ">
                         <label>Precio</label>
                         <input class="form-control" type="number" name="PRECIO" placeholder="ingrese el precio" id="precio" />
+                        <h6 id="valPrecio" style="color:red"></h6>
                     </div>
 
                     <div class="in ">
                         <label>Descripción de la obra</label>
                         <input class="form-control" type="text" name="DESCRIPCION" placeholder="Descripción" id="descripcion" />
+                        <h6 id="valDescripcion" style="color:red"></h6>
                     </div>
 
                     <div class="in ">
                         <label>Cantidad de esta obra</label>
                         <input class="form-control" type="number" name="CANTIDAD" placeholder="Cantidad de la obra que quiere publicar" id="cantidad" />
+                        <h6 id="valCantidad" style="color:red"></h6>
                     </div>
 
                     <div class="in ">
                         <label>Sube la imagen de tu obra</label>
                         <input class="form-control" type="file" name="archivoProducto" id="archivoProducto" />
+                        <h6 id="valArchivo" style="color:red"></h6>
                     </div>
                     <hr />
                     <img id="imagenPrueba2" />
@@ -146,26 +151,31 @@
                 <div class="in ">
                     <label>Nombre del obra</label>
                     <input class="form-control" type="text" name="NOMBRE_PRODUCTO" id="NOMBRE_PRODUCTO2" placeholder="Nombre de la obra" required />
+                    <h6 id="valNombre2" style="color:red"></h6>
                 </div>
 
                 <div class="in ">
                     <label>Precio</label>
                     <input class="form-control" type="number" name="PRECIO" placeholder="ingrese el precio" id="precio2" required />
+                    <h6 id="valPrecio2" style="color:red"></h6>
                 </div>
 
                 <div class="in ">
                     <label>Descripción de la obra</label>
                     <input class="form-control" type="text" name="DESCRIPCION" required placeholder="Descripción" id="descripcion2" />
+                    <h6 id="valDescripcion2" style="color:red"></h6>
                 </div>
 
                 <div class="in ">
                     <label>Cantidad de esta obra</label>
                     <input class="form-control" type="number" name="CANTIDAD" required placeholder="Cantidad de la obra que quiere publicar" id="cantidad2" />
+                    <h6 id="valCantidad2" style="color:red"></h6>
                 </div>
 
                 <div class="in ">
                     <label>Sube la imagen de tu obra</label>
                     <input class="form-control" type="file" name="archivoProducto" id="archivoProducto2" />
+                    <h6 id="valArchivo2" style="color:red"></h6>
                 </div>
 
                 <hr>
@@ -317,86 +327,125 @@
 
         //subir obra
         $(function () {
+
             $("#btn-subir-obra").click(function () {
 
                 let id_artista = document.getElementById("fk_artista").value;
+                let nombreProd = document.getElementById("NOMBRE_PRODUCTO").value;
+                let precio = document.getElementById("precio").value;
+                let descripcion = document.getElementById("descripcion").value;
+                let cantidad = document.getElementById("cantidad").value;
+                let archivoProducto = document.getElementById("archivoProducto").value;
+
+                if (archivoProducto != "" && nombreProd != "" && precio != "" && descripcion != "" && cantidad != "") {
 
 
 
-                   var url1 = "@Url.Content("~/JsonProductos/ContarObras/")"+id_artista;
+
+                    var url1 = "@Url.Content("~/JsonProductos/ContarObras/")" + id_artista;
 
 
-                $.ajax({
+                    $.ajax({
 
-                    cache: false,
-                    contentType: false,
-                    //data: form_data,
-                    dataType: 'JSON',
-                    processData: false,
-                    method: "POST",
-                    url: url1,
-                    success: function (data) {
-                        if (data == 1) {
+                        cache: false,
+                        contentType: false,
+                        //data: form_data,
+                        dataType: 'JSON',
+                        processData: false,
+                        method: "POST",
+                        url: url1,
+                        success: function (data) {
+                            if (data == 1) {
 
-                            var form_data = new FormData();
-                            var file_data = $("#archivoProducto").prop("files")[0];
+                                var form_data = new FormData();
+                                var file_data = $("#archivoProducto").prop("files")[0];
 
-                            form_data.append("archivoProducto", file_data);
+                                form_data.append("archivoProducto", file_data);
 
-                            form_data.append("NOMBRE_PRODUCTO", $("#NOMBRE_PRODUCTO").val());
-                            form_data.append("PRECIO", $("#precio").val());
-                            form_data.append("DESCRIPCION", $("#descripcion").val());
-                            form_data.append("CANTIDAD", $("#cantidad").val());
-                            form_data.append("archivoProducto", $("#archivoProducto").val());
-                            form_data.append("FK_CATEGORIA", $("#select-id-categoria").val());
-                            form_data.append("FK_ARTISTA", $("#fk_artista").val());
-                            form_data.append("ESTADO", $("#estado").val());
+                                form_data.append("NOMBRE_PRODUCTO", $("#NOMBRE_PRODUCTO").val());
+                                form_data.append("PRECIO", $("#precio").val());
+                                form_data.append("DESCRIPCION", $("#descripcion").val());
+                                form_data.append("CANTIDAD", $("#cantidad").val());
+                                form_data.append("archivoProducto", $("#archivoProducto").val());
+                                form_data.append("FK_CATEGORIA", $("#select-id-categoria").val());
+                                form_data.append("FK_ARTISTA", $("#fk_artista").val());
+                                form_data.append("ESTADO", $("#estado").val());
 
-                            for (var value of form_data.values()) {
-                                console.log(value);
-                            }
-
-                            var url = "@Url.Content("~/JsonProductos/PublicarObraAccion")";
-
-
-                            $.ajax({
-
-                                cache: false,
-                                contentType: false,
-                                data: form_data,
-                                dataType: 'JSON',
-                                enctype: 'multipart/form-data',
-                                processData: false,
-                                method: "POST",
-                                url: url,
-                                success: function (data) {
-                                    if (data == 1) {
-                                        swal("Registrado exitosamente!", "You clicked the button!", "success");
-                                        document.getElementById("body2").style.display = "";
-                                        document.getElementById("sin_obras").style.display = "none";
-
-                                        ConsultarObras();
-                                    } else {
-                                        swal("Hubo un error en el sistema!", "Vuelve a intentarlo!", "success");
-                                        document.getElementById("body2").style.display = "";
-                                        document.getElementById("sin_obras").style.display = "none";
-
-                                        ConsultarObras();
-                                    }
-
+                                for (var value of form_data.values()) {
+                                    console.log(value);
                                 }
 
-                            })
-                        } else {
-                            alert("Haz superado el límite de obras para tu plan")
+                                var url = "@Url.Content("~/JsonProductos/PublicarObraAccion")";
+
+
+                                $.ajax({
+
+                                    cache: false,
+                                    contentType: false,
+                                    data: form_data,
+                                    dataType: 'JSON',
+                                    enctype: 'multipart/form-data',
+                                    processData: false,
+                                    method: "POST",
+                                    url: url,
+                                    success: function (data) {
+                                        if (data == 1) {
+                                            swal("Registrado exitosamente!", "", "success");
+                                            document.getElementById("body2").style.display = "";
+                                            document.getElementById("sin_obras").style.display = "none";
+
+                                            ConsultarObras();
+                                        } else {
+                                            swal("Hubo un error en el sistema!", "Vuelve a intentarlo!", "success");
+                                            document.getElementById("body2").style.display = "";
+                                            document.getElementById("sin_obras").style.display = "none";
+
+                                            ConsultarObras();
+                                        }
+
+                                    }
+
+                                })
+                            } else {
+                                alert("Haz superado el límite de obras para tu plan")
+                            }
+
                         }
 
+                    })
+
+
+                } else {
+                    if (nombreProd == "") {
+                        document.getElementById("valNombre").innerHTML = '<h6 id="valNombre" style="color:red">Campo requerido</h6>';
+                    } else {
+                        document.getElementById("valNombre").innerHTML = '<h6 id="valNombre" style="color:red"></h6>';
                     }
 
-                })
+                    if (precio == "") {
+                        document.getElementById("valPrecio").innerHTML = '<h6 id="valPrecio" style="color:red">Campo requerido</h6>';
+                    } else {
+                        document.getElementById("valPrecio").innerHTML = '<h6 id="valPrecio" style="color:red"></h6>';
+                    }
 
+                    if (descripcion == "") {
+                        document.getElementById("valDescripcion").innerHTML = '<h6 id="valDescripcion" style="color:red">Campo requerido</h6>';
+                    } else {
+                        document.getElementById("valDescripcion").innerHTML = '<h6 id="valDescripcion" style="color:red"></h6>';
+                    }
 
+                    if (cantidad == "") {
+                        document.getElementById("valCantidad").innerHTML = '<h6 id="valCantidad" style="color:red">Campo requerido</h6>';
+                    } else {
+                        document.getElementById("valCantidad").innerHTML = '<h6 id="valCantidad" style="color:red"></h6>';
+                    }
 
+                    if (archivoProducto == "") {
+                        document.getElementById("valArchivo").innerHTML = '<h6 id="valArchivo" style="color:red">Campo requerido</h6>';
+                    } else {
+                        document.getElementById("valArchivo").innerHTML = '<h6 id="valArchivo" style="color:red"></h6>';
+                    }
+                }
 
             });
         });
@@ -488,71 +537,108 @@
         $(function () {
             $("#btn-editar").click(function () {
 
+               
+                let precio = document.getElementById("precio2").value;
+                let descripcion = document.getElementById("descripcion2").value;
+                let cantidad = document.getElementById("cantidad2").value;
+                let archivoProducto = document.getElementById("archivoProducto2").value;
                 var nombreObra = document.getElementById("NOMBRE_PRODUCTO2").value;
-                var form_data = new FormData();
-                var file_data = $("#archivoProducto2").prop("files")[0];
 
-                form_data.append("archivoProducto", file_data);
+                if (archivoProducto != "" && nombreObra != "" && precio != "" && descripcion != "" && cantidad != "") {
+                    var form_data = new FormData();
+                    var file_data = $("#archivoProducto2").prop("files")[0];
 
-                form_data.append("PK_ID_PRODUCTO", $("#pk_obra").val());
-                form_data.append("NOMBRE_PRODUCTO", $("#NOMBRE_PRODUCTO2").val());
-                form_data.append("PRECIO", $("#precio2").val());
-                form_data.append("DESCRIPCION", $("#descripcion2").val());
-                form_data.append("CANTIDAD", $("#cantidad2").val());
-                form_data.append("archivoProducto", $("#archivoProducto2").val());
-                form_data.append("FK_CATEGORIA", $("#select-id-categoria2").val());
-                form_data.append("FK_ARTISTA", $("#fk_artista2").val());
-                form_data.append("ESTADO", $("#estado2").val());
+                    form_data.append("archivoProducto", file_data);
 
-                for (var value of form_data.values()) {
-                    console.log(value);
-                }
+                    form_data.append("PK_ID_PRODUCTO", $("#pk_obra").val());
+                    form_data.append("NOMBRE_PRODUCTO", $("#NOMBRE_PRODUCTO2").val());
+                    form_data.append("PRECIO", $("#precio2").val());
+                    form_data.append("DESCRIPCION", $("#descripcion2").val());
+                    form_data.append("CANTIDAD", $("#cantidad2").val());
+                    form_data.append("archivoProducto", $("#archivoProducto2").val());
+                    form_data.append("FK_CATEGORIA", $("#select-id-categoria2").val());
+                    form_data.append("FK_ARTISTA", $("#fk_artista2").val());
+                    form_data.append("ESTADO", $("#estado2").val());
 
-                swal({
-                    title: "Seguro que deseas editar la obra "+nombreObra+"?",
-                    icon: "warning",
-                    buttons: true,
-                    dangerMode: true,
-                })
-                    .then((willDelete) => {
-                        if (willDelete) {
+                    for (var value of form_data.values()) {
+                        console.log(value);
+                    }
 
-                            var url = "@Url.Content("~/Principal/EditarObraAccion")";
-                            $.ajax({
+                    swal({
+                        title: "Seguro que deseas editar la obra " + nombreObra + "?",
+                        icon: "warning",
+                        buttons: true,
+                        dangerMode: true,
+                    })
+                        .then((willDelete) => {
+                            if (willDelete) {
 
-                                cache: false,
-                                contentType: false,
-                                data: form_data,
-                                dataType: 'JSON',
-                                enctype: 'multipart/form-data',
-                                processData: false,
-                                method: "POST",
-                                url: url,
-                                success: function (data) {
-                                    if (data == 1) {
-                                        swal("Se ha modeificado exitosamente!", "You clicked the button!", "success");
-                                        document.getElementById("body2").style.display = "";
-                                        document.getElementById("sin_obras").style.display = "none";
+                                var url = "@Url.Content("~/Principal/EditarObraAccion")";
+                                $.ajax({
 
-                                        ConsultarObras();
-                                    } else {
-                                        swal("Hubo un error en el sistema!", "Vuelve a intentarlo!", "success");
-                                        document.getElementById("body2").style.display = "";
-                                        document.getElementById("sin_obras").style.display = "none";
+                                    cache: false,
+                                    contentType: false,
+                                    data: form_data,
+                                    dataType: 'JSON',
+                                    enctype: 'multipart/form-data',
+                                    processData: false,
+                                    method: "POST",
+                                    url: url,
+                                    success: function (data) {
+                                        if (data == 1) {
+                                            swal("Se ha modeificado exitosamente!", "You clicked the button!", "success");
+                                            document.getElementById("body2").style.display = "";
+                                            document.getElementById("sin_obras").style.display = "none";
 
-                                        ConsultarObras();
+                                            ConsultarObras();
+                                        } else {
+                                            swal("Hubo un error en el sistema!", "Vuelve a intentarlo!", "success");
+                                            document.getElementById("body2").style.display = "";
+                                            document.getElementById("sin_obras").style.display = "none";
+
+                                            ConsultarObras();
+                                        }
+
                                     }
 
-                                }
-
-                            })
+                                })
 
 
-                        }
-                    });
+                            }
+                        });
 
 
+                } else {
+                    if (nombreObra == "") {
+                        document.getElementById("valNombre2").innerHTML = '<h6 id="valNombre2" style="color:red">Campo requerido</h6>';
+                    } else {
+                        document.getElementById("valNombre2").innerHTML = '<h6 id="valNombre2" style="color:red"></h6>';
+                    }
 
+                    if (precio == "") {
+                        document.getElementById("valPrecio2").innerHTML = '<h6 id="valPrecio2" style="color:red">Campo requerido</h6>';
+                    } else {
+                        document.getElementById("valPrecio2").innerHTML = '<h6 id="valPrecio2" style="color:red"></h6>';
+                    }
+
+                    if (descripcion == "") {
+                        document.getElementById("valDescripcion2").innerHTML = '<h6 id="valDescripcion2" style="color:red">Campo requerido</h6>';
+                    } else {
+                        document.getElementById("valDescripcion2").innerHTML = '<h6 id="valDescripcion2" style="color:red"></h6>';
+                    }
+
+                    if (cantidad == "") {
+                        document.getElementById("valCantidad2").innerHTML = '<h6 id="valCantidad2" style="color:red">Campo requerido</h6>';
+                    } else {
+                        document.getElementById("valCantidad2").innerHTML = '<h6 id="valCantidad2" style="color:red"></h6>';
+                    }
+
+                    if (archivoProducto == "") {
+                        document.getElementById("valArchivo2").innerHTML = '<h6 id="valArchivo2" style="color:red">Campo requerido</h6>';
+                    } else {
+                        document.getElementById("valArchivo2").innerHTML = '<h6 id="valArchivo2" style="color:red"></h6>';
+                    }
+                }
 
 
             });

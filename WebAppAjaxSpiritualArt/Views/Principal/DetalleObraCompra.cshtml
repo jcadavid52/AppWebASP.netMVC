@@ -90,24 +90,30 @@
             <div class="modal-body">
 
                 <label>Nombre</label><br />
-                <input type="text" id="nombre_cliente" /><br /><br />
+                <input type="text" id="nombre_cliente" class="form-control" />
+                <h6 id="valNombre" style="color:red"></h6><br />
 
                 <label>Apellido</label><br />
-                <input type="text" id="apellido_cliente" /><br /><br />
+                <input type="text" id="apellido_cliente" class="form-control" />
+                <h6 id="valApellido" style="color:red"></h6><br />
 
                 <label>Teléfono</label><br />
-                <input type="text" id="telefono_cliente" /><br /><br />
+                <input type="text" id="telefono_cliente" class="form-control" />
+                <h6 id="valTel" style="color:red"></h6><br />
 
                 <label>Correo</label><br />
-                <input type="text" id="correo_cliente" /><br /><br />
+                <input type="text" id="correo_cliente" class="form-control" />
+                <h6 id="valCorreo" style="color:red"></h6><br />
 
-                
+
 
                 <label>Asunto</label><br />
-                <input type="text" id="asunto" /><br /><br />
+                <input type="text" id="asunto" class="form-control" />
+                <h6 id="valAsunto" style="color:red"></h6><br />
 
                 <label>Mensaje</label><br />
-                <textarea id="mensaje_cliente"></textarea>
+                <textarea id="mensaje_cliente" class="form-control"></textarea>
+                <h6 id="valMensaje" style="color:red"></h6><br />
 
 
             </div>
@@ -128,47 +134,95 @@
 
             $("#btn-enviar").click(function () {
 
-                var form_data = new FormData();
+                let nombre = document.getElementById("nombre_cliente").value;
+                let apellido = document.getElementById("apellido_cliente").value;
+                let telefono = document.getElementById("telefono_cliente").value;
+                let correo = document.getElementById("correo_cliente").value;
+                let asunto = document.getElementById("asunto").value;
+                let mensaje = document.getElementById("mensaje_cliente").value;
 
-                form_data.append("NOMBRE_CLIENTE", $("#nombre_cliente").val());
-                form_data.append("APELLIDO_CLIENTE", $("#apellido_cliente").val());
-                form_data.append("TELEFONO_CLIENTE", $("#telefono_cliente").val());
-                form_data.append("EMAIL_CLIENTE", $("#correo_cliente").val());     
-                form_data.append("ASUNTO", $("#asunto").val());
-                form_data.append("MENSAJE", $("#mensaje_cliente").val());
-                form_data.append("FK_ARTISTA", $("#fk_artista").val());
-                form_data.append("FK_PRODUCTO", $("#fk_producto").val());
+                if (nombre != "" && apellido != "" && telefono != "" && correo != "" && asunto != "" && mensaje != "") {
 
-                for (var value of form_data.values()) {
-                    console.log(value);
-                }
 
-                var url = "@Url.Content("~/JsonProductos/RegistroCliente")";
 
-                $.ajax({
+                    var form_data = new FormData();
 
-                    cache: false,
-                    contentType: false,
-                    data: form_data,
-                    dataType: 'JSON',
-                   // enctype: 'multipart/form-data',
-                    processData: false,
-                    method: "POST",
-                    url: url,
-                    success: function (data) {
-                        if (data == 1) {
-                            swal("Registrado exitosamente!", "El artista se estArá comunicando lo más pronto contigo", "success");
-                            
+                    form_data.append("NOMBRE_CLIENTE", $("#nombre_cliente").val());
+                    form_data.append("APELLIDO_CLIENTE", $("#apellido_cliente").val());
+                    form_data.append("TELEFONO_CLIENTE", $("#telefono_cliente").val());
+                    form_data.append("EMAIL_CLIENTE", $("#correo_cliente").val());
+                    form_data.append("ASUNTO", $("#asunto").val());
+                    form_data.append("MENSAJE", $("#mensaje_cliente").val());
+                    form_data.append("FK_ARTISTA", $("#fk_artista").val());
+                    form_data.append("FK_PRODUCTO", $("#fk_producto").val());
 
-                            
-                        } else {
+                    for (var value of form_data.values()) {
+                        console.log(value);
+                    }
+
+                    var url = "@Url.Content("~/JsonProductos/RegistroCliente")";
+
+                    $.ajax({
+
+                        cache: false,
+                        contentType: false,
+                        data: form_data,
+                        dataType: 'JSON',
+                        // enctype: 'multipart/form-data',
+                        processData: false,
+                        method: "POST",
+                        url: url,
+                        success: function (data) {
+                            if (data == 1) {
+                                swal("Registrado exitosamente!", "El artista se estará comunicando lo más pronto contigo", "", "success");
+
+
+
+                            } else {
+
+                            }
 
                         }
 
+                    })
+                } else {
+                    if (nombre == "") {
+                        document.getElementById("valNombre").innerHTML = '<h6 id="valNombre" style="color:red">Campo requerido</h6>';
+                    } else {
+                        document.getElementById("valNombre").innerHTML = '<h6 id="valNombre" style="color:red"></h6>';
                     }
 
-                })
+                    if (apellido == "") {
+                        document.getElementById("valApellido").innerHTML = '<h6 id="valApellido" style="color:red">Campo requerido</h6>';
+                    } else {
+                        document.getElementById("valApellido").innerHTML = '<h6 id="valApellido" style="color:red"></h6>';
+                    }
 
+                    if (telefono == "") {
+                        document.getElementById("valTel").innerHTML = '<h6 id="valTel" style="color:red">Campo requerido</h6>';
+                    } else {
+                        document.getElementById("valTel").innerHTML = '<h6 id="valTel" style="color:red"></h6>';
+                    }
+
+                    if (correo == "") {
+                        document.getElementById("valCorreo").innerHTML = '<h6 id="valCorreo" style="color:red">Campo requerido</h6>';
+                    } else {
+                        document.getElementById("valCorreo").innerHTML = '<h6 id="valCorreo" style="color:red"></h6>';
+                    }
+
+                    if (asunto == "") {
+                        document.getElementById("valAsunto").innerHTML = '<h6 id="valAsunto" style="color:red">Campo requerido</h6>';
+                    } else {
+                        document.getElementById("valAsunto").innerHTML = '<h6 id="valAsunto" style="color:red"></h6>';
+                    }
+
+                    if (mensaje == "") {
+                        document.getElementById("valMensaje").innerHTML = '<h6 id="valMensaje" style="color:red">Campo requerido</h6>';
+                    } else {
+                        document.getElementById("valMensaje").innerHTML = '<h6 id="valMensaje" style="color:red"></h6>';
+                    }
+
+                }
             });
 
         });

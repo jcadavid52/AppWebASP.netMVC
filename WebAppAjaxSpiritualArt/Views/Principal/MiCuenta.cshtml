@@ -9,39 +9,43 @@
 @foreach (var item in Model)
 {
     <input type="hidden" value="@item.PK_ID_ARTISTA" id="fk_artista" />
-    <table class="table">
-        <thead>
-            <tr>
-                <th scope="col">Nombre</th>
-                <th scope="col">Primer apellido</th>
-                <th scope="col">Segundo apellido</th>
-                <th scope="col">Correo y usuario</th>
-                <th scope="col">Teléfono</th>
-                <th scope="col">País</th>
-                <th scope="col">Localidad</th>
-                <th scope="col">Ciudad</th>
-                <th scope="col">Dirección</th>
-                <th scope="col">Mi clave</th>
+    <div id="tabla">
 
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
 
-                <td>@item.NOMBRE_ARTISTA</td>
-                <td>@item.PRIMER_APELLIDO_ARTISTA</td>
-                <td>@item.SEGUNDO_APELLIDO_ARTISTA</td>
-                <td>@item.CORREO</td>
-                <td>@item.TELEFONO</td>
-                <td>@item.PAIS</td>
-                <td>@item.LOCALIDAD</td>
-                <td>@item.CIUDAD</td>
-                <td>@item.DIRECCION</td>
-                <td>@item.CLAVE</td>
-            </tr>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Primer apellido</th>
+                    <th scope="col">Segundo apellido</th>
+                    <th scope="col">Correo y usuario</th>
+                    <th scope="col">Teléfono</th>
+                    <th scope="col">País</th>
+                    <th scope="col">Localidad</th>
+                    <th scope="col">Ciudad</th>
+                    <th scope="col">Dirección</th>
+                    <th scope="col">Mi clave</th>
 
-        </tbody>
-    </table>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+
+                    <td>@item.NOMBRE_ARTISTA</td>
+                    <td>@item.PRIMER_APELLIDO_ARTISTA</td>
+                    <td>@item.SEGUNDO_APELLIDO_ARTISTA</td>
+                    <td>@item.CORREO</td>
+                    <td>@item.TELEFONO</td>
+                    <td>@item.PAIS</td>
+                    <td>@item.LOCALIDAD</td>
+                    <td>@item.CIUDAD</td>
+                    <td>@item.DIRECCION</td>
+                    <td>@item.CLAVE</td>
+                </tr>
+
+            </tbody>
+        </table>
+    </div>
     <div class="col text-center">
         <button class="btn-success regular-button" onclick="ConsultarArtistaEditar(@Html.DisplayFor(datos => item.PK_ID_ARTISTA))">Modificar mis datos</button>
     </div>
@@ -75,87 +79,94 @@
                     <input type="hidden" id="pk-artista" />
                     <input type="hidden" id="plan" />
                     <input type="hidden" id="rutaImagen" />
-                    
-                    <div class="col-md-4">
-                        <label for="validationCustom01" class="form-label">Nombre</label>
+
+                    <div>
+                        <label class="form-label">Nombre</label>
                         <input type="text" class="form-control" id="Nombre" required>
+                        <h6 id="valNombre"></h6><br />
 
                     </div>
-                    <div class="col">
-                        <label for="validationCustom02" class="form-label">Primer Apellido</label>
+                    <div>
+                        <label class="form-label">Primer Apellido</label>
                         <input type="text" class="form-control" id="PrimerApellido" required>
+                        <h6 id="valApellido"></h6><br />
+                    </div>
+                    <div>
+                        <label class="form-label">Segundo Apellido</label>
+
+                        <input type="text" class="form-control" id="SegundoApellido" aria-describedby="inputGroupPrepend" required>
+                        <h6 id="valApellido2"></h6><br />
 
                     </div>
-                    <div class="col-md-4">
-                        <label for="validationCustomUsername" class="form-label">Segundo Apellido</label>
-                        <div class="input-group has-validation">
 
-                            <input type="text" class="form-control" id="SegundoApellido" aria-describedby="inputGroupPrepend" required>
-
-                        </div>
-                    </div>
-
-                    <div class="col-md-4">
+                    <div>
                         <label for="validationCustomUsername" class="form-label">Usuario</label>
-                        <div class="input-group has-validation">
 
-                            <input type="email" class="form-control" id="Usuario" aria-describedby="inputGroupPrepend" required>
 
-                        </div>
+                        <input type="email" class="form-control" id="Usuario" aria-describedby="inputGroupPrepend" required>
+                        <h6 id="valUsuario"></h6><br />
+
+
                     </div>
 
-                    <div class="col-md-4">
+                    <div>
                         <label for="validationCustomUsername" class="form-label">Teléfono</label>
-                        <div class="input-group has-validation">
 
-                            <input type="tel" class="form-control" id="Telefono" aria-describedby="inputGroupPrepend" required>
 
-                        </div>
+                        <input type="tel" class="form-control" id="Telefono" aria-describedby="inputGroupPrepend" required>
+                        <h6 id="valTel"></h6><br />
+
+
                     </div>
 
-                    <div class="col-md-4">
+                    <div>
                         <label for="validationCustomUsername" class="form-label">País</label>
-                        <div class="input-group has-validation">
 
-                            <input type="text" class="form-control" id="Pais" aria-describedby="inputGroupPrepend" required>
 
-                        </div>
+                        <input type="text" class="form-control" id="Pais" aria-describedby="inputGroupPrepend" required>
+                        <h6 id="valPais"></h6><br />
+
+
                     </div>
 
-                    <div class="col-md-4">
+                    <div>
                         <label for="validationCustomUsername" class="form-label">Localidad</label>
-                        <div class="input-group has-validation">
 
-                            <input type="text" class="form-control" id="Localidad" aria-describedby="inputGroupPrepend" required>
 
-                        </div>
+                        <input type="text" class="form-control" id="Localidad" aria-describedby="inputGroupPrepend" required>
+                        <h6 id="valLocal"></h6><br />
+
+
                     </div>
 
-                    <div class="col-md-4">
+                    <div>
                         <label for="validationCustomUsername" class="form-label">Ciudad</label>
-                        <div class="input-group has-validation">
 
-                            <input type="text" class="form-control" id="Ciudad" aria-describedby="inputGroupPrepend" required>
 
-                        </div>
+                        <input type="text" class="form-control" id="Ciudad" aria-describedby="inputGroupPrepend" required>
+                        <h6 id="valCiudad"></h6><br />
+
+
                     </div>
 
-                    <div class="col-md-4">
+                    <div>
                         <label for="validationCustomUsername" class="form-label">Dirección</label>
-                        <div class="input-group has-validation">
 
-                            <input type="text" class="form-control" id="Direccion" aria-describedby="inputGroupPrepend" required>
 
-                        </div>
+                        <input type="text" class="form-control" id="Direccion" aria-describedby="inputGroupPrepend" required>
+                        <h6 id="valDirec"></h6><br />
+
+
                     </div>
 
-                    <div class="col-md-4">
+                    <div>
                         <label for="validationCustomUsername" class="form-label">Clave</label>
-                        <div class="input-group has-validation">
 
-                            <input type="number" class="form-control" id="Clave" aria-describedby="inputGroupPrepend" required>
 
-                        </div>
+                        <input type="number" class="form-control" id="Clave" aria-describedby="inputGroupPrepend" required>
+                        <h6 id="valClave"></h6><br />
+
+
                     </div>
 
 
@@ -164,7 +175,7 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
                 <button type="button" class="btn btn-success" id="btn-cambios">Aplicar Cambios</button>
-                
+
             </div>
         </div>
     </div>
@@ -241,58 +252,136 @@
         //editar artista
         $(function () {
             $("#btn-cambios").click(function () {
-                var form_data = new FormData();
+
+                let nombre = document.getElementById("Nombre").value;
+                let apellido = document.getElementById("PrimerApellido").value;
+                let apellido2 = document.getElementById("SegundoApellido").value;
+                let usuario = document.getElementById("Usuario").value;
+                let telefono = document.getElementById("Telefono").value;
+                let pais = document.getElementById("Pais").value;
+                let localidad = document.getElementById("Localidad").value;
+                let ciudad = document.getElementById("Ciudad").value;
+                let direccion = document.getElementById("Direccion").value;
+                let clave = document.getElementById("Clave").value;
+
+                if (nombre != "" && apellido != "" && apellido2 != "" && usuario != "" && telefono != "" && pais != "" && localidad != "" && ciudad != "" && direccion != "" && clave != "") {
 
 
-                form_data.append("PK_ID_ARTISTA", $("#pk-artista").val());
-                form_data.append("NOMBRE_ARTISTA", $("#Nombre").val());
-                form_data.append("PRIMER_APELLIDO_ARTISTA", $("#PrimerApellido").val());
-                form_data.append("SEGUNDO_APELLIDO_ARTISTA", $("#SegundoApellido").val());
-                form_data.append("CORREO", $("#Usuario").val());
-                form_data.append("TELEFONO", $("#Telefono").val());
-                form_data.append("PAIS", $("#Pais").val());
-                form_data.append("LOCALIDAD", $("#Localidad").val());
-                form_data.append("CIUDAD", $("#Ciudad").val());
-                form_data.append("DIRECCION", $("#Direccion").val());
-                form_data.append("CLAVE", $("#Clave").val());
-                form_data.append("FK_TIPO_PLAN", $("#plan").val());
-                form_data.append("IMAGEN", $("#rutaImagen").val());
+                    var form_data = new FormData();
 
-                swal({
-                    title: "Deseas actualizar tus datos?",
 
-                    icon: "warning",
-                    buttons: true,
-                    dangerMode: true,
-                })
-                    .then((willDelete) => {
-                        if (willDelete) {
-                            var url = "@Url.Content("~/JsonProductos/EditarArtista")";
+                    form_data.append("PK_ID_ARTISTA", $("#pk-artista").val());
+                    form_data.append("NOMBRE_ARTISTA", $("#Nombre").val());
+                    form_data.append("PRIMER_APELLIDO_ARTISTA", $("#PrimerApellido").val());
+                    form_data.append("SEGUNDO_APELLIDO_ARTISTA", $("#SegundoApellido").val());
+                    form_data.append("CORREO", $("#Usuario").val());
+                    form_data.append("TELEFONO", $("#Telefono").val());
+                    form_data.append("PAIS", $("#Pais").val());
+                    form_data.append("LOCALIDAD", $("#Localidad").val());
+                    form_data.append("CIUDAD", $("#Ciudad").val());
+                    form_data.append("DIRECCION", $("#Direccion").val());
+                    form_data.append("CLAVE", $("#Clave").val());
+                    form_data.append("FK_TIPO_PLAN", $("#plan").val());
+                    form_data.append("IMAGEN", $("#rutaImagen").val());
 
-                            $.ajax({
+                    swal({
+                        title: "Deseas actualizar tus datos?",
 
-                                cache: false,
-                                contentType: false,
-                                data: form_data,
-                                dataType: 'JSON',
-                                //enctype: 'multipart/form-data',
-                                processData: false,
-                                method: "POST",
-                                url: url,
-                                success: function (data) {
-                                    if (data == 1) {
-                                        swal("Se ha modificado exitosamente!", "", "success");
-                                        ConsultarBiografia();
-                                    } else {
-                                        swal("Hubo un error en el sistema!", "Vuelve a intentarlo!", "success");
+                        icon: "warning",
+                        buttons: true,
+                        dangerMode: true,
+                    })
+                        .then((willDelete) => {
+                            if (willDelete) {
+                                var url = "@Url.Content("~/JsonProductos/EditarArtista")";
+
+                                $.ajax({
+
+                                    cache: false,
+                                    contentType: false,
+                                    data: form_data,
+                                    dataType: 'JSON',
+                                    //enctype: 'multipart/form-data',
+                                    processData: false,
+                                    method: "POST",
+                                    url: url,
+                                    success: function (data) {
+                                        if (data == 1) {
+                                            swal("Se ha modificado exitosamente!", "", "success");
+                                           
+                                            ConsultarBiografia();
+
+                                            $("#tabla").load(" #tabla");
+                                        } else {
+                                            swal("Hubo un error en el sistema!", "Vuelve a intentarlo!", "success");
+                                        }
+
                                     }
 
-                                }
+                                })
+                            }
+                        });
+                } else {
+                    if (nombre == "") {
+                        document.getElementById("valNombre").innerHTML = '<h6 id="valNombre" style="color:red">Campo requerido</h6>';
+                    } else {
+                        document.getElementById("valNombre").innerHTML = '<h6 id="valNombre" style="color:red"></h6>';
+                    }
 
-                            })
-                        }
-                    });
+                    if (apellido == "") {
+                        document.getElementById("valApellido").innerHTML = '<h6 id="valApellido" style="color:red">Campo requerido</h6>';
+                    } else {
+                        document.getElementById("valApellido").innerHTML = '<h6 id="valApellido" style="color:red"></h6>';
+                    }
 
+                    if (apellido2 == "") {
+                        document.getElementById("valApellido2").innerHTML = '<h6 id="valApellido2" style="color:red">Campo requerido</h6>';
+                    } else {
+                        document.getElementById("valApellido2").innerHTML = '<h6 id="valApellido2" style="color:red"></h6>';
+                    }
+
+                    if (usuario == "") {
+                        document.getElementById("valUsuario").innerHTML = '<h6 id="valUsuario" style="color:red">Campo requerido</h6>';
+                    } else {
+                        document.getElementById("valUsuario").innerHTML = '<h6 id="valUsuario" style="color:red"></h6>';
+                    }
+
+                    if (telefono == "") {
+                        document.getElementById("valTel").innerHTML = '<h6 id="valTel" style="color:red">Campo requerido</h6>';
+                    } else {
+                        document.getElementById("valTel").innerHTML = '<h6 id="valTel" style="color:red"></h6>';
+                    }
+
+                    if (pais == "") {
+                        document.getElementById("valPais").innerHTML = '<h6 id="valPais" style="color:red">Campo requerido</h6>';
+                    } else {
+                        document.getElementById("valPais").innerHTML = '<h6 id="valPais" style="color:red"></h6>';
+                    }
+
+                    if (localidad == "") {
+                        document.getElementById("valLocal").innerHTML = '<h6 id="valLocal" style="color:red">Campo requerido</h6>';
+                    } else {
+                        document.getElementById("valLocal").innerHTML = '<h6 id="valLocal" style="color:red"></h6>';
+                    }
+
+                    if (ciudad == "") {
+                        document.getElementById("valCiudad").innerHTML = '<h6 id="valCiudad" style="color:red">Campo requerido</h6>';
+                    } else {
+                        document.getElementById("valCiudad").innerHTML = '<h6 id="valCiudad" style="color:red"></h6>';
+                    }
+
+                    if (direccion == "") {
+                        document.getElementById("valDirec").innerHTML = '<h6 id="valDirec" style="color:red">Campo requerido</h6>';
+                    } else {
+                        document.getElementById("valDirec").innerHTML = '<h6 id="valDirec" style="color:red"></h6>';
+                    }
+
+                    if (clave == "") {
+                        document.getElementById("valClave").innerHTML = '<h6 id="valClave" style="color:red">Campo requerido</h6>';
+                    } else {
+                        document.getElementById("valClave").innerHTML = '<h6 id="valClave" style="color:red"></h6>';
+                    }
+                }
 
             })
 

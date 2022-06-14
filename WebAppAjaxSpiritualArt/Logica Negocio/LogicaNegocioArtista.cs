@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Mail;
 using System.Web;
+using System.Web.Helpers;
 using WebAppAjaxSpiritualArt.Models;
 
 namespace WebAppAjaxSpiritualArt.Logica_Negocio
@@ -26,17 +27,17 @@ namespace WebAppAjaxSpiritualArt.Logica_Negocio
 
         //enviar correo con usuario, contraseña y nombre de la persona registrada
 
-        public void EnviarEmail(string EmailDestino, int? claveArtista, string usuario, string nombre)
+        public void EnviarEmail(string EmailDestino, string claveArtista, string usuario, string nombre)
         {
-            string EmailOrigen = "angiepamplona2001@gmail.com";
-            string clave = "Colombia2021*";
-
+            string EmailOrigen = "cadavidcamilo360@gmail.com";
+            string clave = "pbczcevcfbxykbky";
 
 
             MailMessage omailMessage = new MailMessage(EmailOrigen, EmailDestino, "Bienvenido a SpiritualArt " + nombre, "<p>Ahora Puedes mostrar tu creatividad ingresando con tu usuario: " + usuario + " y tu contraseña: " + claveArtista + "</p>");
             omailMessage.IsBodyHtml = true;
 
-            SmtpClient osmtpClient = new SmtpClient("smtp.gmail.com");
+            SmtpClient osmtpClient = new SmtpClient();
+            osmtpClient.Host = "smtp.gmail.com";
             osmtpClient.EnableSsl = true;
             osmtpClient.UseDefaultCredentials = false;
             osmtpClient.Port = 587;
@@ -47,6 +48,8 @@ namespace WebAppAjaxSpiritualArt.Logica_Negocio
             osmtpClient.Dispose();
 
         }
+
+      
 
         //obtener clave del artista para enviarselo al correo
 
@@ -67,6 +70,16 @@ namespace WebAppAjaxSpiritualArt.Logica_Negocio
             using (BD_SPIRITUAL_ARTEntities bd = new BD_SPIRITUAL_ARTEntities())
             {
                 return bd.REGISTRO_ARTISTA.FirstOrDefault(RA => RA.CORREO == VerificarSesion.CORREO && RA.CLAVE == VerificarSesion.CLAVE);
+
+            }
+        }
+
+        //Recuperar contraseña
+        public REGISTRO_ARTISTA RecuperarClave(REGISTRO_ARTISTA VerificarCorreo)
+        {
+            using (BD_SPIRITUAL_ARTEntities bd = new BD_SPIRITUAL_ARTEntities())
+            {
+                return bd.REGISTRO_ARTISTA.FirstOrDefault(RA => RA.CORREO == VerificarCorreo.CORREO);
 
             }
         }

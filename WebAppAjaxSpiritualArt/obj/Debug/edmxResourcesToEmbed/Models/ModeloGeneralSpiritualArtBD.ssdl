@@ -65,7 +65,7 @@
     <Property Name="CIUDAD" Type="varchar" MaxLength="30" />
     <Property Name="LOCALIDAD" Type="varchar" MaxLength="50" />
     <Property Name="DIRECCION" Type="varchar" MaxLength="50" />
-    <Property Name="CLAVE" Type="int" />
+    <Property Name="CLAVE" Type="varchar" MaxLength="20" />
     <Property Name="FK_TIPO_PLAN" Type="int" />
     <Property Name="ESTADO" Type="bit" />
     <Property Name="IMAGEN" Type="varchar(max)" />
@@ -177,7 +177,7 @@
     <Parameter Name="LOCALIDAD" Type="varchar" Mode="In" />
     <Parameter Name="DIRECCION" Type="varchar" Mode="In" />
     <Parameter Name="FK_TIPO_PLAN" Type="int" Mode="In" />
-    <Parameter Name="CLAVE" Type="int" Mode="In" />
+    <Parameter Name="CLAVE" Type="varchar" Mode="In" />
     <Parameter Name="ESTADO" Type="bit" Mode="In" />
     <Parameter Name="IMAGEN" Type="varchar(max)" Mode="In" />
   </Function>

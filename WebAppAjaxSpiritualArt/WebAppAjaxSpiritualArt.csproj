@@ -189,6 +189,7 @@
     <Content Include="Content\slider2.css" />
     <Content Include="Content\slider3.css" />
     <Content Include="Content\style.css" />
+    <Content Include="Content\TarjetaPlan.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -227,6 +228,7 @@
     <Content Include="Scripts\slider.js" />
     <Content Include="Scripts\slider2.js" />
     <Content Include="Scripts\slider3.js" />
+    <Content Include="Scripts\ValidarCampos.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

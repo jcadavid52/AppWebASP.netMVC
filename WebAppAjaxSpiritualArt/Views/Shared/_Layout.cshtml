@@ -17,6 +17,7 @@
     <link rel="stylesheet"
           href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css" />
     <link rel="stylesheet" href="~/Content/IniciarSesion.css" />
+    <link href="~/Content/TarjetaPlan.css" rel="stylesheet" />
 
     <link href="~/Content/slider2.css" rel="stylesheet" />
     <link href="~/Content/slider3.css" rel="stylesheet" />
@@ -158,14 +159,15 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form>
+                    
 
                         <div class="mb-3">
                             <input type="hidden" id="pk_biografia"  />
                             <label for="message-text" class="col-form-label">Escribe tu biografía:</label>
                             <textarea class="form-control" id="biografia-text" style="height:200px"></textarea>
+                            <h6 id="valBio" style="color:red"></h6>
                         </div>
-                    </form>
+                    
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
@@ -285,7 +287,7 @@
                 });
         }
 
-         //subir obra
+         //cambiar foto de perfil
         $(function () {
 
             $("#btn-imagen-perfil").click(function () {
@@ -369,41 +371,47 @@
 
             $("#btn-biografia").click(function () {
 
-                var form_data = new FormData();
+                let biografia = document.getElementById("biografia-text").value;
+                if (biografia != "") {
 
-                form_data.append("BIOGRAFIATEXTO", $("#biografia-text").val());
-                form_data.append("FK_REGISTRO_ARTISTA", $("#PK_ID_ARTISTA").val());
 
-                for (var value of form_data.values()) {
-                    console.log(value);
-                }
+                    var form_data = new FormData();
 
-                var url = "@Url.Content("~/JsonProductos/publicarBiografia")";
+                    form_data.append("BIOGRAFIATEXTO", $("#biografia-text").val());
+                    form_data.append("FK_REGISTRO_ARTISTA", $("#PK_ID_ARTISTA").val());
 
-                $.ajax({
-
-                    cache: false,
-                    contentType: false,
-                    data: form_data,
-                    dataType: 'JSON',
-                   // enctype: 'multipart/form-data',
-                    processData: false,
-                    method: "POST",
-                    url: url,
-                    success: function (data) {
-                        if (data == 1) {
-                            swal("Tu biografía se ha publicado exitosamente!","", "success");
-
-                            ConsultarBiografia();
-
-                        } else {
-                            swal("Hubo un error :(", "warning");
-                        }
-
+                    for (var value of form_data.values()) {
+                        console.log(value);
                     }
 
-                })
+                    var url = "@Url.Content("~/JsonProductos/publicarBiografia")";
 
+                    $.ajax({
+
+                        cache: false,
+                        contentType: false,
+                        data: form_data,
+                        dataType: 'JSON',
+                        // enctype: 'multipart/form-data',
+                        processData: false,
+                        method: "POST",
+                        url: url,
+                        success: function (data) {
+                            if (data == 1) {
+                                swal("Tu biografía se ha publicado exitosamente!", "", "success");
+
+                                ConsultarBiografia();
+
+                            } else {
+                                swal("Hubo un error :(", "warning");
+                            }
+
+                        }
+
+                    })
+                } else {
+                    document.getElementById("valBio").innerHTML = '<h6 id="valBio">Campo requerido</h6>';
+                }
             });
 
         });
@@ -452,44 +460,50 @@
         //editar biografia
           $(function () {
 
-            $("#btn-editar-biografia").click(function () {
+              $("#btn-editar-biografia").click(function () {
 
-                var form_data = new FormData();
+                  let biografia = document.getElementById("biografia-text").value;
 
-                form_data.append("PK_ID_BIOGRAFIA", $("#pk_biografia").val());
-                form_data.append("BIOGRAFIATEXTO", $("#biografia-text").val());
-                form_data.append("FK_REGISTRO_ARTISTA", $("#PK_ID_ARTISTA").val());
+                  if (biografia != "") {
 
-                for (var value of form_data.values()) {
-                    console.log(value);
-                }
+                      var form_data = new FormData();
 
-                var url = "@Url.Content("~/JsonProductos/EditarBiografia")";
+                      form_data.append("PK_ID_BIOGRAFIA", $("#pk_biografia").val());
+                      form_data.append("BIOGRAFIATEXTO", $("#biografia-text").val());
+                      form_data.append("FK_REGISTRO_ARTISTA", $("#PK_ID_ARTISTA").val());
 
-                $.ajax({
+                      for (var value of form_data.values()) {
+                          console.log(value);
+                      }
 
-                    cache: false,
-                    contentType: false,
-                    data: form_data,
-                    dataType: 'JSON',
-                   // enctype: 'multipart/form-data',
-                    processData: false,
-                    method: "POST",
-                    url: url,
-                    success: function (data) {
-                        if (data == 1) {
-                            swal("Tu biografía se ha modificado exitosamente!", "", "success");
+                      var url = "@Url.Content("~/JsonProductos/EditarBiografia")";
 
-                            ConsultarBiografia();
+                      $.ajax({
 
-                        } else {
-                            swal("Hubo un error :(", "warning");
-                        }
+                          cache: false,
+                          contentType: false,
+                          data: form_data,
+                          dataType: 'JSON',
+                          // enctype: 'multipart/form-data',
+                          processData: false,
+                          method: "POST",
+                          url: url,
+                          success: function (data) {
+                              if (data == 1) {
+                                  swal("Tu biografía se ha modificado exitosamente!", "", "success");
 
-                    }
+                                  ConsultarBiografia();
 
-                })
+                              } else {
+                                  swal("Hubo un error :(", "warning");
+                              }
 
+                          }
+
+                      })
+                  } else {
+                      document.getElementById("valBio").innerHTML = '<h6 id="valBio">Campo requerido</h6>';
+                  }  
             });
 
         });

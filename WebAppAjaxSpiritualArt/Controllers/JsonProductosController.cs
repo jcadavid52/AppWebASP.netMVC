@@ -438,7 +438,7 @@ namespace WebAppAjaxSpiritualArt.Controllers
             public string CIUDAD { get; set; }
             public string LOCALIDAD { get; set; }
             public string DIRECCION { get; set; }
-            public Nullable<int> CLAVE { get; set; }
+            public string CLAVE { get; set; }
             public int? FK_TIPO_PLAN { get; set; }
             public Nullable<bool> ESTADO { get; set; }
             public string IMAGEN { get; set; }
@@ -463,6 +463,22 @@ namespace WebAppAjaxSpiritualArt.Controllers
                 return Content("2");
             }
 
+        }
+
+        //Recuperar contraseña
+        public ActionResult RecuperarClave(REGISTRO_ARTISTA VerificarCorreo)
+        {
+            var verificarClave = logicaNegocioArtista.RecuperarClave(VerificarCorreo);
+
+            if (verificarClave != null)
+            {
+                
+                return Content("1");
+            }
+            else
+            {
+                return Content("2");
+            }
         }
 
 

@@ -29,6 +29,7 @@ namespace WebAppAjaxSpiritualArt.Models
         public string MENSAJE { get; set; }
         public int FK_ARTISTA { get; set; }
         public int FK_PRODUCTO { get; set; }
+       
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<NOTIFICACION> NOTIFICACION { get; set; }

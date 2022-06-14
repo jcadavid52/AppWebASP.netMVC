@@ -12,15 +12,15 @@ namespace WebAppAjaxSpiritualArt.Models
     using System;
     using System.Collections.Generic;
     using System.Web;
-    
+
     public partial class REGISTRO_ARTISTA
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public REGISTRO_ARTISTA()
         {
+            this.BIOGRAFIA = new HashSet<BIOGRAFIA>();
             this.NOTIFICACION = new HashSet<NOTIFICACION>();
             this.PRODUCTO = new HashSet<PRODUCTO>();
-            this.BIOGRAFIA = new HashSet<BIOGRAFIA>();
         }
     
         public int PK_ID_ARTISTA { get; set; }
@@ -33,18 +33,18 @@ namespace WebAppAjaxSpiritualArt.Models
         public string CIUDAD { get; set; }
         public string LOCALIDAD { get; set; }
         public string DIRECCION { get; set; }
-        public Nullable<int> CLAVE { get; set; }
+        public string CLAVE { get; set; }
         public Nullable<int> FK_TIPO_PLAN { get; set; }
         public Nullable<bool> ESTADO { get; set; }
         public string IMAGEN { get; set; }
         public HttpPostedFileBase archivo { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<BIOGRAFIA> BIOGRAFIA { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<NOTIFICACION> NOTIFICACION { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PRODUCTO> PRODUCTO { get; set; }
         public virtual TIPO_PLAN TIPO_PLAN { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<BIOGRAFIA> BIOGRAFIA { get; set; }
     }
 }

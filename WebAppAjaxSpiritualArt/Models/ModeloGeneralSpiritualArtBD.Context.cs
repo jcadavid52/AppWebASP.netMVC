@@ -27,15 +27,15 @@ namespace WebAppAjaxSpiritualArt.Models
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<BIOGRAFIA> BIOGRAFIA { get; set; }
         public virtual DbSet<CATEGORIA> CATEGORIA { get; set; }
         public virtual DbSet<CLIENTE> CLIENTE { get; set; }
         public virtual DbSet<NOTIFICACION> NOTIFICACION { get; set; }
         public virtual DbSet<PRODUCTO> PRODUCTO { get; set; }
         public virtual DbSet<REGISTRO_ARTISTA> REGISTRO_ARTISTA { get; set; }
         public virtual DbSet<TIPO_PLAN> TIPO_PLAN { get; set; }
-        public virtual DbSet<BIOGRAFIA> BIOGRAFIA { get; set; }
     
-        public virtual int SP_REGISTRAR_ARTISTA(string nOMBRE_ARTISTA, string pRIMER_APELLIDO_ARTISTA, string sEGUNDO_APELLIDO_ARTISTA, string tELEFONO, string cORREO, string pAIS, string cIUDAD, string lOCALIDAD, string dIRECCION, Nullable<int> fK_TIPO_PLAN, Nullable<int> cLAVE, Nullable<bool> eSTADO, string iMAGEN)
+        public virtual int SP_REGISTRAR_ARTISTA(string nOMBRE_ARTISTA, string pRIMER_APELLIDO_ARTISTA, string sEGUNDO_APELLIDO_ARTISTA, string tELEFONO, string cORREO, string pAIS, string cIUDAD, string lOCALIDAD, string dIRECCION, Nullable<int> fK_TIPO_PLAN, string cLAVE, Nullable<bool> eSTADO, string iMAGEN)
         {
             var nOMBRE_ARTISTAParameter = nOMBRE_ARTISTA != null ?
                 new ObjectParameter("NOMBRE_ARTISTA", nOMBRE_ARTISTA) :
@@ -77,9 +77,9 @@ namespace WebAppAjaxSpiritualArt.Models
                 new ObjectParameter("FK_TIPO_PLAN", fK_TIPO_PLAN) :
                 new ObjectParameter("FK_TIPO_PLAN", typeof(int));
     
-            var cLAVEParameter = cLAVE.HasValue ?
+            var cLAVEParameter = cLAVE != null ?
                 new ObjectParameter("CLAVE", cLAVE) :
-                new ObjectParameter("CLAVE", typeof(int));
+                new ObjectParameter("CLAVE", typeof(string));
     
             var eSTADOParameter = eSTADO.HasValue ?
                 new ObjectParameter("ESTADO", eSTADO) :

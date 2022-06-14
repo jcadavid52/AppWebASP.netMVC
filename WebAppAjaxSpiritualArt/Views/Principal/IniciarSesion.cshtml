@@ -13,17 +13,24 @@
         <form action="@Url.Action("IniciarSesionAccion","Principal")" method="post" class="form-sesion">
 
 
-            <h2>Login</h2>
+
 
 
             <div class="in">
                 <label>Usuario</label>
-                <input class="form-control" type="text" name="CORREO" value="" placeholder="ingrese usuario" />
+                <input class="form-control" type="email" name="CORREO" value="" placeholder="ingrese usuario" required />
             </div>
 
             <div class="in">
                 <label>Contraseña</label>
-                <input class="form-control" type="password" name="CLAVE" value="" placeholder="Contraseña" />
+                <input class="form-control" type="password" name="CLAVE" value="" placeholder="Contraseña" required/>
+            </div>
+            <div>
+                <a href="#" style="text-decoration:none; color:black" onclick="abrirModalRecuperarClave()">¿Haz olvidado tu contraseña?</a>
+            </div>
+
+            <div>
+                <a href="#" style="text-decoration:none; color:black">¿Quieres registrarte?</a>
             </div>
 
             <div class="in">
@@ -44,5 +51,94 @@
 
     </div>
 
+    <!-- Modal recuperar contraseña-->
+    <div class="modal fade" id="recuperarClave" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Recuperar contraseña</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <label for="validationCustom01" class="form-label">Ingresa el correo registrado</label>
+                            <input type="email" class="form-control" id="email" required>
+                            <h6  id="validacion" style="color:red"></h6>
+
+
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                        <button type="submit" class="btn btn-primary" id="btn-recuperar">Recuperar contraseña</button>
+
+                    </div>
+                
+            </div>
+        </div>
+    </div>
+
+    @section scripts{
+        <script>
+            $(function () {
+
+                $("#btn-recuperar").click(function () {
+                    let correo = document.getElementById("email").value;
+                    if (correo != "") {
+
+                        document.getElementById("validacion").innerHTML = '<h6 class="validacion" id="validacion"></h6>';
+
+
+                        var form_data = new FormData();
+                        form_data.append("CORREO", $("#email").val());
+
+                        var url = "@Url.Content("~/JsonProductos/RecuperarClave")";
+
+
+                        $.ajax({
+
+                            cache: false,
+                            contentType: false,
+                            data: form_data,
+                            dataType: 'JSON',
+                            processData: false,
+                            method: "POST",
+                            url: url,
+                            success: function (data) {
+
+                                if (data == 1) {
+                                    swal("Hemos enviado la contraseña al correo " + correo, "", "success");
+                                } else {
+                                    swal("El correo " + correo + " No aparece registrado", "Intenta nuevamente", "warning");
+                                }
+
+                            }
+                        })
+
+                    } else {
+                        document.getElementById("validacion").innerHTML = '<h6 id="validacion">Campo requerido</h6>'
+                    }
+
+
+
+
+                });
+
+            });
+
+                  //funcion que abre modal recuperar Clave
+                function abrirModalRecuperarClave() {
+                    $('#recuperarClave').modal('toggle')
+                }
+
+
+        
+
+        </script>
+
+        
+    }
 </body>
 
