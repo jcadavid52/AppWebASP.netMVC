@@ -32,8 +32,8 @@
 
 
     <div class="menu2">
-        <div style="text-align: left;" class="m2">
-            <a href=""><img src="" width="60" alt=""></a>
+        <div class="container-icono">
+            @*<img src="~/ArchivosLectura/imagenes-index/logo-removebg-preview.png" class="img-fluid"/>*@
 
         </div>
         @if (Session["correo"] != null && Session["clave"] != null)
@@ -53,12 +53,13 @@
 
             <div style="text-align: right;" class="m2">
 
-                <a style="text-decoration:none" href="#"><img src="~/ArchivosLectura/imagenes-index/love.png" width="30" alt=""></a>
+                <a onclick="abrirNotifi()" style="text-decoration:none" href="#"><img src="~/ArchivosLectura/imagenes-index/notificacion.png" width="30" alt=""><span id="span-button" style="color:whitesmoke"></span></a>
                 <span style="color:aliceblue">| </span>
 
                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
                     <img src="@Url.Content(Session["imagen"].ToString())" width="45" height="45" id="perfil" />
                 </button>
+
                 <span style="color:aliceblue">| </span>
                 <div class="btn-group">
                     <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -76,6 +77,8 @@
             </div>
 
 
+
+
         }
         else
         {
@@ -91,9 +94,9 @@
             </div>
 
             <div style="text-align: right;" class="m2">
-                <a style="text-decoration:none" href="#"><img src="~/ArchivosLectura/imagenes-index/love.png" width="30" alt=""> |</a>
+                <a style="text-decoration:none" href="@Url.Action("InfoGeneral", "Principal")"><img src="~/ArchivosLectura/imagenes-index/love.png" width="30" alt=""> |</a>
                 <a style="text-decoration:none" href="@Url.Action("IniciarSesion", "Principal")"><img src="~/ArchivosLectura/imagenes-index/user2.png" width="30" alt=""> |</a>
-                <a><img src="~/ArchivosLectura/imagenes-index/bolso.png" width="30" alt=""></a>
+                <a href="@Url.Action("InfoNegocio", "Principal")"><img src="~/ArchivosLectura/imagenes-index/bolso.png" width="30" alt=""></a>
 
 
 
@@ -101,13 +104,15 @@
             </div>
 
 
+
+
         }
 
-    </div>
+    </div><br /><br /><br /><br />
 
 
 
-    <div style="min-height:calc(100vh - 100px - 200px)">
+    <div style="min-height:calc(100vh - 100px - 200px);">
         @RenderBody()
 
 
@@ -159,21 +164,67 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    
 
-                        <div class="mb-3">
-                            <input type="hidden" id="pk_biografia"  />
-                            <label for="message-text" class="col-form-label">Escribe tu biografía:</label>
-                            <textarea class="form-control" id="biografia-text" style="height:200px"></textarea>
-                            <h6 id="valBio" style="color:red"></h6>
-                        </div>
-                    
+
+                    <div class="mb-3">
+                        <input type="hidden" id="pk_biografia" />
+                        <label for="message-text" class="col-form-label">Escribe tu biografía:</label>
+                        <textarea class="form-control" id="biografia-text" style="height:200px"></textarea>
+                        <h6 id="valBio" style="color:red"></h6>
+                    </div>
+
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
                     <button type="button" class="btn btn-primary" id="btn-biografia">Publicar</button>
                     <button type="button" class="btn btn-danger" id="btn-editar-biografia" style="display:none">Editar</button>
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal notificaciones -->
+    <div class="modal fade" id="VerNotificaciones" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Clientes que te han solicitado obras</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+                <div class="modal-body">
+                    <h3>Datos de la notificación</h3>
+                    <table class="table" id="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Fecha</th>
+                                <th scope="col">Nombre del cliente</th>
+                                <th scope="col">Apellidos del cliente</th>
+                                <th scope="col">Correo del cliente</th>
+                                <th scope="col">Teléfono del cliente</th>
+                                <th scope="col">Asunto</th>
+                                <th scope="col">Mensaje</th>
+                                <th scope="col">Producto solicitado</th>
+
+                            </tr>
+                        </thead>
+                        <tbody id="tbody">
+                        </tbody>
+                    </table>
+
+
+
+                    <div id="sin_notificaciones" style="display:none">
+                        <h4>No tienes notificaciones</h4>
+                    </div>
+
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+
+                </div>
+
             </div>
         </div>
     </div>
@@ -192,11 +243,18 @@
 
                 <div class="sobre">
 
+                    
+                    <div style="position:absolute; left:300px"><a href=""><img src="~/ArchivosLectura/imagenes-index/logo-removebg-preview.png" width="190" height="190"/></a></div>
+                    
+
+
+                </div>
+                <div class="sobre">
+
                     <br>
-                    <div class="tittle"><a href="">Nuestra Empresa</a></div><br>
+                    <div class="tittle"><a href="">Nuestro Proyecto</a></div><br>
                     <div class="sobren"><a href="">Quienes somos</a></div>
-                    <div class="sobren"><a href="">Empleo</a></div>
-                    <div class="sobren"><a href="">Movil</a></div>
+                    <div class="sobren"><a href="">Haz parte de nosotros</a></div>
                     <div class="sobren"><a href="">Blog</a></div>
 
 
@@ -215,27 +273,17 @@
 
                 </div>
 
-                <div class="sobre">
-                    <br>
-
-                    <div class="tittle"><a href="">Servicio</a></div><br>
-                    <div class="sobren"><a href="">Domicilio</a></div>
-                    <div class="sobren"><a href="">Envios</a></div>
-                    <div class="sobren"><a href="">Nuestras Tiendas</a></div>
-                    <div class="sobren"><a href="">Mapa</a></div>
-
-
-                </div>
+                
 
 
                 <div class="sobre">
                     <br>
 
                     <div class="tittle"><a href="">Categorias</a></div><br>
-                    <div class="sobren"><a href="">Arte</a></div>
-                    <div class="sobren"><a href="">Musica</a></div>
-                    <div class="sobren"><a href="">Artesanos</a></div>
-                    <div class="sobren"><a href="">Moda</a></div>
+                    <div class="sobren"><a href="">Pintura</a></div>
+                    <div class="sobren"><a href="">Lápiz</a></div>
+                    <div class="sobren"><a href="">Escultura</a></div>
+                    <div class="sobren"><a href="">Arte moderno</a></div>
 
 
                 </div>
@@ -399,7 +447,7 @@
                         success: function (data) {
                             if (data == 1) {
                                 swal("Tu biografía se ha publicado exitosamente!", "", "success");
-
+                                $("#biografia-text").val("");
                                 ConsultarBiografia();
 
                             } else {
@@ -491,7 +539,7 @@
                           success: function (data) {
                               if (data == 1) {
                                   swal("Tu biografía se ha modificado exitosamente!", "", "success");
-
+                                  $("#biografia-text").val("");
                                   ConsultarBiografia();
 
                               } else {
@@ -503,11 +551,116 @@
                       })
                   } else {
                       document.getElementById("valBio").innerHTML = '<h6 id="valBio">Campo requerido</h6>';
-                  }  
+                  }
             });
 
-        });
+          });
+
+         function listarNotificaciones() {
+
+             var fk_artista = document.getElementById("PK_ID_ARTISTA").value;
+
+
+            fetch("@Url.Content("~/JsonProductos/EnviarNotificaciones/")" + fk_artista)
+
+                .then(function (res) {
+
+                    return res.json();
+                })
+
+                .then(function (miJson) {
+                    document.getElementById("tbody").innerHTML = "";
+                    console.log(miJson);
+                    let cont = 0;
+                    let botonEliminar = 'Descartar';
+
+                    if (miJson[0] != null) {
+                        for (let i = 0; i < miJson.length; i++) {
+
+                            cont++
+
+
+                            document.getElementById("tbody").innerHTML = document.getElementById("tbody").innerHTML +
+                                '<tr>' +
+
+
+                                '<td>' + miJson[i].fecha + '</td>' +
+                                '<td>' + miJson[i].nombreCliente + '</td>' +
+                                '<td>' + miJson[i].apellidoCliente + '</td>' +
+                                '<td>' + miJson[i].correoCliente + '</td>' +
+                                '<td>' + miJson[i].telefonoCliente + '</td>' +
+                                '<td>' + miJson[i].asunto + '</td>' +
+                                '<td>' + miJson[i].mensaje + '</td>' +
+                                '<td>' + miJson[i].nombreProducto + '</td>' +
+                                '<td><button class="btn-danger" onclick="eliminarNotificacion(' + miJson[i].PK_ID_NOTIFICACION +')">' + botonEliminar + '</button></td>' +
+                                '</tr>';
+
+                        }
+                    } else {
+                        document.getElementById("table").style.display = "none";
+                        document.getElementById("sin_notificaciones").style.display = "";
+
+                    }
+                    document.getElementById("span-button").innerHTML = cont;
+                })
+        }
+
+
+        //eliminar la notifiacion
+        function eliminarNotificacion(id) {
+
+            swal({
+                title: "Deseas eliminar esta notificación?",
+                text: "Una vez eliminada no puedes recuperarla!",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+            })
+                .then((willDelete) => {
+                    if (willDelete) {
+                       var form_data = new FormData();
+                       var url = "@Url.Content("~/JsonProductos/EliminarNotificacion")";
+
+
+                       form_data.append("PK_ID_NOTIFICACION", id);
+
+                       $.ajax({
+
+                           cache: false,
+                           contentType: false,
+                           data: form_data,
+                           dataType: 'JSON',
+
+                           processData: false,
+                           method: "POST",
+                           url: url,
+                           success: function (data) {
+
+                               if (data == 1) {
+                                   swal("La notificación se ha eliminado con éxito", {
+                                       icon: "success",
+                                   });
+                                   listarNotificaciones();
+                               } else {
+                                   alert("Error en el sistema, intenta nuevamente.")
+                               }
+                           }
+                       })
+
+                    }
+                });
+
+
+
+        }
+
+
+        //abrir noticiaciones
+        function abrirNotifi() {
+            $('#VerNotificaciones').modal('toggle');
+        }
         (ConsultarBiografia2)();
+        (listarNotificaciones)();
     </script>
 
 </body>

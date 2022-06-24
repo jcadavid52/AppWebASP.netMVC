@@ -25,16 +25,10 @@
     text-align: center;
     padding-left: 10%;
     padding-right: 10%;
-    font-family: 'Playfair Display SC', serif;
+    
 }
 
-h2 {
-    text-align: center;
-    padding: 12px;
-    font-family: 'Playfair Display SC', serif;
-    font-size: 3vw;
-    color: rgb(22, 22, 22)
-}
+
 
 .in label {
     color: rgb(22, 22, 22);
@@ -42,13 +36,7 @@ h2 {
     font-size: 2vw;
 }
 
-.in input {
-    color: rgb(252, 249, 249);
-    font-family: 'Playfair Display SC', serif;
-    font-size: 1vw;
-    margin-bottom: 2%;
-    opacity: 90%;
-}
+
 
 
 .btn-login {

@@ -27,15 +27,10 @@
     text-align: center;
     padding-left: 10%;
     padding-right: 10%;
-    font-family: 'Playfair Display SC', serif;
+    
 }
 
-h2 {
-    text-align: center;
-    padding: 12px;
-    font-size: 3vw;
-    color: rgb(22, 22, 22)
-}
+
 
 .input label {
     color: rgb(255, 255, 255);

@@ -5,7 +5,15 @@
     List<CATEGORIA> categorias = ViewBag.Categorias;
 }
 
+<div class="header-info">
 
+    <div class="container-header-spiritual">
+        <a href="#" style="text-decoration:none; color:darkgray"><h2>Conoce Spiritual Art</h2></a>
+    </div>
+    <div class="container-logo-header">
+        <img src="~/ArchivosLectura/imagenes-index/logo.jpeg" class="img-fluid" />
+    </div>
+</div><br /><br />
 <form action="@Url.Action("FiltrarObras","Principal")" method="post">
     <label>Categoría de obra</label>
     <select name="id_categoria" class="form-select form-select-sm mb-3">
@@ -18,7 +26,7 @@
 </form>
 <div class="container">
     <div class="rowProducts">
-        <h2 class="titulocate">Obras que hacen parte de nuestra comunidad SpiritualArt</h2>
+        <h2 class="titulocate">Obras que hacen parte de nuestra comunidad Spiritual Art</h2>
         <div class="row2">
             @foreach (var obras in Model)
             {
@@ -38,6 +46,17 @@
             }
 
         </div>
+    </div>
+</div>
+
+<div class="info-artistas">
+    <h3 class="titulo-info">¿Quieres hacer parte de la comunidad SpiritualArt?</h3>
+    <p class="parrafo-info-artistas">Haz parte de nuestra comunidad y expande tu creatividad.</p>
+    <div class="btn-expo">
+
+        <a href="#">
+            <input type="button" value="Ver información" class="btn-danger">
+        </a>
     </div>
 </div>
 

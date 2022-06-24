@@ -174,8 +174,13 @@
                         url: url,
                         success: function (data) {
                             if (data == 1) {
-                                swal("Registrado exitosamente!", "El artista se estará comunicando lo más pronto contigo", "", "success");
-
+                                swal("Registrado exitosamente!", "El artista se estará comunicando lo más pronto contigo", "success");
+                                $("#nombre_cliente").val("");
+                                $("#apellido_cliente").val("");
+                                $("#telefono_cliente").val("");
+                                $("#correo_cliente").val("");
+                                $("#asunto").val("");
+                                $("#mensaje_cliente").val("");
 
 
                             } else {

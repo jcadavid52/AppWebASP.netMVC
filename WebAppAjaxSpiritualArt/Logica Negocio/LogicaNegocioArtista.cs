@@ -125,6 +125,25 @@ namespace WebAppAjaxSpiritualArt.Logica_Negocio
             }
         }
 
+        //eliminar notificacion
+        public bool EliminarNotificacion(NOTIFICACION id)
+        {
+            using (BD_SPIRITUAL_ARTEntities bd = new BD_SPIRITUAL_ARTEntities())
+            {
+                try
+                {
+                  bd.Entry(id).State = System.Data.Entity.EntityState.Deleted;
+                  bd.SaveChanges();
+
+                    return true;
+                }
+                catch (Exception)
+                {
+                    return false;
+                }
+            }
+        }
+
         //cosulta de un artista
         public REGISTRO_ARTISTA ConsultaArtista(int id_artista)
         {

@@ -19,13 +19,25 @@ a {
     width: 100%;
     align-items: center;
     background-color: rgb(22, 22, 22);
+    max-height:105px;
+    position:fixed;
+    z-index:999;
 }
 
     .menu2 a {
         color: rgb(255, 255, 255);
+        
     }
 
-
+.container-icono {
+    
+    height: 120px;
+    width: 120px;
+    margin-left: 150px;
+    background: url(../ArchivosLectura/imagenes-index/logo-removebg-preview.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
 
 .menu3 {
     display: grid;
@@ -37,8 +49,7 @@ a {
 
 
 .m2 {
-    margin-bottom: 10%;
-    margin-top: 10%;
+  
 }
 
 .buscador {
@@ -295,4 +306,161 @@ footer {
 .sobren {
     display: grid;
     justify-self: center;
+}
+
+.grid-info {
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    row-gap: 1em;
+    column-gap: 1em;
+    grid-auto-rows: minmax(500px,auto);
+    background: rgba(0, 0, 0, 0.7) url(../ArchivosLectura/imagenes-index/fondo-info.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-blend-mode: darken;
+    color: white;
+}
+
+.item-info-uno {
+    height: 200px;
+    
+}
+
+.item-info-dos {
+    margin: 50px;
+    
+}
+
+.titulo-info {
+    text-align: center;
+    
+}
+
+.parrafo-info{
+    margin:15px;
+   
+}
+.info-artistas{
+   
+    margin-bottom:100px;
+    height:200px;
+    width:100%;
+}
+.parrafo-info-artistas{
+    text-align:center;
+}
+.btn-expo{
+    text-align:center;
+}
+
+/*info general*/
+
+.header-info {
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    background: rgba(0, 0, 0, 0.4) url(../ArchivosLectura/imagenes-index/pastel.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-blend-mode: darken;
+}
+
+.container-header-spiritual {
+    border-top:solid 3px;
+    margin: 50px 50px 50px 50px;
+   text-align:center;
+}
+
+.container-logo-header {
+    
+    margin: 25px 50px 25px 500px;
+    
+}
+
+.container-info-general {
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    height:500px;
+    margin-top:50px;
+}
+
+.container-general-uno {
+    
+    margin-left:20px;
+}
+
+.container-general-dos {
+    
+    margin-left:100px;
+}
+.body-categorias {
+    border: solid 1px;
+    height: 2100px;
+    margin-top: 50px;
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    background-color: black;
+   
+    
+    
+}
+.card-img-pintura {
+    border: solid 1px;
+    margin:50px;
+    background-image: url(../ArchivosLectura/imagenes-index/artes-plasticas.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-radius: 2%;
+    filter: drop-shadow(0 2px 10px rgba(41, 80, 58, 0.74));
+    max-height:500px;
+}
+
+.card-img-lapiz {
+    border: solid 1px;
+    margin: 50px;
+    background-image: url(../ArchivosLectura/imagenes-index/lapiz.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-radius: 2%;
+    filter: drop-shadow(0 2px 10px rgba(41, 80, 58, 0.74));
+    max-height: 500px;
+}
+
+.card-img-foto {
+    border: solid 1px;
+    margin: 50px;
+    background-image: url(../ArchivosLectura/imagenes-index/fotografia.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-radius: 2%;
+    filter: drop-shadow(0 2px 10px rgba(41, 80, 58, 0.74));
+    max-height: 500px;
+}
+
+.card-img-escultura {
+    border: solid 1px;
+    margin: 50px;
+    background-image: url(../ArchivosLectura/imagenes-index/dragon.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-radius: 2%;
+    filter: drop-shadow(0 2px 10px rgba(41, 80, 58, 0.74));
+    max-height: 500px;
+}
+
+.card-img-moderno {
+    border: solid 1px;
+    margin: 50px;
+    background-image: url(../ArchivosLectura/imagenes-index/chispa.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-radius: 2%;
+    filter: drop-shadow(0 2px 10px rgba(41, 80, 58, 0.74));
+}
+.text-pintura {
+    margin-left: 50px;
+    margin-right: 150px;
+    margin-top: 50px;
+    margin-bottom:50px;
+    border: solid 1px;
+    max-height: 500px;
 }

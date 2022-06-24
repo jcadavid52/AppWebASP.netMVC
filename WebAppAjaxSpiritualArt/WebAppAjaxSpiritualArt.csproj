@@ -251,6 +251,8 @@
     <Content Include="Views\Principal\DetalleObraCompra.cshtml" />
     <Content Include="Views\Principal\DetalleArtista.cshtml" />
     <Content Include="Views\Principal\MiCuenta.cshtml" />
+    <Content Include="Views\Principal\InfoGeneral.cshtml" />
+    <Content Include="Views\Principal\InfoNegocio.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -481,6 +481,21 @@ namespace WebAppAjaxSpiritualArt.Controllers
             }
         }
 
+        //eliminar notificacion
+        public ActionResult EliminarNotificacion(NOTIFICACION id)
+        {
+            var notificacion = logicaNegocioArtista.EliminarNotificacion(id);
+
+            if (notificacion)
+            {
+                return Content("1");
+            }
+            else
+            {
+                return Content("2");
+            }
+        }
+
 
     }
 

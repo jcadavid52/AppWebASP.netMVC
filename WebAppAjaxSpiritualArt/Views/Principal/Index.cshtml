@@ -3,6 +3,8 @@
     <style>
         import url('https://fonts.googleapis.com/css2?family=Archivo:wght@500&family=Belgrano&family=Carter+One&family=Cinzel:wght@400;500&family=Cookie&family=Licorice&family=Martel:wght@600&family=Merriweather:wght@900&family=Michroma&family=Pacifico&family=Playball&family=Playfair+Display+SC&family=Prompt:ital,wght@0,300;1,300&family=Ramaraja&family=Sacramento&family=Secular+One&family=Slabo+27px&family=Varela+Round&family=Zilla+Slab:wght@300&display=swap');
     </style>
+
+    <script src="//code.tidio.co/7fa7g4jye4gq0epqdd8ainscf8av7f8n.js" async></script>
 </head>
 
 <!-- carousel-->
@@ -26,14 +28,14 @@
             <img src="https://bit.ly/3iMHuI1" class="d-block w-100" alt="..." width="500" height="450">
             <div class="carousel-caption d-none d-md-block">
                 <h5 style="color:brown">¿Quieres hacer parte de la comunidad SpiritualArt?</h5>
-                <p style="color:brown;"><a style="text-decoration: none; background-color:aliceblue" href="#">Solicita información aquí</a></p>
+                <p style="color:brown;"><a style="text-decoration: none; background-color:aliceblue" href="@Url.Action("InfoNegocio", "Principal")">Solicita información aquí</a></p>
             </div>
         </div>
         <div class="carousel-item">
             <img src="~/ArchivosLectura/imagenes-index/salpica4.png" class="d-block w-100" alt="..." width="500" height="450">
             <div class="carousel-caption d-none d-md-block">
                 <h5 style="color:brown">¿Quieres comprar arte?</h5>
-                <p style="color:brown"><a style="text-decoration: none; background-color:aliceblue" href="#">Visita nuestra exposición virtual</a></p>
+                <p style="color:brown"><a style="text-decoration: none; background-color:aliceblue" href="@Url.Action("Exposicion", "Principal")">Visita nuestra exposición virtual</a></p>
             </div>
         </div>
     </div>
@@ -87,7 +89,7 @@
                 <path d="M10.02 6L8.61 7.41 13.19 12l-4.58 4.59L10.02 18l6-6-6-6z" />
             </svg>
         </button>
-        
+
     </div>
 </div>
 
@@ -95,7 +97,7 @@
 
 
 <!--CAROUSEL 3-->
-<h2 class="titulocate">Obras Destacadas</h2>
+<h2 class="titulocate" style="text-align:center">Obras Destacadas</h2>
 <div class="car3">
 
     <div class="center">
@@ -103,8 +105,8 @@
             <div class="inner" id="card-json">
 
 
-                <div class="card" >
-                 
+                <div class="card">
+
                 </div>
 
             </div>
@@ -121,6 +123,35 @@
     </div>
 
 
+</div>
+<div class="info-artistas">
+    <h3 class="titulo-info">Échale un vistazo a nuestras obras de arte.</h3>
+    <p class="parrafo-info-artistas">Descubre el talento de los artistas que hacen parte de nuestra comunidad SpiritualArt.</p>
+    <div class="btn-expo">
+
+        <a href="#">
+            <input type="button" value="Ver exposición" class="btn-danger">
+        </a>
+    </div>
+</div>
+<div>
+
+    <div class="grid-info">
+
+
+        <div class="item-info-uno"></div>
+        <div class="item-info-dos">
+
+            <h1 class="titulo-info">UN ESPACIO DONDE EXPONER TUS OBRAS.</h1>
+
+            <p class="parrafo-info">
+                SpiritualArt te da el espacio que necesitas para exponer todas tus obras, podrás exponer tus cuadros a óleo, tus acuarelas, tus acrílicos, pasteles, dibujos, tus esculturas y también tenemos un espacio para la fotografía de autor, la fotografia artística.
+                Queremos apoyar al arte en todas sus vertientes y por eso hemos creado este espacio.
+            </p>
+            <p class="parrafo-info">SpiritualArt te proporciona todas las herramientas, para que el viaje a la creacción de tu Exposición Virtual, sea fácil y sencillo. Nuestras prioridades son que tanto los artistas que expongan, como todos los que visiten nuestra galería disfrunten de un recorrido hermoso y diferente, es decir, que podamos todos disfrutar del arte.</p>
+
+        </div>
+    </div>
 </div>
 
 
@@ -168,6 +199,5 @@
         (listarPremium)();
 
     </script>
-
 
 }

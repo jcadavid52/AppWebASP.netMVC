@@ -5,18 +5,16 @@
     List<PRODUCTO> consultaObras = ViewBag.ConsultaObras;
 }
 
-<h2>IndexSesion</h2>
+
+<div style="text-align:center; margin:20px">
 
 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#AgregarObra">
     Agregar Obra
 </button>
-<br />
-<br />
+</div>
 
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#VerNotificaciones">
-    Notificaciones <span id="span-button"></span>
-</button>
-<br />
+
+
 
 
 
@@ -89,51 +87,7 @@
 </div>
 
 
-<!-- Modal notificaciones -->
-<div class="modal fade" id="VerNotificaciones" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-xl">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Clientes que te han solicitado obras</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
 
-            <div class="modal-body">
-                <h3>Datos de la notificación</h3>
-                <table class="table" id="table">
-                    <thead>
-                        <tr>
-                            <th scope="col">Fecha</th>
-                            <th scope="col">Nombre del cliente</th>
-                            <th scope="col">Apellidos del cliente</th>
-                            <th scope="col">Correo del cliente</th>
-                            <th scope="col">Teléfono del cliente</th>
-                            <th scope="col">Asunto</th>
-                            <th scope="col">Mensaje</th>
-                            <th scope="col">Producto solicitado</th>
-
-                        </tr>
-                    </thead>
-                    <tbody id="tbody">
-                    </tbody>
-                </table>
-
-
-
-                <div id="sin_notificaciones" style="display:none">
-                    <h4>No tienes notificaciones</h4>
-                </div>
-
-
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-
-            </div>
-
-        </div>
-    </div>
-</div>
 
 <!-- Modal editar obra-->
 <div class="modal fade" id="editar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -181,7 +135,7 @@
                 <hr>
 
 
-                <img id="imagenPrueba" />
+                <img id="imagenPrueba"/>
 
                 <hr />
 
@@ -263,7 +217,7 @@
                       for (let i = 0; i < miJson.length; i++) {
                           document.getElementById("content").innerHTML = document.getElementById("content").innerHTML +
                               '<a  style="text-decoration:none" onclick="ConsultarObraEditar(' + miJson[i].PK_ID_PRODUCTO +')")>'+
-                            '<figure style="background-image:url(' + miJson[i].IMAGEN_PRODUCTO+');">' +
+                            '<figure style="background-image:url(' + miJson[i].IMAGEN_PRODUCTO+'); width:300px; height: 300px">' +
                               '</figure >' +
                                '</a >'
 
@@ -394,6 +348,11 @@
                                             document.getElementById("body2").style.display = "";
                                             document.getElementById("sin_obras").style.display = "none";
 
+                                            $("#NOMBRE_PRODUCTO").val("");
+                                            $("#precio").val("");
+                                            $("#descripcion").val("");
+                                            $("#cantidad").val("");
+
                                             ConsultarObras();
                                         } else {
                                             swal("Hubo un error en el sistema!", "Vuelve a intentarlo!", "success");
@@ -487,7 +446,7 @@
                                 '<td>' + miJson[i].asunto + '</td>' +
                                 '<td>' + miJson[i].mensaje + '</td>' +
                                 '<td>' + miJson[i].nombreProducto + '</td>' +
-                                '<td><button class="btn-danger">' + botonEliminar + '</button></td>' +
+                                '<td><button class="btn-danger" onclick="eliminarNotificacion(' + miJson[i].PK_ID_NOTIFICACION +')">' + botonEliminar + '</button></td>' +
                                 '</tr>';
 
                         }
@@ -505,7 +464,7 @@
             $('#editar').modal('toggle')
         }
 
-      
+
 
         //funtion que consulta una obra para editarla
         function ConsultarObraEditar(id) {
@@ -537,7 +496,7 @@
         $(function () {
             $("#btn-editar").click(function () {
 
-               
+
                 let precio = document.getElementById("precio2").value;
                 let descripcion = document.getElementById("descripcion2").value;
                 let cantidad = document.getElementById("cantidad2").value;
@@ -711,12 +670,13 @@
 
         
 
+
         (listarCategorias)();
 
         (ConsultarObras)();
 
-        (listarNotificaciones)();
         
+
 
 
     </script>

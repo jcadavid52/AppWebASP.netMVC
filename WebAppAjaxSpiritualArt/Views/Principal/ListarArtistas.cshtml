@@ -4,11 +4,19 @@
     ViewBag.Title = "ListarArtistas";
 }
 
+<div class="header-info">
 
+    <div class="container-header-spiritual">
+        <a href="#" style="text-decoration:none; color:darkgray"><h2>Conoce Spiritual Art</h2></a>
+    </div>
+    <div class="container-logo-header">
+        <img src="~/ArchivosLectura/imagenes-index/logo.jpeg" class="img-fluid" />
+    </div>
+</div><br /><br />
 
 <div class="container">
     <div class="rowProducts">
-        <h2 class="titulocate">Artistas de SpiritualArt</h2>
+        <h2 class="titulocate">Artistas de Spiritual Art</h2>
 
         <div class="row">
             @foreach (var artistas in Model)
@@ -33,3 +41,13 @@
     </div>
 </div>
 
+<div class="info-artistas">
+    <h3 class="titulo-info">¿Quieres hacer parte de la comunidad SpiritualArt?</h3>
+    <p class="parrafo-info-artistas">Haz parte de nuestra comunidad y expande tu creatividad.</p>
+    <div class="btn-expo">
+
+        <a href="#">
+            <input type="button" value="Ver información" class="btn-danger">
+        </a>
+    </div>
+</div>

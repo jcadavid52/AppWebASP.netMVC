@@ -110,6 +110,7 @@
 
                                 if (data == 1) {
                                     swal("Hemos enviado la contraseña al correo " + correo, "", "success");
+                                    $("#email").val("");
                                 } else {
                                     swal("El correo " + correo + " No aparece registrado", "Intenta nuevamente", "warning");
                                 }

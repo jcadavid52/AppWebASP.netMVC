@@ -432,5 +432,16 @@ namespace WebAppAjaxSpiritualArt.Controllers
             return View(artista);
         }
 
+        //infromación de Spiritual Art
+        public ActionResult InfoGeneral()
+        {
+            return View();
+        }
+
+        //información a cerca del negocio spiritual Art
+        public ActionResult InfoNegocio()
+        {
+            return View();
+        }
     }
 }
