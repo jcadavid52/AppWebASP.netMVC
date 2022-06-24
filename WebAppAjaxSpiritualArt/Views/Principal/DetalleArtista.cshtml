@@ -7,28 +7,53 @@
 
 }
 
-<h2>DetalleArtista</h2>
+<div class="header-info">
+
+    <div class="container-header-spiritual">
+        <a href="@Url.Action("InfoGeneral", "Principal")" style="text-decoration:none; color:darkgray"><h2>Conoce Spiritual Art</h2></a>
+    </div>
+    <div class="container-logo-header">
+        <img src="~/ArchivosLectura/imagenes-index/logo.jpeg" class="img-fluid" />
+    </div>
+</div>
 
 
 <input type="hidden" id="fk_artista" value="@Model.PK_ID_ARTISTA" />
-<div class="card mb-3" style="max-width: 600px;">
-    <div class="row3 g-0">
-        <div class="col-md-4">
-            <img src="@Url.Content(imagen)" alt="..." height="400" width="300">
-        </div>
-        <div class="col-md-8">
-            <div class="card-body" id="card-body">
-                <h5 class="card-title">@Model.NOMBRE_ARTISTA</h5>
-                <h6 class="card-title">@Model.PRIMER_APELLIDO_ARTISTA</h6>
-                <div id="parrafo">
-                    @*<p class="card-text"></p>*@
+
+<div class="container-detalle-artista">
+
+    <div class="card mb-3" style="max-width: 600px;">
+        <div class="row3 g-0">
+            <div class="col-md-4">
+                <img src="@Url.Content(imagen)" alt="..." height="400" width="300">
+            </div>
+            <div class="col-md-8">
+                <div class="card-body" id="card-body">
+                    <h5 class="card-title">@Model.NOMBRE_ARTISTA</h5>
+                    <h6 class="card-title">@Model.PRIMER_APELLIDO_ARTISTA</h6>
+                    <div id="parrafo">
+                        @*<p class="card-text"></p>*@
+                    </div>
+                    <h5><strong>Cantidad de obras publicadas: </strong>@ViewBag.CantidadObras</h5>
+                    <p class="card-text"><small class="text-muted">@Model.CIUDAD</small></p>
                 </div>
-                <h5><strong>Cantidad de obras publicadas: </strong>@ViewBag.CantidadObras</h5>
-                <p class="card-text"><small class="text-muted">@Model.CIUDAD</small></p>
             </div>
         </div>
     </div>
+
+    <div class="info-artistas" style="margin-top:50px">
+        <h3 class="titulo-info">¿Quieres hacer parte de la comunidad SpiritualArt?</h3>
+        <p class="parrafo-info-artistas">Haz parte de nuestra comunidad y expande tu creatividad.</p>
+        <div class="btn-expo">
+
+            <a href="@Url.Action("InfoNegocio", "Principal")">
+                <input type="button" value="Ver información" class="btn-danger">
+            </a>
+        </div>
+    </div>
 </div>
+
+
 @section scripts{
     <script>
         function ConsultarBiografia() {
@@ -51,18 +76,18 @@
                           }
                           document.getElementById("btn-editar-biografia").style.display = "";
                           document.getElementById("btn-biografia").style.display = "none";
-                         
+
                       } else {
                           document.getElementById("parrafo").innerHTML = document.getElementById("parrafo").innerHTML +
                               '<p class="card-text">El artista no ha publicado una biografía</p>'
-                          
+
                       }
 
-    
+
                })
         }
         (ConsultarBiografia)();
     </script>
 }
-   
+
 

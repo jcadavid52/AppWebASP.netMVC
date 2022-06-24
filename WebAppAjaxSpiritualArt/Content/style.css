@@ -461,6 +461,95 @@ footer {
     margin-right: 150px;
     margin-top: 50px;
     margin-bottom:50px;
-    border: solid 1px;
+    
     max-height: 500px;
+}
+/*detalle artista*/
+.container-detalle-artista {
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+}
+/*info negocio*/
+.header-info-negocio {
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    background: rgba(0, 0, 0, 0.4) url(../ArchivosLectura/imagenes-index/images.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-blend-mode: darken;
+}
+
+.container-info-negocio {
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    height: 700px;
+   
+    margin-top:50px;
+}
+
+.item-info-negocio {
+    
+    margin-right: 25px;
+    margin-left: 120px;
+    margin-top:70px;
+}
+
+.item-imagen-negocio {
+    margin-left: 50px;
+    margin-right: 80px;
+    margin-top: 80px;
+    margin-bottom: 80px;
+    border-radius: 5%;
+    background: url(../ArchivosLectura/imagenes-index/chica.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    filter: drop-shadow(0 10px 20px rgb(72 0 255));
+    max-height:500px;
+}
+
+.container-info-negocio-dos {
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    height: 700px;
+    margin-top: 50px;
+    
+}
+
+.item-imagen-negocio-dos {
+    margin-right: 25px;
+    margin-left: 120px;
+    margin-top: 70px;
+    border-radius: 5%;
+    background: url(../ArchivosLectura/imagenes-index/graffiti.jpg);
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    filter: drop-shadow(0 10px 20px rgb(182 255 0));
+    max-height: 500px;
+    
+}
+
+.item-info-negocio-dos {
+    
+    margin-left: 50px;
+    margin-right: 80px;
+    margin-top: 80px;
+    margin-bottom: 80px;
+}
+
+.fondo-planes {
+    height: 700px;
+    border: 1px solid;
+    background: rgba(0, 0, 0, 0.4) url(../ArchivosLectura/imagenes-index/trees.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-blend-mode: darken;
+}
+
+#regis:hover{
+    background:white;
+}
+
+#contra:hover {
+    background: white;
 }

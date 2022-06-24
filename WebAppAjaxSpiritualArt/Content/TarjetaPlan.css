@@ -13,6 +13,10 @@
     background: linear-gradient(180deg,#6edcc4,#1aab8b);
 }
 
+.background3-left-column {
+    background: linear-gradient(180deg,rgb(68, 66, 66),#808080);
+}
+
 
 /** {
     padding: 0;
