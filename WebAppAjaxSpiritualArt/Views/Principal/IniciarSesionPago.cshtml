@@ -2,9 +2,9 @@
 @{
     ViewBag.Title = "IniciarSesion";
 }
-
+<br />
 <body class="body-sesion">
-    <h2>IniciarSesion</h2>
+    <h2 style="text-align:center">Iniciar Sesion</h2>
 
     <input type="text" value="@TempData["correoRegistrado"]" id="correo" hidden />
 
@@ -16,7 +16,7 @@
         <form action="@Url.Action("IniciarSesionAccion","Principal")" method="post" class="form-sesion">
 
 
-            <h2>Login</h2>
+            
 
 
             <div class="in">
@@ -30,11 +30,11 @@
             </div>
 
             <div>
-                <a href="#" style="text-decoration:none; color:black" onclick="abrirModalRecuperarClave()">¿Haz olvidado tu contraseña?</a>
+                <a href="#" style="text-decoration:none; color:black" onclick="abrirModalRecuperarClave()" id="contra">¿Haz olvidado tu contraseña?</a>
             </div>
 
             <div>
-                <a href="#" style="text-decoration:none; color:black">¿Quieres registrarte?</a>
+                <a href="@Url.Action("RegistrarArtista", "Principal")" style="text-decoration:none; color:black" id="regis">¿Quieres registrarte?</a>
             </div>
 
             <div class="in">

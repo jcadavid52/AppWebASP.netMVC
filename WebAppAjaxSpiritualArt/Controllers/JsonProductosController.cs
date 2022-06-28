@@ -472,7 +472,7 @@ namespace WebAppAjaxSpiritualArt.Controllers
 
             if (verificarClave != null)
             {
-                
+                logicaNegocioArtista.EnviarEmail(verificarClave.CORREO, verificarClave.CLAVE, verificarClave.NOMBRE_ARTISTA);
                 return Content("1");
             }
             else

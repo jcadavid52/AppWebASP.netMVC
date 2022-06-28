@@ -2,9 +2,10 @@
 @{
     ViewBag.Title = "IniciarSesion";
 }
-
+<br />
 <body class="body-sesion">
 
+    <h2 style="text-align:center">Iniciar Sesion</h2>
 
 
     <div class="cont">
@@ -23,7 +24,7 @@
 
             <div class="in">
                 <label>Contraseña</label>
-                <input class="form-control" type="password" name="CLAVE" value="" placeholder="Contraseña" required/>
+                <input class="form-control" type="password" name="CLAVE" value="" placeholder="Contraseña" required />
             </div>
             <div>
                 <a href="#" style="text-decoration:none; color:black" onclick="abrirModalRecuperarClave()" id="contra">¿Haz olvidado tu contraseña?</a>
@@ -59,23 +60,23 @@
                     <h5 class="modal-title" id="exampleModalLabel">Recuperar contraseña</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                
-                    <div class="modal-body">
-                        <div class="mb-3">
-                            <label for="validationCustom01" class="form-label">Ingresa el correo registrado</label>
-                            <input type="email" class="form-control" id="email" required>
-                            <h6  id="validacion" style="color:red"></h6>
 
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="validationCustom01" class="form-label">Ingresa el correo registrado</label>
+                        <input type="email" class="form-control" id="email" required>
+                        <h6 id="validacion" style="color:red"></h6>
 
-                        </div>
 
                     </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                        <button type="submit" class="btn btn-primary" id="btn-recuperar">Recuperar contraseña</button>
 
-                    </div>
-                
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    <button type="submit" class="btn btn-primary" id="btn-recuperar">Recuperar contraseña</button>
+
+                </div>
+
             </div>
         </div>
     </div>
@@ -135,11 +136,11 @@
                 }
 
 
-        
+
 
         </script>
 
-        
+
     }
 </body>
 

@@ -49,7 +49,29 @@ namespace WebAppAjaxSpiritualArt.Logica_Negocio
 
         }
 
-      
+        //enviar contraseña recuperada al email(sobrecarga)
+        public void EnviarEmail(string EmailDestino, string claveArtista,string nombre)
+        {
+            string EmailOrigen = "cadavidcamilo360@gmail.com";
+            string clave = "pbczcevcfbxykbky";
+
+
+            MailMessage omailMessage = new MailMessage(EmailOrigen, EmailDestino, "Muy bien " + nombre, "<p> tu contraseña se ha recuperado exitosamente: " + claveArtista + "</p>");
+            omailMessage.IsBodyHtml = true;
+
+            SmtpClient osmtpClient = new SmtpClient();
+            osmtpClient.Host = "smtp.gmail.com";
+            osmtpClient.EnableSsl = true;
+            osmtpClient.UseDefaultCredentials = false;
+            osmtpClient.Port = 587;
+            osmtpClient.Credentials = new NetworkCredential(EmailOrigen, clave);
+
+
+            osmtpClient.Send(omailMessage);
+            osmtpClient.Dispose();
+        }
+
+
 
         //obtener clave del artista para enviarselo al correo
 
